@@ -2,8 +2,8 @@
 
 {% block title %}{{ apiary.name }} - Beesh{% endblock %}
 
-{% if apiary.latitude and apiary.longitude %}
-    {% block head %}
+{% block head %}
+    {% if apiary.latitude and apiary.longitude %}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
         <style>
@@ -11,8 +11,8 @@
                 height: 400px;
             }
         </style>
-    {% endblock %}
-{% endif %}
+    {% endif %}
+{% endblock %}
 
 {% block body %}
     <section class="section">
@@ -42,8 +42,8 @@
     </section>
 {% endblock %}
 
-{% if apiary.latitude and apiary.longitude %}
-    {% block scripts %}
+{% block scripts %}
+    {% if apiary.latitude and apiary.longitude %}
         <script>
             (function () {
                 var map = L.map('apiary-map');
@@ -62,5 +62,5 @@
                 }).addTo(map);
             }());
         </script>
-    {% endblock %}
-{% endif %}
+    {% endif %}
+{% endblock %}
