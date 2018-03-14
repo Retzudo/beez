@@ -1,0 +1,14 @@
+{% extends 'frontend/master.html' %}
+{% load bulma_tags %}
+
+{% block body %}
+    <section class="section">
+        <div class="container">
+            <form action="" method="post">
+                {{ form|bulma }}
+                {% csrf_token %}
+                <button class="button">Create</button>
+            </form>
+        </div>
+    </section>
+{% endblock %}

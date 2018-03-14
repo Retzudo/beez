@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.core import validators
 from django.db import models
+from django.urls import reverse
 
 
 class Apiary(models.Model):
@@ -30,6 +31,9 @@ class Hive(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('hive-detail', args=[self.pk])
 
 
 class Inspection(models.Model):
