@@ -3,7 +3,13 @@
 {% block body %}
     <section class="section">
         <div class="container">
-            <a href="{% url 'apiary-list' %}">Apiaries</a>
+            <h1 class="title">Welcome to Beesh!</h1>
+
+            <p class="has-text-centered">
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'register' %}">Create an account</a> or <a href="{% url 'login' %}">log in.</a>
+                {% endif %}
+            </p>
         </div>
     </section>
 {% endblock %}

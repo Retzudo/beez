@@ -1,5 +1,6 @@
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, FormView
 
 from core.models import Hive, Apiary
 from frontend import weather
@@ -46,3 +47,8 @@ class HiveCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.apiary = Apiary.objects.get(pk=self.kwargs.get('pk'))
         return super().form_valid(form)
+
+
+class RegisterView(FormView):
+    form_class = UserCreationForm
+    template_name = 'registration/register.html'

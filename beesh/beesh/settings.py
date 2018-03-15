@@ -31,15 +31,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bulma',
     'core',
     'frontend',
+    'django.contrib.admin',
+    'bulma',
 ]
 
 MIDDLEWARE = [
@@ -104,3 +104,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 OWM_API_KEY = os.getenv('OWM_API_KEY')
+LOGIN_REDIRECT_URL = '/dashboard'

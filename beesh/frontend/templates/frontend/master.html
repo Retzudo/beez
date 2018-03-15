@@ -7,9 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}Beesh{% endblock %}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     {% block head %}{% endblock %}
 </head>
 <body>
+    {% include 'frontend/_navbar.html' %}
     {% block body %}{% endblock %}
     {% block scripts %}{% endblock %}
 </body>
