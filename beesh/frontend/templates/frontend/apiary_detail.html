@@ -1,5 +1,7 @@
 {% extends 'frontend/master.html' %}
 
+{% load timestamp %}
+
 {% block title %}{{ apiary.name }} - Beesh{% endblock %}
 
 {% block head %}
@@ -61,6 +63,15 @@
                     {% endif %}
                     {% if apiary.notes %}
                         <p>{{ apiary.notes }}</p>
+                    {% endif %}
+
+                    {% if apiary.latitude and apiary.longitude %}
+                        Forecast:
+                        <ul>
+                            {% for day in weather.list %}
+                                <li>{{ day.dt|date_from_timestamp|date:"D" }}: {{ day.temp.day|floatformat }} °C</li>
+                            {% endfor %}
+                        </ul>
                     {% endif %}
                 </div>
                 {% if apiary.latitude and apiary.longitude %}

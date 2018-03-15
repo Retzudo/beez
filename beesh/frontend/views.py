@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView
 
 from core.models import Hive, Apiary
+from frontend import weather
 
 
 class ApiaryListView(LoginRequiredMixin, ListView):
@@ -17,6 +18,16 @@ class ApiaryDetailView(LoginRequiredMixin, DetailView):
 
     def get_queryset(self):
         return self.request.user.apiaries.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        apiary = context.get('apiary')
+        context['weather'] = weather.get_daily_forecast(
+            latitude=apiary.latitude,
+            longitude=apiary.longitude,
+        )
+
+        return context
 
 
 class HiveDetailView(LoginRequiredMixin, DetailView):
