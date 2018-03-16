@@ -9,7 +9,6 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='frontend/index.html'), name='index'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/register', views.RegisterView.as_view(), name='register'),
-    path('dashboard/', login_required(TemplateView.as_view(template_name='frontend/dashboard.html')), name='dashboard'),
     path('dashboard/apiaries', views.ApiaryListView.as_view(), name='apiary-list'),
     path('dashboard/apiaries/<int:pk>', views.ApiaryDetailView.as_view(), name='apiary-detail'),
     path('dashboard/apiaries/<int:pk>/create-hive', views.HiveCreateView.as_view(), name='hive-create'),

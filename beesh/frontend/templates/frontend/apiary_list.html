@@ -3,11 +3,7 @@
 {% block body %}
     <section class="section">
         <div class="container">
-            <nav class="breadcrumb" aria-label="breadcrumbs">
-                <ul>
-                    <li class="is-active">Apiaries</li>
-                </ul>
-            </nav>
+            {% include 'frontend/_dashboard_tabs.html' with active='apiary-list' %}
             <table class="table is-striped is-fullwidth">
                 <thead>
                 <tr>
