@@ -28,7 +28,12 @@
                 </ul>
             </nav>
 
-            <h1 class="title">{{ apiary.name }}</h1>
+            <h1 class="title">
+                <span>{{ apiary.name }}</span>
+                <a href="{% url 'apiary-edit' pk=apiary.pk %}">
+                    <span class="icon"><i class="fa fa-pencil-alt"></i></span>
+                </a>
+            </h1>
 
             <h2 class="title is-4">Hives</h2>
             {% if apiary.hives.count > 0 %}
@@ -43,6 +48,8 @@
                     <tr>
                         <th>Name</th>
                         <th><abbr title="Last Inspection">Insp</abbr></th>
+                        <th><abbr title="Last Recorded Weight">Wgt</abbr></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -51,6 +58,15 @@
                             <tr>
                                 <td><a href="{% url 'hive-detail' pk=hive.pk %}">{{ hive.name }}</a></td>
                                 <td></td>
+                                <td>kg</td>
+                                <td>
+                                    <a href="#" class="button" title="Create Inspection">
+                                        <span class="icon"><i class="fa fa-clipboard-list"></i></span>
+                                    </a>
+                                    <a href="#" class="button" title="Transfer Hive">
+                                        <span class="icon"><i class="fa fa-exchange-alt"></i></span>
+                                    </a>
+                                </td>
                             </tr>
                         {% endif %}
                     {% endfor %}
@@ -68,17 +84,6 @@
             <h2 class="title is-4">Details</h2>
             <div class="columns">
                 <div class="column is-half">
-                    {% if apiary.address %}
-                        <div class="box">
-                            <h3 class="subtitle">Address</h3>
-                            <address>{{ apiary.address }}</address>
-                        </div>
-                    {% endif %}
-                    {% if apiary.notes %}
-                        <h3 class="subtitle">Notes</h3>
-                        <p>{{ apiary.notes }}</p>
-                    {% endif %}
-
                     {% if apiary.latitude and apiary.longitude %}
                         <div class="box">
                             <h3 class="subtitle">Forecast</h3>
@@ -87,9 +92,9 @@
                                 <tr>
                                     <th></th>
                                     <th><abbr title="Condition">Con</abbr></th>
-                                    <th><abbr title="Average">Avg</abbr></th>
-                                    <th><abbr title="Minimum">Min</abbr></th>
-                                    <th><abbr title="Maximum">Max</abbr></th>
+                                    <th ><abbr title="Average">Avg</abbr></th>
+                                    <th class="is-hidden-mobile"><abbr title="Minimum">Min</abbr></th>
+                                    <th class="is-hidden-mobile"><abbr title="Maximum">Max</abbr></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -102,8 +107,8 @@
                                         </span>
                                         </td>
                                         <td>{{ day.temp.day|floatformat }} °C</td>
-                                        <td>{{ day.temp.min }} °C</td>
-                                        <td>{{ day.temp.max }} °C</td>
+                                        <td class="is-hidden-mobile">{{ day.temp.min }} °C</td>
+                                        <td class="is-hidden-mobile">{{ day.temp.max }} °C</td>
                                     </tr>
                                 {% endfor %}
 
@@ -114,6 +119,24 @@
                             </table>
                         </div>
                     {% endif %}
+
+                    <div class="box">
+                        <h3 class="subtitle">Address</h3>
+                        {% if apiary.address %}
+                            <address>{{ apiary.address }}</address>
+                        {% else %}
+                            <em>N/A</em>
+                        {% endif %}
+                    </div>
+
+                    <div class="box">
+                        <h3 class="subtitle">Notes</h3>
+                        {% if apiary.notes %}
+                            <p>{{ apiary.notes }}</p>
+                        {% else %}
+                            <em>N/A</em>
+                        {% endif %}
+                    </div>
                 </div>
                 {% if apiary.latitude and apiary.longitude %}
                     <div class="column is-half">

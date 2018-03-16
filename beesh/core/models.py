@@ -22,12 +22,18 @@ class Apiary(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('apiary-detail', args=[self.pk])
+
 
 class Hive(models.Model):
     apiary = models.ForeignKey(Apiary, related_name='hives', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
+    date_created = models.DateTimeField(auto_now_add=True)
     terminated = models.BooleanField(default=False)
+    date_terminated = models.DateTimeField(blank=True, null=True)
+    notes = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -39,8 +45,13 @@ class Hive(models.Model):
 class Inspection(models.Model):
     hive = models.ForeignKey(Hive, related_name='inspections', on_delete=models.CASCADE)
     date = models.DateTimeField()
+    weight = models.FloatField(blank=True, null=True)
+    saw_queen = models.BooleanField(default=False)
     # TODO: Add a whole bunch of parameters
     notes = models.TextField(blank=True, null=True)
+
+    class Meta:
+        ordering = ['-date']
 
     def __str__(self):
         return 'Inspection on {}'.format(self.date)

@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, CreateView, FormView
+from django.views.generic import ListView, DetailView, CreateView, FormView, UpdateView
 
 from core.models import Hive, Apiary
 from frontend import weather
@@ -29,6 +29,22 @@ class ApiaryDetailView(LoginRequiredMixin, DetailView):
         )
 
         return context
+
+
+class ApiaryCreateView(LoginRequiredMixin, CreateView):
+    template_name = 'frontend/apiary_form.html'
+    model = Apiary
+    fields = ['name', 'latitude', 'longitude', 'address', 'radius', 'notes']
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+
+
+class ApiaryUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = 'frontend/apiary_form.html'
+    model = Apiary
+    fields = ['name', 'latitude', 'longitude', 'address', 'radius', 'notes']
 
 
 class HiveDetailView(LoginRequiredMixin, DetailView):

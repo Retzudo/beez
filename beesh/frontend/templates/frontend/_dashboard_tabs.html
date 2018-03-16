@@ -1,18 +1,18 @@
 <div class="tabs is-centered">
     <ul>
         <li{% if active == 'apiary-list' %} class="is-active"{% endif %}>
-            <a href="{% url 'apiary-list' %}">
-                <span class="icon"><i class="fa fa-industry"></i></span> Apiaries
+            <a href="{% url 'apiary-list' %}" title="Apiaries">
+                <span class="icon"><i class="fa fa-industry"></i></span><span class="is-hidden-mobile"> Apiaries</span>
             </a>
         </li>
         <li{% if active == 'statistics' %} class="is-active"{% endif %}>
-            <a href="#">
-                <span class="icon"><i class="fa fa-chart-line"></i></span> Statistics
+            <a href="#" title="Statistics">
+                <span class="icon"><i class="fa fa-chart-line"></i></span><span class="is-hidden-mobile"> Statistics</span>
             </a>
         </li>
         <li{% if active == 'settings' %} class="is-active"{% endif %}>
-            <a href="#">
-                <span class="icon"><i class="fa fa-wrench"></i></span> Settings
+            <a href="#" title="Settings">
+                <span class="icon"><i class="fa fa-wrench"></i></span><span class="is-hidden-mobile"> Settings</span>
             </a>
         </li>
     </ul>

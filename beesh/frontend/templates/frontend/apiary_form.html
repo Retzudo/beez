@@ -1,0 +1,49 @@
+{% extends 'frontend/master.html' %}
+
+{% load bulma_tags %}
+
+{% block body %}
+    <section class="section">
+        <div class="container">
+            <form action="" method="post">
+                {{ form|bulma }}
+                {% csrf_token %}
+                <button class="button is-primary">
+                    {% if form.instance.pk %}Save{% else %}Create{% endif %} Apiary
+                </button>
+            </form>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        (function () {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(setLatLon);
+            }
+
+            function setLatLon(position) {
+                var $latInput = document.getElementById('{{ form.latitude.id_for_label }}');
+                var $lonInput = document.getElementById('{{ form.longitude.id_for_label }}');
+
+                var $button = document.createElement('button');
+                $button.classList.add('button', 'is-info');
+                $button.innerHTML = '<span class="icon"><i class="fa fa-crosshairs"></i></span><span>Detect</span>';
+
+                var $insertTarget = $lonInput.parentNode.parentNode
+
+                $insertTarget.parentNode.insertBefore($button, $insertTarget.nextSibling);
+
+                $button.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    $latInput.value = position.coords.latitude;
+                    $lonInput.value = position.coords.longitude;
+                });
+
+
+                console.log(position.coords);
+            }
+        }());
+    </script>
+{% endblock %}

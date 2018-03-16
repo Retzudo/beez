@@ -4,36 +4,69 @@
     <section class="section">
         <div class="container">
             {% include 'frontend/_dashboard_tabs.html' with active='apiary-list' %}
-            <table class="table is-striped is-hoverable is-fullwidth">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Coords</th>
-                    <th class="is-hidden-mobile"># Hives</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for apiary in user.apiaries.all %}
+            {% if user.apiaries.count > 0 %}
+                <div class="buttons is-right">
+                    <a class="button" href="{% url 'apiary-create' %}">
+                        <span class="icon"><i class="fa fa-plus"></i></span>
+                        <span>Add Apiary</span>
+                    </a>
+                </div>
+                <table class="table is-striped is-hoverable is-fullwidth">
+                    <thead>
                     <tr>
-                        <td>
-                            <a href="{% url 'apiary-detail' pk=apiary.pk %}">{{ apiary.name }}</a>
-                        </td>
-                        <td>{{ apiary.address }}</td>
-                        <td>
-                            <a class="is-hidden-mobile" target="_blank"
-                               href="https://www.openstreetmap.org/?mlat={{ apiary.latitude }}&mlon={{ apiary.longitude }}&zoom=16">
-                                Open Map
-                            </a>
-                            <a class="is-hidden-desktop" href="geo:{{ apiary.longitude }}, {{ apiary.latitude }}">
-                                Map
-                            </a>
-                        </td>
-                        <td class="is-hidden-mobile">{{ apiary.hives.count }}</td>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Coords</th>
+                        <th class="is-hidden-mobile"># Hives</th>
+                        <th class="is-hidden-mobile"></th>
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {% for apiary in user.apiaries.all %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'apiary-detail' pk=apiary.pk %}">{{ apiary.name }}</a>
+                            </td>
+                            <td>
+                                {% if apiary.address %}
+                                    {{ apiary.address }}
+                                {% else %}
+                                    <em>N/A</em>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if apiary.latitude and apiary.longitude %}
+
+                                    <a class="is-hidden-mobile" target="_blank"
+                                       href="https://www.openstreetmap.org/?mlat={{ apiary.latitude }}&mlon={{ apiary.longitude }}&zoom=16">
+                                        Open Map
+                                    </a>
+                                    <a class="is-hidden-desktop"
+                                       href="geo:{{ apiary.longitude }}, {{ apiary.latitude }}">
+                                        Map
+                                    </a>
+                                {% else %}
+                                    <em>N/A</em>
+                                {% endif %}
+                            </td>
+                            <td class="is-hidden-mobile">{{ apiary.hives.count }}</td>
+                            <td class="is-hidden-mobile">
+                                <a class="button is-small" href="{% url 'apiary-edit' pk=apiary.pk %}" title="Edit">
+                                    <span class="icon"><i class="fa fa-edit"></i></span>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="buttons is-centered">
+                    <a href="{% url 'apiary-create' %}" class="button is-primary is-big">
+                        <span class="icon"><i class="fa fa-plus"></i></span>
+                        <span>Add Your First Apiary</span>
+                    </a>
+                </div>
+            {% endif %}
         </div>
     </section>
 {% endblock %}
