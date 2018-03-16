@@ -13,7 +13,64 @@
                 </ul>
             </nav>
 
-            <h1 class="title">{{ hive.name }}</h1>
+            <h1 class="title">
+                <span>{{ hive.name }}</span>
+                <a href="{% url 'hive-edit' pk=hive.pk %}">
+                    <span class="icon"><i class="fa fa-pencil-alt"></i></span>
+                </a>
+            </h1>
+
+            <h2 class="title is-4">Inspections</h2>
+            {% if hive.inspections.count > 0 %}
+                <table class="table is-striped is-fullwidth is-striped is-hoverable">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th class="is-hidden-mobile"><abbr title="Last Recorded Weight">Wgt</abbr></th>
+                        <th class="is-hidden-mobile"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for inspection in hive.inspections.all %}
+                        <tr>
+                            <td>{{ inspection.date }}</td>
+                            <td>
+                                {% if inspection.weight %}
+                                    {{ inspection.weight }} kg
+                                {% else %}
+                                    <em>N/A</em>
+                                {% endif %}
+                            </td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <a class="button is-success" href="{% url 'inspection-create' pk=hive.pk %}">
+                    <span class="icon"><i class="fa fa-plus"></i></span>
+                    <span>Add Inspection</span>
+                </a>
+            {% else %}
+                <div class="buttons is-centered">
+                    <a href="{% url 'inspection-create' pk=hive.pk %}" class="button is-primary is-big">
+                        <span class="icon"><i class="fa fa-plus"></i></span>
+                        <span>Create Your First Inspection</span>
+                    </a>
+                </div>
+            {% endif %}
+
+            <hr>
+
+            <div class="buttons">
+                <a href="{% url 'hive-transfer' pk=hive.pk %}" class="button">
+                    <span class="icon"><i class="fa fa-exchange-alt"></i></span>
+                    <span class="is-hidden-mobile">Transfer Hive</span>
+                </a>
+                <a href="{% url 'hive-terminate' pk=hive.pk %}" class="button is-danger">
+                    <span class="icon"><i class="fa fa-ban"></i></span>
+                    <span class="is-hidden-mobile">Terminate Hive</span>
+                </a>
+            </div>
         </div>
     </section>
 {% endblock %}

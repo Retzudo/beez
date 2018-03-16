@@ -5,6 +5,8 @@
 {% block body %}
     <section class="section">
         <div class="container">
+            {% include 'frontend/_dashboard_tabs.html' with active='apiary-list' %}
+            <h1 class="title">{% if form.instance.pk %}Edit{% else %}Create{% endif %} Apiary</h1>
             <form action="" method="post">
                 {{ form|bulma }}
                 {% csrf_token %}
@@ -40,9 +42,6 @@
                     $latInput.value = position.coords.latitude;
                     $lonInput.value = position.coords.longitude;
                 });
-
-
-                console.log(position.coords);
             }
         }());
     </script>

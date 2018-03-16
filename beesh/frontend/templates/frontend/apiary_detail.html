@@ -37,12 +37,6 @@
 
             <h2 class="title is-4">Hives</h2>
             {% if apiary.hives.count > 0 %}
-                <div class="buttons is-right">
-                    <a class="button" href="{% url 'hive-create' pk=apiary.pk %}">
-                        <span class="icon"><i class="fa fa-plus"></i></span>
-                        <span>Add Hive</span>
-                    </a>
-                </div>
                 <table class="table is-striped is-fullwidth is-striped is-hoverable">
                     <thead>
                     <tr>
@@ -75,6 +69,10 @@
                     {% endfor %}
                     </tbody>
                 </table>
+                <a class="button is-success" href="{% url 'hive-create' pk=apiary.pk %}">
+                    <span class="icon"><i class="fa fa-plus"></i></span>
+                    <span>Add Hive</span>
+                </a>
             {% else %}
                 <div class="buttons is-centered">
                     <a href="{% url 'hive-create' pk=apiary.pk %}" class="button is-primary is-big">
@@ -83,6 +81,8 @@
                     </a>
                 </div>
             {% endif %}
+
+            <hr>
 
             <h2 class="title is-4">Details</h2>
             <div class="columns">
