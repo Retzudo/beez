@@ -1,6 +1,6 @@
 {% extends 'frontend/master.html' %}
 
-{% load timestamp %}
+{% load timestamp weather %}
 
 {% block title %}{{ apiary.name }} - Beesh{% endblock %}
 
@@ -33,19 +33,24 @@
             <h2 class="title is-4">Hives</h2>
             {% if apiary.hives.count > 0 %}
                 <div class="buttons is-right">
-                    <a class="button" href="{% url 'hive-create' pk=apiary.pk %}">Add Hive</a>
+                    <a class="button" href="{% url 'hive-create' pk=apiary.pk %}">
+                        <span class="icon"><i class="fa fa-plus"></i></span>
+                        <span>Add Hive</span>
+                    </a>
                 </div>
-                <table class="table is-striped is-fullwidth">
+                <table class="table is-striped is-fullwidth is-striped is-hoverable">
                     <thead>
-                        <tr>
-                            <th>Name</th>
-                        </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th><abbr title="Last Inspection">Insp</abbr></th>
+                    </tr>
                     </thead>
                     <tbody>
                     {% for hive in apiary.hives.all %}
                         {% if not hive.terminated %}
                             <tr>
                                 <td><a href="{% url 'hive-detail' pk=hive.pk %}">{{ hive.name }}</a></td>
+                                <td></td>
                             </tr>
                         {% endif %}
                     {% endfor %}
@@ -53,7 +58,10 @@
                 </table>
             {% else %}
                 <div class="buttons is-centered">
-                    <a href="{% url 'hive-create' pk=apiary.pk %}" class="button is-primary is-big">Add Your First Hive</a>
+                    <a href="{% url 'hive-create' pk=apiary.pk %}" class="button is-primary is-big">
+                        <span class="icon"><i class="fa fa-plus"></i></span>
+                        <span>Add Your First Hive</span>
+                    </a>
                 </div>
             {% endif %}
 
@@ -61,23 +69,56 @@
             <div class="columns">
                 <div class="column is-half">
                     {% if apiary.address %}
-                        <address>{{ apiary.address }}</address>
+                        <div class="box">
+                            <h3 class="subtitle">Address</h3>
+                            <address>{{ apiary.address }}</address>
+                        </div>
                     {% endif %}
                     {% if apiary.notes %}
+                        <h3 class="subtitle">Notes</h3>
                         <p>{{ apiary.notes }}</p>
                     {% endif %}
 
                     {% if apiary.latitude and apiary.longitude %}
-                        Forecast:
-                        <ul>
-                            {% for day in weather.list %}
-                                <li>{{ day.dt|date_from_timestamp|date:"D" }}: {{ day.temp.day|floatformat }} °C</li>
-                            {% endfor %}
-                        </ul>
+                        <div class="box">
+                            <h3 class="subtitle">Forecast</h3>
+                            <table class="table is-fullwidth is-striped is-hoverable">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th><abbr title="Condition">Con</abbr></th>
+                                    <th><abbr title="Average">Avg</abbr></th>
+                                    <th><abbr title="Minimum">Min</abbr></th>
+                                    <th><abbr title="Maximum">Max</abbr></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for day in weather.list %}
+                                    <tr>
+                                        <td>{{ day.dt|date_from_timestamp|date:"D" }}</td>
+                                        <td>
+                                        <span class="icon" title="{{ day.weather.0.main }}">
+                                            <i class="wi wi-{{ day.weather.0.main|weather_icon }}"></i>
+                                        </span>
+                                        </td>
+                                        <td>{{ day.temp.day|floatformat }} °C</td>
+                                        <td>{{ day.temp.min }} °C</td>
+                                        <td>{{ day.temp.max }} °C</td>
+                                    </tr>
+                                {% endfor %}
+
+                                <tr>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     {% endif %}
                 </div>
                 {% if apiary.latitude and apiary.longitude %}
-                    <div id="apiary-map" class="column is-half apiary-map is-hidden-mobile"></div>
+                    <div class="column is-half">
+                        <div id="apiary-map" class="box apiary-map is-hidden-mobile"></div>
+                    </div>
                 {% endif %}
             </div>
         </div>
@@ -101,7 +142,8 @@
                     fillColor: 'green',
                     fillOpacity: 0.2,
                     radius: {{ apiary.radius }} * 1000
-                }).addTo(map);
+            }).
+                addTo(map);
             }());
         </script>
     {% endif %}

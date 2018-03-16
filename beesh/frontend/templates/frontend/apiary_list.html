@@ -4,7 +4,7 @@
     <section class="section">
         <div class="container">
             {% include 'frontend/_dashboard_tabs.html' with active='apiary-list' %}
-            <table class="table is-striped is-fullwidth">
+            <table class="table is-striped is-hoverable is-fullwidth">
                 <thead>
                 <tr>
                     <th>Name</th>
@@ -23,7 +23,7 @@
                         <td>
                             <a class="is-hidden-mobile" target="_blank"
                                href="https://www.openstreetmap.org/?mlat={{ apiary.latitude }}&mlon={{ apiary.longitude }}&zoom=16">
-                                Open in Maps
+                                Open Map
                             </a>
                             <a class="is-hidden-desktop" href="geo:{{ apiary.longitude }}, {{ apiary.latitude }}">
                                 Map
