@@ -36,7 +36,6 @@
                             </td>
                             <td>
                                 {% if apiary.latitude and apiary.longitude %}
-
                                     <a class="is-hidden-mobile" target="_blank"
                                        href="https://www.openstreetmap.org/?mlat={{ apiary.latitude }}&mlon={{ apiary.longitude }}&zoom=16">
                                         Open Map
@@ -50,7 +49,7 @@
                                 {% endif %}
                             </td>
                             <td class="is-hidden-mobile">{{ apiary.hives.count }}</td>
-                            <td class="is-hidden-mobile">
+                            <td class="is-hidden-mobile has-text-right">
                                 <a class="button is-small" href="{% url 'apiary-edit' pk=apiary.pk %}" title="Edit">
                                     <span class="icon"><i class="fa fa-edit"></i></span>
                                 </a>

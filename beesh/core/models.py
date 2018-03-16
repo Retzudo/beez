@@ -41,6 +41,10 @@ class Hive(models.Model):
     def get_absolute_url(self):
         return reverse('hive-detail', args=[self.pk])
 
+    @property
+    def last_recorded_weight(self):
+        return self.inspections.filter(weight__isnull=False).first().weight
+
 
 class Inspection(models.Model):
     hive = models.ForeignKey(Hive, related_name='inspections', on_delete=models.CASCADE)

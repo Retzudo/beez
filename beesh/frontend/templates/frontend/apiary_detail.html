@@ -48,8 +48,8 @@
                     <tr>
                         <th>Name</th>
                         <th><abbr title="Last Inspection">Insp</abbr></th>
-                        <th><abbr title="Last Recorded Weight">Wgt</abbr></th>
-                        <th></th>
+                        <th class="is-hidden-mobile"><abbr title="Last Recorded Weight">Wgt</abbr></th>
+                        <th class="is-hidden-mobile"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -57,14 +57,17 @@
                         {% if not hive.terminated %}
                             <tr>
                                 <td><a href="{% url 'hive-detail' pk=hive.pk %}">{{ hive.name }}</a></td>
-                                <td></td>
-                                <td>kg</td>
-                                <td>
-                                    <a href="#" class="button" title="Create Inspection">
+                                <td><a href="{% url 'inspection-details' pk=hive.inspections.first.pk %}">{{ hive.inspections.first.date }}</a></td>
+                                <td class="is-hidden-mobile">{{ hive.last_recorded_weight|floatformat }} kg</td>
+                                <td class="is-hidden-mobile has-text-right">
+                                    <a href="{% url 'inspection-create' pk=hive.pk %}" class="button is-small" title="Create Inspection">
                                         <span class="icon"><i class="fa fa-clipboard-list"></i></span>
                                     </a>
-                                    <a href="#" class="button" title="Transfer Hive">
+                                    <a href="{% url 'hive-transfer' pk=hive.pk %}" class="button is-small" title="Transfer Hive">
                                         <span class="icon"><i class="fa fa-exchange-alt"></i></span>
+                                    </a>
+                                    <a href="{% url 'hive-edit' pk=hive.pk %}" class="button is-small" title="Edit">
+                                        <span class="icon"><i class="fa fa-edit"></i></span>
                                     </a>
                                 </td>
                             </tr>
