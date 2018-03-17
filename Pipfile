@@ -10,6 +10,8 @@ name = "pypi"
 django = "*"
 django-bulma = "*"
 requests = "*"
+"psycopg2" = "*"
+dj-database-url = "*"
 
 
 [dev-packages]

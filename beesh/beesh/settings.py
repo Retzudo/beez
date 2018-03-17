@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import dj_database_url
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -20,12 +22,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'kcw@7*n8z8eviiifh5q50l#ych8(m9$*wrc)sxw4l18xo1vi7m'
+SECRET_KEY = os.getenv('BEESH_SECRET_KEY', os.urandom(24))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if os.getenv('BEESH_DEBUG') else False
 
 ALLOWED_HOSTS = []
+if not DEBUG:
+    beesh_hostname = os.getenv('BEESH_HOSTNAME')
+    ALLOWED_HOSTS.append(beesh_hostname)
 
 
 # Application definition
@@ -75,12 +80,10 @@ WSGI_APPLICATION = 'beesh.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+# Use the environment variable DATABASE_URL.
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config(default='sqlite://'+os.path.join(BASE_DIR, 'db.sqlite3'))
 }
 
 
@@ -103,5 +106,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-OWM_API_KEY = os.getenv('OWM_API_KEY')
+OWM_API_KEY = os.getenv('BEESH_OWM_API_KEY')
 LOGIN_REDIRECT_URL = '/dashboard'

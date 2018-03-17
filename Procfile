@@ -1,0 +1,1 @@
+web: gunicorn beesh.wsgi --log-file=-
