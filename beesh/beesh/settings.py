@@ -29,8 +29,7 @@ DEBUG = True if os.getenv('BEESH_DEBUG') else False
 
 ALLOWED_HOSTS = []
 if not DEBUG:
-    beesh_hostnames = os.getenv('BEESH_HOSTNAMES', '')
-    ALLOWED_HOSTS += beesh_hostnames.split(',')
+    ALLOWED_HOSTS += os.getenv('BEESH_HOSTNAMES', '').split(',')
 
 
 # Application definition
