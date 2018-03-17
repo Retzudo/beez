@@ -144,6 +144,14 @@
                 {% if apiary.latitude and apiary.longitude %}
                     <div class="column is-half">
                         <div id="apiary-map" class="box apiary-map is-hidden-mobile"></div>
+                        <div class="box is-hidden-desktop">
+                            <h3 class="subtitle">Map</h3>
+
+                            <a href="geo:{{ apiary.latitude }}, {{ apiary.longitude }}">
+                                <span class="icon"><i class="fa fa-external-link-alt"></i></span>
+                                <span>Show on Map</span>
+                            </a>
+                        </div>
                     </div>
                 {% endif %}
             </div>

@@ -32,11 +32,13 @@
                                 {% if apiary.latitude and apiary.longitude %}
                                     <a class="is-hidden-mobile" target="_blank"
                                        href="https://www.openstreetmap.org/?mlat={{ apiary.latitude }}&mlon={{ apiary.longitude }}&zoom=16">
-                                        Open Map
+                                        <span class="icon"><i class="fa fa-external-link-alt"></i></span>
+                                        <span>Open Map</span>
                                     </a>
                                     <a class="is-hidden-desktop"
                                        href="geo:{{ apiary.latitude }}, {{ apiary.longitude }}">
-                                        Map
+                                        <span class="icon"><i class="fa fa-external-link-alt"></i></span>
+                                        <span>Map</span>
                                     </a>
                                 {% else %}
                                     <em>N/A</em>
