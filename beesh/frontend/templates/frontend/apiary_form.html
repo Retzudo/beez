@@ -33,14 +33,14 @@
                 $button.classList.add('button', 'is-info');
                 $button.innerHTML = '<span class="icon"><i class="fa fa-crosshairs"></i></span><span>Detect</span>';
 
-                var $insertTarget = $lonInput.parentNode.parentNode
+                var $insertTarget = $lonInput.parentNode.parentNode;
 
                 $insertTarget.parentNode.insertBefore($button, $insertTarget.nextSibling);
 
                 $button.addEventListener('click', function (event) {
                     event.preventDefault();
-                    $latInput.value = position.coords.latitude;
-                    $lonInput.value = position.coords.longitude;
+                    $latInput.value = position.coords.latitude.toFixed(6);
+                    $lonInput.value = position.coords.longitude.toFixed(6);
                 });
             }
         }());

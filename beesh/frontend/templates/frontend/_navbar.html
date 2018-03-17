@@ -12,6 +12,12 @@
     <div class="navbar-menu" id="navbar-menu">
         <div class="navbar-end">
             {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                    <a href="/admin" class="navbar-item">
+                        <span class="icon"><fa class="fa fa-bug"></fa></span>
+                        <span>Admin</span>
+                    </a>
+                {% endif %}
                 <div class="navbar-item has-dropdown is-hoverable">
                     <div class="navbar-link is-hidden-mobile">
                         <span class="icon"><fa class="fa fa-user"></fa></span>

@@ -13,6 +13,7 @@ requests = "*"
 "psycopg2" = "*"
 dj-database-url = "*"
 gunicorn = "*"
+dj-static = "*"
 
 
 [dev-packages]
