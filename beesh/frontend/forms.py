@@ -7,3 +7,7 @@ class TransferHiveForm(forms.Form):
         self.fields['to_apiary'] = forms.ModelChoiceField(
             queryset=user.apiaries.all().exclude(pk=current_apiary_pk)
         )
+
+
+class TerminateHiveForm(forms.Form):
+    terminate = forms.HiddenInput(attrs={'value': True})

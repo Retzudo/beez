@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.views.generic import DetailView, CreateView, UpdateView, View
+from django.views.generic import DetailView, CreateView, UpdateView, View, DeleteView
 
 from core.models import Hive, Apiary
 from frontend import forms
@@ -62,3 +62,19 @@ class HiveTransferView(LoginRequiredMixin, View):
             return redirect(hive.get_absolute_url())
         else:
             return self._render(form)
+
+
+class HiveTerminateView(LoginRequiredMixin, DeleteView):
+    template_name = 'frontend/hive/terminate.html'
+    model = Hive
+
+    def get_success_url(self):
+        return self.get_object().apiary.get_absolute_url()
+
+    def delete(self, request, *args, **kwargs):
+        hive = self.get_object()
+        hive.terminated = True
+        hive.save()
+
+        success_url = self.get_success_url()
+        return HttpResponseRedirect(success_url)

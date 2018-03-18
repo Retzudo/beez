@@ -1,0 +1,27 @@
+{% extends 'frontend/master.html' %}
+{% load bulma_tags %}
+
+{% block body %}
+    <section class="section">
+        <div class="container">
+            {% include 'frontend/_dashboard_tabs.html' with active='apiary-list' %}
+            <h1 class="title">Terminate Hive</h1>
+            <div class="message is-warning">
+                <p class="message-body">
+                    A terminated hive will not be deleted but marked as <em>defunct</em>. Do you want to proceed?
+                </p>
+            </div>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="has-text-centered">
+                    <a href="{% url 'hive-detail' pk=hive.pk %}" class="button">
+                        Cancel
+                    </a>
+                    <button class="button is-danger">
+                        Terminate Hive
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}
