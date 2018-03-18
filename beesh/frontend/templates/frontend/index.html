@@ -1,5 +1,29 @@
 {% extends 'frontend/master.html' %}
 
+{% block head %}
+    <style>
+        .quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            font-family: serif;
+            background-color: whitesmoke;
+            padding: 1em 0;
+        }
+
+        .quote:before {
+            content: '"'
+        }
+
+        .quote:after {
+            content: '"'
+        }
+
+        .quote-by {
+
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
     <section class="section">
         <div class="container">
@@ -10,6 +34,13 @@
                     <a href="{% url 'register' %}">Create an account</a> or <a href="{% url 'login' %}">log in.</a>
                 {% endif %}
             </p>
+
+            <blockquote class="quote has-text-centered">
+                I think beesh are pretty great.
+            </blockquote>
+            <div class="quote-by has-text-right">
+                &mdash;Sean Connery (not really)
+            </div>
         </div>
     </section>
 {% endblock %}
