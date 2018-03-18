@@ -53,7 +53,7 @@ class Hive(models.Model):
 class Inspection(models.Model):
     hive = models.ForeignKey(Hive, related_name='inspections', on_delete=models.CASCADE)
     date = models.DateTimeField()
-    weight = models.FloatField(blank=True, null=True)
+    weight = models.FloatField(blank=True, null=True, validators=[validators.MinValueValidator(0)])
     saw_queen = models.BooleanField(default=False)
     # TODO: Add a whole bunch of parameters
     notes = models.TextField(blank=True, null=True)
@@ -63,6 +63,9 @@ class Inspection(models.Model):
 
     def __str__(self):
         return 'Inspection on {}'.format(self.date)
+
+    def get_absolute_url(self):
+        return reverse('inspection-details', args=[self.pk])
 
 
 class Harvest(models.Model):

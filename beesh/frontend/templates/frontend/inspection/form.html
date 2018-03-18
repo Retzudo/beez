@@ -1,0 +1,40 @@
+{% extends 'frontend/master.html' %}
+{% load bulma_tags %}
+
+{% block body %}
+    <section class="section">
+        <div class="container">
+            {% include 'frontend/_dashboard_tabs.html' with active='apiary-list' %}
+            <h1 class="title">{% if form.instance.pk %}Edit{% else %}Create{% endif %} Inspection</h1>
+            <form action="" method="post">
+                {{ form|bulma }}
+                {% csrf_token %}
+                <button class="button is-primary">
+                    {% if form.instance.pk %}Save{% else %}Create{% endif %} Inspection
+                </button>
+            </form>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js"></script>
+    <script>
+        (function () {
+            var $timeInput = document.getElementById('{{ form.date.id_for_label }}');
+            var $button = document.createElement('button');
+
+            $button.classList.add('button', 'is-info');
+            $button.innerHTML = '<span class="icon"><i class="fa fa-clock"></i></span><span>Now</span>';
+
+            var $insertTarget = $timeInput.parentNode.parentNode;
+
+            $insertTarget.parentNode.insertBefore($button, $insertTarget.nextSibling);
+
+            $button.addEventListener('click', function (event) {
+                event.preventDefault();
+                $timeInput.value = moment().format('Y-MM-DD HH:mm');
+            });
+        }());
+    </script>
+{% endblock %}

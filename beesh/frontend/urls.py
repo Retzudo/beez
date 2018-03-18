@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-from frontend.views import apiary, hive, user
+from frontend.views import apiary, hive, user, inspection
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='frontend/index.html'), name='index'),
@@ -19,8 +19,9 @@ urlpatterns = [
     path('dashboard/hives/<int:pk>/transfer', hive.HiveTransferView.as_view(), name='hive-transfer'),
     path('dashboard/hives/<int:pk>/terminate', hive.HiveTerminateView.as_view(), name='hive-terminate'),
     path('dashboard/hives/<int:pk>/delete', lambda x: None, name='hive-delete'),
-    path('dashboard/hives/<int:pk>/create-inspection', lambda x: None, name='inspection-create'),
+    path('dashboard/hives/<int:pk>/create-inspection', inspection.InspectionCreateView.as_view(), name='inspection-create'),
 
-    path('dashboard/inspections/<int:pk>', lambda x: None, name='inspection-details'),
-    path('dashboard/inspections/<int:pk>/edit', lambda x: None, name='inspection-edit'),
+    path('dashboard/inspections/<int:pk>', lambda x: None, name='inspection-detail'),
+    path('dashboard/inspections/<int:pk>/edit', inspection.InspectionUpdateView.as_view(), name='inspection-edit'),
+    path('dashboard/inspections/<int:pk>/delete', inspection.InspectionDeleteView.as_view(), name='inspection-delete'),
 ]

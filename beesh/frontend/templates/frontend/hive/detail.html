@@ -41,7 +41,14 @@
                                     <em>N/A</em>
                                 {% endif %}
                             </td>
-                            <td></td>
+                            <td class="has-text-right">
+                                <a href="{% url 'inspection-edit' pk=inspection.pk %}" class="button is-small" title="Edit Inspection">
+                                    <span class="icon"><i class="fa fa-pencil-alt"></i></span>
+                                </a>
+                                <a href="{% url 'inspection-delete' pk=inspection.pk %}" class="button is-small is-danger" title="Delete Inspection">
+                                    <span class="icon"><i class="fa fa-trash-alt"></i></span>
+                                </a>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>

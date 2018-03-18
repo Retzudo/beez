@@ -44,3 +44,6 @@ class ApiaryUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'frontend/apiary/form.html'
     model = Apiary
     fields = ['name', 'latitude', 'longitude', 'address', 'radius', 'notes']
+
+    def get_queryset(self):
+        return self.request.user.apiaries.all()
