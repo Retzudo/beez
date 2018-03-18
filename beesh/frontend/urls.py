@@ -16,7 +16,7 @@ urlpatterns = [
 
     path('dashboard/hives/<int:pk>', hive.HiveDetailView.as_view(), name='hive-detail'),
     path('dashboard/hives/<int:pk>/edit', hive.HiveUpdateView.as_view(), name='hive-edit'),
-    path('dashboard/hives/<int:pk>/transfer', lambda x: None, name='hive-transfer'),
+    path('dashboard/hives/<int:pk>/transfer', hive.HiveTransferView.as_view(), name='hive-transfer'),
     path('dashboard/hives/<int:pk>/terminate', lambda x: None, name='hive-terminate'),
     path('dashboard/hives/<int:pk>/delete', lambda x: None, name='hive-delete'),
     path('dashboard/hives/<int:pk>/create-inspection', lambda x: None, name='inspection-create'),
