@@ -4,10 +4,14 @@
 {% block body %}
     <section class="section">
         <div class="container">
+            {% include 'frontend/_dashboard_tabs.html' with active='apiary-list' %}
+            <h1 class="title">{% if form.instance.pk %}Edit{% else %}Create{% endif %} Hive</h1>
             <form action="" method="post">
                 {{ form|bulma }}
                 {% csrf_token %}
-                <button class="button">Create</button>
+                <button class="button is-primary">
+                    {% if form.instance.pk %}Save{% else %}Create{% endif %} Hive
+                </button>
             </form>
         </div>
     </section>
