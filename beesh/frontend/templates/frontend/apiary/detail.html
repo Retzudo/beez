@@ -53,7 +53,7 @@
                                 <td><a href="{% url 'hive-detail' pk=hive.pk %}">{{ hive.name }}</a></td>
                                 <td>
                                     {% if hive.inspections.first %}
-                                        <a href="{% url 'inspection-details' pk=hive.inspections.first.pk %}">{{ hive.inspections.first.date }}</a>
+                                        <a href="{% url 'inspection-detail' pk=hive.inspections.first.pk %}">{{ hive.inspections.first.date }}</a>
                                     {% else %}
                                         <em>N/A</em>
                                     {% endif %}
