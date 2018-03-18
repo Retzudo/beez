@@ -33,7 +33,7 @@
                     <tbody>
                     {% for inspection in hive.inspections.all %}
                         <tr>
-                            <td>{{ inspection.date }}</td>
+                            <td><a href="{% url 'inspection-detail' pk=inspection.pk %}">{{ inspection.date }}</a></td>
                             <td>
                                 {% if inspection.weight %}
                                     {{ inspection.weight }} kg

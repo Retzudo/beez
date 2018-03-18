@@ -1,7 +1,16 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 
 from core.models import Inspection, Hive
+
+
+class InspectionDetailView(LoginRequiredMixin, DetailView):
+    template_name = 'frontend/inspection/detail.html'
+    model = Inspection
+    context_object_name = 'inspection'
+
+    def get_queryset(self):
+        return Inspection.objects.filter(hive__apiary__owner=self.request.user)
 
 
 class InspectionCreateView(LoginRequiredMixin, CreateView):

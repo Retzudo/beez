@@ -21,7 +21,7 @@ urlpatterns = [
     path('dashboard/hives/<int:pk>/delete', lambda x: None, name='hive-delete'),
     path('dashboard/hives/<int:pk>/create-inspection', inspection.InspectionCreateView.as_view(), name='inspection-create'),
 
-    path('dashboard/inspections/<int:pk>', lambda x: None, name='inspection-detail'),
+    path('dashboard/inspections/<int:pk>', inspection.InspectionDetailView.as_view(), name='inspection-detail'),
     path('dashboard/inspections/<int:pk>/edit', inspection.InspectionUpdateView.as_view(), name='inspection-edit'),
     path('dashboard/inspections/<int:pk>/delete', inspection.InspectionDeleteView.as_view(), name='inspection-delete'),
 ]

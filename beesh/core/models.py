@@ -65,7 +65,7 @@ class Inspection(models.Model):
         return 'Inspection on {}'.format(self.date)
 
     def get_absolute_url(self):
-        return reverse('inspection-details', args=[self.pk])
+        return reverse('inspection-detail', args=[self.pk])
 
 
 class Harvest(models.Model):
