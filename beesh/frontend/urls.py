@@ -16,7 +16,7 @@ urlpatterns = [
     path('dashboard/apiaries/<int:pk>/create-hive', views.HiveCreateView.as_view(), name='hive-create'),
 
     path('dashboard/hives/<int:pk>', views.HiveDetailView.as_view(), name='hive-detail'),
-    path('dashboard/hives/<int:pk>/edit', lambda x: None, name='hive-edit'),
+    path('dashboard/hives/<int:pk>/edit', views.HiveUpdateView.as_view(), name='hive-edit'),
     path('dashboard/hives/<int:pk>/transfer', lambda x: None, name='hive-transfer'),
     path('dashboard/hives/<int:pk>/terminate', lambda x: None, name='hive-terminate'),
     path('dashboard/hives/<int:pk>/delete', lambda x: None, name='hive-delete'),

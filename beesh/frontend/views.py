@@ -65,6 +65,12 @@ class HiveCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+class HiveUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = 'frontend/hive_form.html'
+    model = Hive
+    fields = ['name', 'description']
+
+
 class RegisterView(FormView):
     form_class = UserCreationForm
     template_name = 'registration/register.html'
