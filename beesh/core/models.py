@@ -14,6 +14,7 @@ class Apiary(models.Model):
         validators.MinValueValidator(0),
         validators.MaxValueValidator(10),
     ])
+    date_created = models.DateTimeField(auto_now_add=True)
     notes = models.TextField(blank=True, null=True)
 
     class Meta:
