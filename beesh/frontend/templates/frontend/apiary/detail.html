@@ -51,8 +51,20 @@
                         {% if not hive.terminated %}
                             <tr>
                                 <td><a href="{% url 'hive-detail' pk=hive.pk %}">{{ hive.name }}</a></td>
-                                <td><a href="{% url 'inspection-details' pk=hive.inspections.first.pk %}">{{ hive.inspections.first.date }}</a></td>
-                                <td class="is-hidden-mobile">{{ hive.last_recorded_weight|floatformat }} kg</td>
+                                <td>
+                                    {% if hive.inspections.first %}
+                                        <a href="{% url 'inspection-details' pk=hive.inspections.first.pk %}">{{ hive.inspections.first.date }}</a>
+                                    {% else %}
+                                        <em>N/A</em>
+                                    {% endif %}
+                                </td>
+                                <td class="is-hidden-mobile">
+                                    {% if hive.last_recorded_weight %}
+                                        {{ hive.last_recorded_weight|floatformat }} kg
+                                    {% else %}
+                                        <em>N/A</em>
+                                    {% endif %}
+                                </td>
                                 <td class="is-hidden-mobile has-text-right">
                                     <a href="{% url 'inspection-create' pk=hive.pk %}" class="button is-small" title="Create Inspection">
                                         <span class="icon"><i class="fa fa-clipboard-list"></i></span>

@@ -6,14 +6,14 @@ from frontend import weather
 
 
 class ApiaryListView(LoginRequiredMixin, ListView):
-    template_name = 'frontend/apiary_list.html'
+    template_name = 'frontend/apiary/list.html'
 
     def get_queryset(self):
         return self.request.user.apiaries.all()
 
 
 class ApiaryDetailView(LoginRequiredMixin, DetailView):
-    template_name = 'frontend/apiary_detail.html'
+    template_name = 'frontend/apiary/detail.html'
     context_object_name = 'apiary'
 
     def get_queryset(self):
@@ -31,7 +31,7 @@ class ApiaryDetailView(LoginRequiredMixin, DetailView):
 
 
 class ApiaryCreateView(LoginRequiredMixin, CreateView):
-    template_name = 'frontend/apiary_form.html'
+    template_name = 'frontend/apiary/form.html'
     model = Apiary
     fields = ['name', 'latitude', 'longitude', 'address', 'radius', 'notes']
 
@@ -41,6 +41,6 @@ class ApiaryCreateView(LoginRequiredMixin, CreateView):
 
 
 class ApiaryUpdateView(LoginRequiredMixin, UpdateView):
-    template_name = 'frontend/apiary_form.html'
+    template_name = 'frontend/apiary/form.html'
     model = Apiary
     fields = ['name', 'latitude', 'longitude', 'address', 'radius', 'notes']

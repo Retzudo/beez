@@ -44,7 +44,10 @@ class Hive(models.Model):
 
     @property
     def last_recorded_weight(self):
-        return self.inspections.filter(weight__isnull=False).first().weight
+        inspection = self.inspections.filter(weight__isnull=False).first()
+
+        if inspection:
+            return inspection.weight
 
 
 class Inspection(models.Model):
