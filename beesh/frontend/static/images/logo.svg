@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30.5mm" height="35.218mm" version="1.1" viewBox="0 0 30.5 35.218" xmlns="http://www.w3.org/2000/svg">
+ <style>
+  path {
+   fill: none;
+   stroke-width: 2;
+   stroke: #000000;
+  }
+ </style>
+ <g transform="translate(-72.647 -22.441)">
+  <path d="m102.15 48.278-14.25 8.2272-14.25-8.2272v-16.454l14.25-8.2272 14.25 8.2272z" class="logo-path"/>
+  <path d="m92.615 37.345v5.4847l-4.7499 2.7424-4.7499-2.7424v-5.4847l4.7499-2.7424z" class="logo-path"/>
+  <path transform="matrix(.9957 0 0 1 .35683 0)" d="m83.115 37.345v5.4847l-4.7499 2.7424-4.7499-2.7424v-5.4847l4.7499-2.7424z" class="logo-path"/>
+  <path d="m102.11 37.345v5.4847l-4.7499 2.7424-4.7499-2.7424v-5.4847l4.7499-2.7424z" class="logo-path"/>
+  <path d="m87.865 29.118v5.4847l-4.7499 2.7424-4.7499-2.7424v-5.4847l4.7499-2.7424z" class="logo-path"/>
+  <path d="m97.365 29.118v5.4847l-4.7499 2.7424-4.7499-2.7424v-5.4847l4.7499-2.7424z" class="logo-path"/>
+  <path transform="matrix(.99644 0 0 .99652 .31248 .14878)" d="m87.865 45.572v5.4847l-4.7499 2.7424-4.7499-2.7424v-5.4847l4.7499-2.7424z" sclass="logo-path"/>
+  <path d="m97.365 45.572v5.4847l-4.7499 2.7424-4.7499-2.7424v-5.4847l4.7499-2.7424z" class="logo-path"/>
+ </g>
+</svg>
