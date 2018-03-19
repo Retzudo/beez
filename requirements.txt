@@ -4,10 +4,15 @@ dj-database-url==0.5.0
 dj-static==0.0.6
 Django==2.0.3
 django-bulma==0.4.0
+django-markdown-deux==1.0.5
+django-qr-code==0.4.1
 gunicorn==19.7.1
 idna==2.6
-psycopg2==2.7.4
+markdown2==2.3.5
+psycopg2-binary==2.7.4
 pytz==2018.3
+qrcode==5.3
 requests==2.18.4
+six==1.11.0
 static3==0.7.0
 urllib3==1.22
