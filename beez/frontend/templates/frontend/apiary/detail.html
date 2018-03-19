@@ -36,57 +36,63 @@
             </h1>
 
             <h2 class="title is-4">Hives</h2>
-            {% if apiary.hives.count > 0 %}
-                <table class="table is-striped is-fullwidth is-striped is-hoverable">
-                    <thead>
+            <table class="table is-striped is-fullwidth is-striped is-hoverable">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th><abbr title="Last Inspection">Insp</abbr></th>
+                    <th class="is-hidden-touch"><abbr title="Last Recorded Weight">Wgt</abbr></th>
+                    <th class="is-hidden-touch"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for hive in apiary.hives.all %}
+                    {% if not hive.terminated %}
+                        <tr>
+                            {% url 'hive-detail' pk=hive.pk as hive_detail_url %}
+                            <td><a href="{{ hive_detail_url }}">{{ hive.name }}</a></td>
+                            <td>
+                                {% if hive.inspections.first %}
+                                    <a href="{% url 'inspection-detail' pk=hive.inspections.first.pk %}">{{ hive.inspections.first.date }}</a>
+                                {% else %}
+                                    <em>N/A</em>
+                                {% endif %}
+                            </td>
+                            <td class="is-hidden-touch">
+                                {% if hive.last_recorded_weight %}
+                                    {{ hive.last_recorded_weight|floatformat }} kg
+                                {% else %}
+                                    <em>N/A</em>
+                                {% endif %}
+                            </td>
+                            <td class="is-hidden-touch has-text-right">
+                                <a href="{% url 'inspection-create' pk=hive.pk %}" class="button is-small" title="Create Inspection">
+                                    <span class="icon"><i class="fa fa-clipboard-list"></i></span>
+                                </a>
+                                <a href="{% url 'hive-transfer' pk=hive.pk %}" class="button is-small" title="Transfer Hive">
+                                    <span class="icon"><i class="fa fa-exchange-alt"></i></span>
+                                </a>
+                                <a href="{% url 'hive-edit' pk=hive.pk %}" class="button is-small" title="Edit">
+                                    <span class="icon"><i class="fa fa-edit"></i></span>
+                                </a>
+                                {% with absolute_url=request.scheme|add:'://'|add:request.get_host|add:hive_detail_url %}
+                                <a href="{% qr_url_from_text absolute_url size="h" image_format="svg" border="1" %}" target="_blank" class="button is-small is-hidden-touch" title="QR Code">
+                                    <span class="icon"><i class="fa fa-qrcode"></i></span>
+                                </a>
+                                {% endwith %}
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% empty %}
                     <tr>
-                        <th>Name</th>
-                        <th><abbr title="Last Inspection">Insp</abbr></th>
-                        <th class="is-hidden-touch"><abbr title="Last Recorded Weight">Wgt</abbr></th>
-                        <th class="is-hidden-touch"></th>
+                        <td colspan="4">
+                            <em>No hives</em>
+                        </td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    {% for hive in apiary.hives.all %}
-                        {% if not hive.terminated %}
-                            <tr>
-                                {% url 'hive-detail' pk=hive.pk as hive_detail_url %}
-                                <td><a href="{{ hive_detail_url }}">{{ hive.name }}</a></td>
-                                <td>
-                                    {% if hive.inspections.first %}
-                                        <a href="{% url 'inspection-detail' pk=hive.inspections.first.pk %}">{{ hive.inspections.first.date }}</a>
-                                    {% else %}
-                                        <em>N/A</em>
-                                    {% endif %}
-                                </td>
-                                <td class="is-hidden-touch">
-                                    {% if hive.last_recorded_weight %}
-                                        {{ hive.last_recorded_weight|floatformat }} kg
-                                    {% else %}
-                                        <em>N/A</em>
-                                    {% endif %}
-                                </td>
-                                <td class="is-hidden-touch has-text-right">
-                                    <a href="{% url 'inspection-create' pk=hive.pk %}" class="button is-small" title="Create Inspection">
-                                        <span class="icon"><i class="fa fa-clipboard-list"></i></span>
-                                    </a>
-                                    <a href="{% url 'hive-transfer' pk=hive.pk %}" class="button is-small" title="Transfer Hive">
-                                        <span class="icon"><i class="fa fa-exchange-alt"></i></span>
-                                    </a>
-                                    <a href="{% url 'hive-edit' pk=hive.pk %}" class="button is-small" title="Edit">
-                                        <span class="icon"><i class="fa fa-edit"></i></span>
-                                    </a>
-                                    {% with absolute_url=request.scheme|add:'://'|add:request.get_host|add:hive_detail_url %}
-                                    <a href="{% qr_url_from_text absolute_url size="h" image_format="svg" border="1" %}" target="_blank" class="button is-small is-hidden-touch" title="QR Code">
-                                        <span class="icon"><i class="fa fa-qrcode"></i></span>
-                                    </a>
-                                    {% endwith %}
-                                </td>
-                            </tr>
-                        {% endif %}
-                    {% endfor %}
-                    </tbody>
-                </table>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% if apiary.hives.count > 0 %}
                 <a class="button is-success" href="{% url 'hive-create' pk=apiary.pk %}">
                     <span class="icon"><i class="fa fa-plus"></i></span>
                     <span>Add Hive</span>

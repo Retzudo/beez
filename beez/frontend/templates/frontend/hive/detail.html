@@ -23,38 +23,44 @@
             </h1>
 
             <h2 class="title is-4">Inspections</h2>
-            {% if hive.inspections.count > 0 %}
-                <table class="table is-striped is-fullwidth is-striped is-hoverable">
-                    <thead>
+            <table class="table is-striped is-fullwidth is-striped is-hoverable">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th><abbr title="Last Recorded Weight">Wgt</abbr></th>
+                    <th class="is-hidden-touch"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for inspection in hive.inspections.all %}
                     <tr>
-                        <th>Date</th>
-                        <th><abbr title="Last Recorded Weight">Wgt</abbr></th>
-                        <th class="is-hidden-touch"></th>
+                        <td><a href="{% url 'inspection-detail' pk=inspection.pk %}">{{ inspection.date }}</a></td>
+                        <td>
+                            {% if inspection.weight %}
+                                {{ inspection.weight }} kg
+                            {% else %}
+                                <em>N/A</em>
+                            {% endif %}
+                        </td>
+                        <td class="has-text-right is-hidden-touch">
+                            <a href="{% url 'inspection-edit' pk=inspection.pk %}" class="button is-small" title="Edit Inspection">
+                                <span class="icon"><i class="fa fa-pencil-alt"></i></span>
+                            </a>
+                            <a href="{% url 'inspection-delete' pk=inspection.pk %}" class="button is-small is-danger" title="Delete Inspection">
+                                <span class="icon"><i class="fa fa-trash-alt"></i></span>
+                            </a>
+                        </td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    {% for inspection in hive.inspections.all %}
-                        <tr>
-                            <td><a href="{% url 'inspection-detail' pk=inspection.pk %}">{{ inspection.date }}</a></td>
-                            <td>
-                                {% if inspection.weight %}
-                                    {{ inspection.weight }} kg
-                                {% else %}
-                                    <em>N/A</em>
-                                {% endif %}
-                            </td>
-                            <td class="has-text-right">
-                                <a href="{% url 'inspection-edit' pk=inspection.pk %}" class="button is-small" title="Edit Inspection">
-                                    <span class="icon"><i class="fa fa-pencil-alt"></i></span>
-                                </a>
-                                <a href="{% url 'inspection-delete' pk=inspection.pk %}" class="button is-small is-danger" title="Delete Inspection">
-                                    <span class="icon"><i class="fa fa-trash-alt"></i></span>
-                                </a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                {% empty %}
+                    <tr>
+                        <td colspan="3">
+                            <em>No inspections</em>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% if hive.inspections.count > 0 %}
                 <a class="button is-success" href="{% url 'inspection-create' pk=hive.pk %}">
                     <span class="icon"><i class="fa fa-plus"></i></span>
                     <span>Add Inspection</span>
