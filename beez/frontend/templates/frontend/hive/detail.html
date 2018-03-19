@@ -2,7 +2,7 @@
 
 {% load qr_code markdown_deux_tags %}
 
-{% block title %}{{ hive.name }} - Beez{% endblock %}
+{% block title %}{{ hive.name }} - {{ block.super }}{% endblock %}
 
 {% block body %}
     <section class="section">

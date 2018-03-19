@@ -2,7 +2,7 @@
 
 {% load timestamp weather qr_code markdown_deux_tags %}
 
-{% block title %}{{ apiary.name }} - Beez{% endblock %}
+{% block title %}{{ apiary.name }} - {{ block.super }}{% endblock %}
 
 {% block head %}
     {% if apiary.latitude and apiary.longitude %}

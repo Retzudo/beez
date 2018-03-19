@@ -30,7 +30,7 @@ class Apiary(models.Model):
 class Hive(models.Model):
     apiary = models.ForeignKey(Apiary, related_name='hives', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
+    description = models.CharField(blank=True, null=True, max_length=255)
     date_created = models.DateTimeField(auto_now_add=True)
     terminated = models.BooleanField(default=False)
     date_terminated = models.DateTimeField(blank=True, null=True)
