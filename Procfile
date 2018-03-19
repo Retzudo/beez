@@ -1,1 +1,1 @@
-web: gunicorn --chdir beesh beesh.wsgi --log-file=-
+web: gunicorn --chdir beez beez.wsgi --log-file=-
