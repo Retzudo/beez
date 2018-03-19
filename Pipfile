@@ -10,13 +10,13 @@ name = "pypi"
 django = "*"
 django-bulma = "*"
 requests = "*"
-"psycopg2" = "*"
 dj-database-url = "*"
 gunicorn = "*"
 dj-static = "*"
 qrcode = "*"
 django-qr-code = "*"
 django-markdown-deux = "*"
+"psycopg2-binary" = "*"
 
 
 [dev-packages]
