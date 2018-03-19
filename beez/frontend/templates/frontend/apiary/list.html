@@ -11,8 +11,8 @@
                         <th>Name</th>
                         <th>Address</th>
                         <th>Coords</th>
-                        <th class="is-hidden-mobile"># Hives</th>
-                        <th class="is-hidden-mobile"></th>
+                        <th class="is-hidden-touch"># Hives</th>
+                        <th class="is-hidden-touch"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -30,7 +30,7 @@
                             </td>
                             <td>
                                 {% if apiary.latitude and apiary.longitude %}
-                                    <a class="is-hidden-mobile" target="_blank"
+                                    <a class="is-hidden-touch" target="_blank"
                                        href="https://www.openstreetmap.org/?mlat={{ apiary.latitude }}&mlon={{ apiary.longitude }}&zoom=16">
                                         <span class="icon"><i class="fa fa-external-link-alt"></i></span>
                                         <span>Open Map</span>
@@ -44,8 +44,8 @@
                                     <em>N/A</em>
                                 {% endif %}
                             </td>
-                            <td class="is-hidden-mobile">{{ apiary.hives.count }}</td>
-                            <td class="is-hidden-mobile has-text-right">
+                            <td class="is-hidden-touch">{{ apiary.hives.count }}</td>
+                            <td class="is-hidden-touch has-text-right">
                                 <a class="button is-small" href="{% url 'apiary-edit' pk=apiary.pk %}" title="Edit">
                                     <span class="icon"><i class="fa fa-edit"></i></span>
                                 </a>

@@ -42,8 +42,8 @@
                     <tr>
                         <th>Name</th>
                         <th><abbr title="Last Inspection">Insp</abbr></th>
-                        <th class="is-hidden-mobile"><abbr title="Last Recorded Weight">Wgt</abbr></th>
-                        <th class="is-hidden-mobile"></th>
+                        <th class="is-hidden-touch"><abbr title="Last Recorded Weight">Wgt</abbr></th>
+                        <th class="is-hidden-touch"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -58,14 +58,14 @@
                                         <em>N/A</em>
                                     {% endif %}
                                 </td>
-                                <td class="is-hidden-mobile">
+                                <td class="is-hidden-touch">
                                     {% if hive.last_recorded_weight %}
                                         {{ hive.last_recorded_weight|floatformat }} kg
                                     {% else %}
                                         <em>N/A</em>
                                     {% endif %}
                                 </td>
-                                <td class="is-hidden-mobile has-text-right">
+                                <td class="is-hidden-touch has-text-right">
                                     <a href="{% url 'inspection-create' pk=hive.pk %}" class="button is-small" title="Create Inspection">
                                         <span class="icon"><i class="fa fa-clipboard-list"></i></span>
                                     </a>
@@ -108,8 +108,8 @@
                                     <th></th>
                                     <th><abbr title="Condition">Con</abbr></th>
                                     <th ><abbr title="Average">Avg</abbr></th>
-                                    <th class="is-hidden-mobile"><abbr title="Minimum">Min</abbr></th>
-                                    <th class="is-hidden-mobile"><abbr title="Maximum">Max</abbr></th>
+                                    <th class="is-hidden-touch"><abbr title="Minimum">Min</abbr></th>
+                                    <th class="is-hidden-touch"><abbr title="Maximum">Max</abbr></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -122,8 +122,8 @@
                                         </span>
                                         </td>
                                         <td>{{ day.temp.day|floatformat }} °C</td>
-                                        <td class="is-hidden-mobile">{{ day.temp.min }} °C</td>
-                                        <td class="is-hidden-mobile">{{ day.temp.max }} °C</td>
+                                        <td class="is-hidden-touch">{{ day.temp.min }} °C</td>
+                                        <td class="is-hidden-touch">{{ day.temp.max }} °C</td>
                                     </tr>
                                 {% endfor %}
 
@@ -155,7 +155,7 @@
                 </div>
                 {% if apiary.latitude and apiary.longitude %}
                     <div class="column is-half">
-                        <div id="apiary-map" class="box apiary-map is-hidden-mobile"></div>
+                        <div id="apiary-map" class="box apiary-map is-hidden-touch"></div>
                         <div class="box is-hidden-desktop">
                             <h3 class="subtitle">Map</h3>
 
