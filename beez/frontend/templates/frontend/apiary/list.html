@@ -60,10 +60,12 @@
                 </tbody>
             </table>
             {% if user.apiaries.count > 0 %}
-                <a class="button is-success" href="{% url 'apiary-create' %}">
-                    <span class="icon"><i class="fa fa-plus"></i></span>
-                    <span>Add Apiary</span>
-                </a>
+                <div class="buttons">
+                    <a class="button is-success" href="{% url 'apiary-create' %}">
+                        <span class="icon"><i class="fa fa-plus"></i></span>
+                        <span>Add Apiary</span>
+                    </a>
+                </div>
             {% else %}
                 <div class="buttons is-centered">
                     <a href="{% url 'apiary-create' %}" class="button is-primary is-big">

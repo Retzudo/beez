@@ -1,6 +1,6 @@
 {% extends 'frontend/master.html' %}
 
-{% load timestamp weather qr_code %}
+{% load timestamp weather qr_code markdown_deux_tags %}
 
 {% block title %}{{ apiary.name }} - Beez{% endblock %}
 
@@ -93,10 +93,12 @@
                 </tbody>
             </table>
             {% if apiary.hives.count > 0 %}
-                <a class="button is-success" href="{% url 'hive-create' pk=apiary.pk %}">
-                    <span class="icon"><i class="fa fa-plus"></i></span>
-                    <span>Add Hive</span>
-                </a>
+                <div class="buttons">
+                    <a class="button is-success" href="{% url 'hive-create' pk=apiary.pk %}">
+                        <span class="icon"><i class="fa fa-plus"></i></span>
+                        <span>Add Hive</span>
+                    </a>
+                </div>
             {% else %}
                 <div class="buttons is-centered">
                     <a href="{% url 'hive-create' pk=apiary.pk %}" class="button is-primary is-big">
@@ -159,7 +161,7 @@
                     <div class="box">
                         <h3 class="subtitle">Notes</h3>
                         {% if apiary.notes %}
-                            <p>{{ apiary.notes }}</p>
+                            <div class="content">{{ apiary.notes|markdown }}</div>
                         {% else %}
                             <em>N/A</em>
                         {% endif %}

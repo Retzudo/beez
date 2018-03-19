@@ -18,7 +18,7 @@ class HiveDetailView(LoginRequiredMixin, DetailView):
 class HiveCreateView(LoginRequiredMixin, CreateView):
     template_name = 'frontend/hive/form.html'
     model = Hive
-    fields = ['name', 'description']
+    fields = ['name', 'description', 'notes']
 
     def form_valid(self, form):
         form.instance.apiary = Apiary.objects.get(owner=self.request.user, pk=self.kwargs.get('pk'))
@@ -28,7 +28,7 @@ class HiveCreateView(LoginRequiredMixin, CreateView):
 class HiveUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'frontend/hive/form.html'
     model = Hive
-    fields = ['name', 'description']
+    fields = ['name', 'description', 'notes']
 
     def get_queryset(self):
         return Hive.objects.filter(apiary__owner=self.request.user)

@@ -1,6 +1,6 @@
 {% extends 'frontend/master.html' %}
 
-{% load qr_code %}
+{% load qr_code markdown_deux_tags %}
 
 {% block body %}
     <section class="section">
@@ -61,10 +61,12 @@
                 </tbody>
             </table>
             {% if hive.inspections.count > 0 %}
-                <a class="button is-success" href="{% url 'inspection-create' pk=hive.pk %}">
-                    <span class="icon"><i class="fa fa-plus"></i></span>
-                    <span>Add Inspection</span>
-                </a>
+                <div class="buttons">
+                    <a class="button is-success" href="{% url 'inspection-create' pk=hive.pk %}">
+                        <span class="icon"><i class="fa fa-plus"></i></span>
+                        <span>Add Inspection</span>
+                    </a>
+                </div>
             {% else %}
                 <div class="buttons is-centered">
                     <a href="{% url 'inspection-create' pk=hive.pk %}" class="button is-primary is-big">
@@ -73,6 +75,32 @@
                     </a>
                 </div>
             {% endif %}
+
+            <hr>
+
+            <h2 class="title is-4">Details</h2>
+            <div class="columns">
+                <div class="column is-half">
+                    <div class="box">
+                        <h3 class="subtitle">Description</h3>
+                        {% if hive.description %}
+                            <div class="content">{{ hive.description }}</div>
+                        {% else %}
+                            <em>N/A</em>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="column is-half">
+                    <div class="box">
+                        <h3 class="subtitle">Notes</h3>
+                        {% if hive.notes %}
+                            <div class="content">{{ hive.notes|markdown }}</div>
+                        {% else %}
+                            <em>N/A</em>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
 
             <hr>
 
