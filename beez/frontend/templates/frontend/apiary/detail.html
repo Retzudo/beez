@@ -136,14 +136,10 @@
                                         </span>
                                         </td>
                                         <td>{{ day.temp.day|floatformat }} °C</td>
-                                        <td class="is-hidden-touch">{{ day.temp.min }} °C</td>
-                                        <td class="is-hidden-touch">{{ day.temp.max }} °C</td>
+                                        <td class="is-hidden-touch">{{ day.temp.min|floatformat }} °C</td>
+                                        <td class="is-hidden-touch">{{ day.temp.max|floatformat }} °C</td>
                                     </tr>
                                 {% endfor %}
-
-                                <tr>
-
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
