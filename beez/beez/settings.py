@@ -112,7 +112,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, '../static')
 
 OWM_API_KEY = os.getenv('BEEZ_OWM_API_KEY')
-LOGIN_REDIRECT_URL = '/dashboard/apiaries'
+# LOGIN_REDIRECT_URL = '/dashboard/apiaries'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
