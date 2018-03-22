@@ -1,7 +1,9 @@
 FROM python
 
+RUN pip install pipenv
+
 COPY . /beez
-RUN pip install -r /beez/requirements.txt
+RUN cd /beez && pipenv install --system
 RUN cd /beez/beez && python manage.py collectstatic --no-input
 
 WORKDIR /beez/beez
