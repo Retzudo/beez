@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Retzudo/beez.svg?branch=master)](https://travis-ci.org/Retzudo/beez)
 # Beez
 
 Beez is a web based tool for beekeepers.
