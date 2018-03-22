@@ -14,6 +14,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import dj_database_url
+from django.urls import reverse_lazy
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -112,7 +113,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, '../static')
 
 OWM_API_KEY = os.getenv('BEEZ_OWM_API_KEY')
-LOGIN_REDIRECT_URL = '/dashboard/apiaries'
+LOGIN_REDIRECT_URL = reverse_lazy('frontend:apiary-list')
 
 REST_FRAMEWORK = {
     'COERCE_DECIMAL_TO_STRING': False,  # Don't render lat/lon as string. We don't need the precision
