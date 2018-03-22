@@ -115,6 +115,7 @@ OWM_API_KEY = os.getenv('BEEZ_OWM_API_KEY')
 # LOGIN_REDIRECT_URL = '/dashboard/apiaries'
 
 REST_FRAMEWORK = {
+    'COERCE_DECIMAL_TO_STRING': False,  # Don't render lat/lon as string. We don't need the precision
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
@@ -124,3 +125,4 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ),
 }
+
