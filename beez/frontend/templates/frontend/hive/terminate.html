@@ -14,7 +14,7 @@
             <form action="" method="post">
                 {% csrf_token %}
                 <div class="has-text-centered">
-                    <a href="{% url 'hive-detail' pk=hive.pk %}" class="button">
+                    <a href="{% url 'frontend:hive-detail' pk=hive.pk %}" class="button">
                         Cancel
                     </a>
                     <button class="button is-danger">

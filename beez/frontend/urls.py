@@ -3,6 +3,8 @@ from django.views.generic import TemplateView
 
 from frontend.views import apiary, hive, user, inspection
 
+app_name = 'frontend'
+
 urlpatterns = [
     path('', TemplateView.as_view(template_name='frontend/index.html'), name='index'),
     path('accounts/', include('django.contrib.auth.urls')),

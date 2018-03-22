@@ -7,7 +7,7 @@
 
             <p class="has-text-centered">
                 {% if not user.is_authenticated %}
-                    <a href="{% url 'register' %}">Create an account</a> or <a href="{% url 'login' %}">log in.</a>
+                    <a href="{% url 'frontend:register' %}">Create an account</a> or <a href="{% url 'frontend:login' %}">log in.</a>
                 {% endif %}
             </p>
         </div>

@@ -19,7 +19,8 @@ from django.urls import path, include
 from qr_code import urls as qr_code_urls
 
 urlpatterns = [
-    path('', include('frontend.urls')),
-    path('qr_code/', include(qr_code_urls, namespace="qr_code")),
+    path('', include('frontend.urls', namespace='frontend')),
+    path('api', include('api.urls', namespace='api')),
+    path('qr_code/', include(qr_code_urls, namespace='qr_code')),
     path('admin/', admin.site.urls),
 ]

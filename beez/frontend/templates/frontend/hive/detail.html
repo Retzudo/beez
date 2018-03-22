@@ -11,15 +11,15 @@
 
             <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
-                    <li><a href="{% url 'apiary-list' %}">Apiaries</a></li>
-                    <li><a href="{% url 'apiary-detail' pk=hive.apiary.pk %}">{{ hive.apiary.name }}</a></li>
-                    <li class="is-active"><a href="{% url 'hive-detail' pk=hive.pk %}">{{ hive.name }}</a></li>
+                    <li><a href="{% url 'frontend:apiary-list' %}">Apiaries</a></li>
+                    <li><a href="{% url 'frontend:apiary-detail' pk=hive.apiary.pk %}">{{ hive.apiary.name }}</a></li>
+                    <li class="is-active"><a href="{% url 'frontend:hive-detail' pk=hive.pk %}">{{ hive.name }}</a></li>
                 </ul>
             </nav>
 
             <h1 class="title">
                 <span>{{ hive.name }}</span>
-                <a href="{% url 'hive-edit' pk=hive.pk %}">
+                <a href="{% url 'frontend:hive-edit' pk=hive.pk %}">
                     <span class="icon"><i class="fa fa-pencil-alt"></i></span>
                 </a>
             </h1>
@@ -36,7 +36,7 @@
                 <tbody>
                 {% for inspection in hive.inspections.all %}
                     <tr>
-                        <td><a href="{% url 'inspection-detail' pk=inspection.pk %}">{{ inspection.date }}</a></td>
+                        <td><a href="{% url 'frontend:inspection-detail' pk=inspection.pk %}">{{ inspection.date }}</a></td>
                         <td>
                             {% if inspection.weight %}
                                 {{ inspection.weight }} kg
@@ -45,10 +45,10 @@
                             {% endif %}
                         </td>
                         <td class="has-text-right is-hidden-touch">
-                            <a href="{% url 'inspection-edit' pk=inspection.pk %}" class="button is-small" title="Edit Inspection">
+                            <a href="{% url 'frontend:inspection-edit' pk=inspection.pk %}" class="button is-small" title="Edit Inspection">
                                 <span class="icon"><i class="fa fa-pencil-alt"></i></span>
                             </a>
-                            <a href="{% url 'inspection-delete' pk=inspection.pk %}" class="button is-small is-danger" title="Delete Inspection">
+                            <a href="{% url 'frontend:inspection-delete' pk=inspection.pk %}" class="button is-small is-danger" title="Delete Inspection">
                                 <span class="icon"><i class="fa fa-trash-alt"></i></span>
                             </a>
                         </td>
@@ -64,14 +64,14 @@
             </table>
             {% if hive.inspections.count > 0 %}
                 <div class="buttons">
-                    <a class="button is-success" href="{% url 'inspection-create' pk=hive.pk %}">
+                    <a class="button is-success" href="{% url 'frontend:inspection-create' pk=hive.pk %}">
                         <span class="icon"><i class="fa fa-plus"></i></span>
                         <span>Add Inspection</span>
                     </a>
                 </div>
             {% else %}
                 <div class="buttons is-centered">
-                    <a href="{% url 'inspection-create' pk=hive.pk %}" class="button is-primary is-big">
+                    <a href="{% url 'frontend:inspection-create' pk=hive.pk %}" class="button is-primary is-big">
                         <span class="icon"><i class="fa fa-plus"></i></span>
                         <span>Create Your First Inspection</span>
                     </a>
@@ -107,11 +107,11 @@
             <hr>
 
             <div class="buttons">
-                <a href="{% url 'hive-transfer' pk=hive.pk %}" class="button">
+                <a href="{% url 'frontend:hive-transfer' pk=hive.pk %}" class="button">
                     <span class="icon"><i class="fa fa-exchange-alt"></i></span>
                     <span>Transfer Hive</span>
                 </a>
-                <a href="{% url 'hive-terminate' pk=hive.pk %}" class="button is-danger">
+                <a href="{% url 'frontend:hive-terminate' pk=hive.pk %}" class="button is-danger">
                     <span class="icon"><i class="fa fa-ban"></i></span>
                     <span>Terminate Hive</span>
                 </a>

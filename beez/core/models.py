@@ -24,7 +24,7 @@ class Apiary(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('apiary-detail', args=[self.pk])
+        return reverse('frontend:apiary-detail', args=[self.pk])
 
 
 class Hive(models.Model):
@@ -40,7 +40,7 @@ class Hive(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('hive-detail', args=[self.pk])
+        return reverse('frontend:hive-detail', args=[self.pk])
 
     @property
     def last_recorded_weight(self):
@@ -65,7 +65,7 @@ class Inspection(models.Model):
         return 'Inspection on {}'.format(self.date)
 
     def get_absolute_url(self):
-        return reverse('inspection-detail', args=[self.pk])
+        return reverse('frontend:inspection-detail', args=[self.pk])
 
 
 class Harvest(models.Model):

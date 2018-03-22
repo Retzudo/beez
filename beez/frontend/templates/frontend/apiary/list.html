@@ -18,7 +18,7 @@
                 {% for apiary in user.apiaries.all %}
                     <tr>
                         <td>
-                            <a href="{% url 'apiary-detail' pk=apiary.pk %}">{{ apiary.name }}</a>
+                            <a href="{% url 'frontend:apiary-detail' pk=apiary.pk %}">{{ apiary.name }}</a>
                         </td>
                         <td>
                             {% if apiary.address %}
@@ -45,7 +45,7 @@
                         </td>
                         <td class="is-hidden-touch">{{ apiary.hives.count }}</td>
                         <td class="is-hidden-touch has-text-right">
-                            <a class="button is-small" href="{% url 'apiary-edit' pk=apiary.pk %}" title="Edit">
+                            <a class="button is-small" href="{% url 'frontend:apiary-edit' pk=apiary.pk %}" title="Edit">
                                 <span class="icon"><i class="fa fa-edit"></i></span>
                             </a>
                         </td>
@@ -61,14 +61,14 @@
             </table>
             {% if user.apiaries.count > 0 %}
                 <div class="buttons">
-                    <a class="button is-success" href="{% url 'apiary-create' %}">
+                    <a class="button is-success" href="{% url 'frontend:apiary-create' %}">
                         <span class="icon"><i class="fa fa-plus"></i></span>
                         <span>Add Apiary</span>
                     </a>
                 </div>
             {% else %}
                 <div class="buttons is-centered">
-                    <a href="{% url 'apiary-create' %}" class="button is-primary is-big">
+                    <a href="{% url 'frontend:apiary-create' %}" class="button is-primary is-big">
                         <span class="icon"><i class="fa fa-plus"></i></span>
                         <span>Add Your First Apiary</span>
                     </a>

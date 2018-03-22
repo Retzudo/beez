@@ -1,7 +1,7 @@
 {% load static %}
 <nav class="navbar has-shadow   " role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-        <a class="navbar-item" href="{% url 'index' %}">
+        <a class="navbar-item" href="{% url 'frontend:index' %}">
             <img src="{% static 'images/logo.svg' %}" alt="Beez Logo">
             <span style="margin-left: 0.5em;">Beez</span>
         </a>
@@ -28,15 +28,15 @@
                         <span>{{ request.user.username }}</span>
                     </div>
                     <div class="navbar-dropdown is-right">
-                        <a class="navbar-item" href="{% url 'apiary-list' %}"><span class="icon"><i class="fa fa-tachometer-alt"></i></span>  Dashboard</a>
+                        <a class="navbar-item" href="{% url 'frontend:apiary-list' %}"><span class="icon"><i class="fa fa-tachometer-alt"></i></span>  Dashboard</a>
                         <a class="navbar-item" href="#"><span class="icon"><i class="fa fa-user-circle"></i></span> Profile</a>
                         <hr class="navbar-divider">
-                        <a class="navbar-item" href="{% url 'logout' %}"><span class="icon"><i class="fa fa-sign-out-alt"></i></span> Log out</a>
+                        <a class="navbar-item" href="{% url 'frontend:logout' %}"><span class="icon"><i class="fa fa-sign-out-alt"></i></span> Log out</a>
                     </div>
                 </div>
             {% else %}
-                <a href="{% url 'register' %}" class="navbar-item">Register</a>
-                <a href="{% url 'login' %}" class="navbar-item">Log in</a>
+                <a href="{% url 'frontend:register' %}" class="navbar-item">Register</a>
+                <a href="{% url 'frontend:login' %}" class="navbar-item">Log in</a>
             {% endif %}
         </div>
     </div>

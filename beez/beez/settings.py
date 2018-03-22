@@ -40,10 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_jwt',
     'markdown_deux',
     'qr_code',
     'core',
     'frontend',
+    'api',
     'django.contrib.admin',
     'bulma',
 ]
@@ -110,3 +113,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, '../static')
 
 OWM_API_KEY = os.getenv('BEEZ_OWM_API_KEY')
 LOGIN_REDIRECT_URL = '/dashboard/apiaries'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}

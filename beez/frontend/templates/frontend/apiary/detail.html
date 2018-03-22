@@ -23,14 +23,14 @@
 
             <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
-                    <li><a href="{% url 'apiary-list' %}">Apiaries</a></li>
-                    <li class="is-active"><a href="{% url 'apiary-detail' pk=apiary.pk %}">{{ apiary.name }}</a></li>
+                    <li><a href="{% url 'frontend:apiary-list' %}">Apiaries</a></li>
+                    <li class="is-active"><a href="{% url 'frontend:apiary-detail' pk=apiary.pk %}">{{ apiary.name }}</a></li>
                 </ul>
             </nav>
 
             <h1 class="title">
                 <span>{{ apiary.name }}</span>
-                <a href="{% url 'apiary-edit' pk=apiary.pk %}">
+                <a href="{% url 'frontend:apiary-edit' pk=apiary.pk %}">
                     <span class="icon"><i class="fa fa-pencil-alt"></i></span>
                 </a>
             </h1>
@@ -49,11 +49,11 @@
                 {% for hive in apiary.hives.all %}
                     {% if not hive.terminated %}
                         <tr>
-                            {% url 'hive-detail' pk=hive.pk as hive_detail_url %}
+                            {% url 'frontend:hive-detail' pk=hive.pk as hive_detail_url %}
                             <td><a href="{{ hive_detail_url }}">{{ hive.name }}</a></td>
                             <td>
                                 {% if hive.inspections.first %}
-                                    <a href="{% url 'inspection-detail' pk=hive.inspections.first.pk %}">{{ hive.inspections.first.date }}</a>
+                                    <a href="{% url 'frontend:inspection-detail' pk=hive.inspections.first.pk %}">{{ hive.inspections.first.date }}</a>
                                 {% else %}
                                     <em>N/A</em>
                                 {% endif %}
@@ -66,13 +66,13 @@
                                 {% endif %}
                             </td>
                             <td class="is-hidden-touch has-text-right">
-                                <a href="{% url 'inspection-create' pk=hive.pk %}" class="button is-small" title="Create Inspection">
+                                <a href="{% url 'frontend:inspection-create' pk=hive.pk %}" class="button is-small" title="Create Inspection">
                                     <span class="icon"><i class="fa fa-clipboard-list"></i></span>
                                 </a>
-                                <a href="{% url 'hive-transfer' pk=hive.pk %}" class="button is-small" title="Transfer Hive">
+                                <a href="{% url 'frontend:hive-transfer' pk=hive.pk %}" class="button is-small" title="Transfer Hive">
                                     <span class="icon"><i class="fa fa-exchange-alt"></i></span>
                                 </a>
-                                <a href="{% url 'hive-edit' pk=hive.pk %}" class="button is-small" title="Edit">
+                                <a href="{% url 'frontend:hive-edit' pk=hive.pk %}" class="button is-small" title="Edit">
                                     <span class="icon"><i class="fa fa-edit"></i></span>
                                 </a>
                                 {% with absolute_url=request.scheme|add:'://'|add:request.get_host|add:hive_detail_url %}
@@ -94,14 +94,14 @@
             </table>
             {% if apiary.hives.count > 0 %}
                 <div class="buttons">
-                    <a class="button is-success" href="{% url 'hive-create' pk=apiary.pk %}">
+                    <a class="button is-success" href="{% url 'frontend:hive-create' pk=apiary.pk %}">
                         <span class="icon"><i class="fa fa-plus"></i></span>
                         <span>Add Hive</span>
                     </a>
                 </div>
             {% else %}
                 <div class="buttons is-centered">
-                    <a href="{% url 'hive-create' pk=apiary.pk %}" class="button is-primary is-big">
+                    <a href="{% url 'frontend:hive-create' pk=apiary.pk %}" class="button is-primary is-big">
                         <span class="icon"><i class="fa fa-plus"></i></span>
                         <span>Add Your First Hive</span>
                     </a>

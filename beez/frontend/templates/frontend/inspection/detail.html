@@ -11,16 +11,16 @@
 
             <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
-                    <li><a href="{% url 'apiary-list' %}">Apiaries</a></li>
-                    <li><a href="{% url 'apiary-detail' pk=inspection.hive.apiary.pk %}">{{ inspection.hive.apiary.name }}</a></li>
-                    <li><a href="{% url 'hive-detail' pk=inspection.hive.pk %}">{{ inspection.hive.name }}</a></li>
-                    <li class="is-active"><a href="{% url 'inspection-detail' pk=inspection.pk %}">Inspection</a></li>
+                    <li><a href="{% url 'frontend:apiary-list' %}">Apiaries</a></li>
+                    <li><a href="{% url 'frontend:apiary-detail' pk=inspection.hive.apiary.pk %}">{{ inspection.hive.apiary.name }}</a></li>
+                    <li><a href="{% url 'frontend:hive-detail' pk=inspection.hive.pk %}">{{ inspection.hive.name }}</a></li>
+                    <li class="is-active"><a href="{% url 'frontend:inspection-detail' pk=inspection.pk %}">Inspection</a></li>
                 </ul>
             </nav>
 
             <h1 class="title">
                 <span>Inspection</span>
-                <a href="{% url 'inspection-edit' pk=inspection.pk %}">
+                <a href="{% url 'frontend:inspection-edit' pk=inspection.pk %}">
                     <span class="icon"><i class="fa fa-pencil-alt"></i></span>
                 </a>
             </h1>
