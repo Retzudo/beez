@@ -7,10 +7,10 @@ from api import views
 app_name = 'api'
 
 router = routers.SimpleRouter()
-router.register(r'apiaries', views.ApiaryViewSet, base_name='apiaries')
-router.register(r'hives', views.HiveViewSet, base_name='hives')
-router.register(r'inspections', views.InspectionViewSet, base_name='inspections')
-router.register(r'harvests', views.HarvestViewSet, base_name='harvests')
+router.register(r'apiaries', views.ApiaryViewSet, base_name='apiary')
+router.register(r'hives', views.HiveViewSet, base_name='hive')
+router.register(r'inspections', views.InspectionViewSet, base_name='inspection')
+router.register(r'harvests', views.HarvestViewSet, base_name='harvest')
 
 urlpatterns = [
     path('auth', obtain_jwt_token),
