@@ -17,6 +17,8 @@ qrcode = "*"
 django-qr-code = "*"
 django-markdown-deux = "*"
 "psycopg2-binary" = "*"
+djangorestframework = "*"
+djangorestframework-jwt = "*"
 
 
 [dev-packages]
