@@ -1,0 +1,9 @@
+{% extends "rest_framework/base.html" %}
+
+{% load staticfiles %}
+
+{% block branding %}
+    <a class="navbar-brand" href="{% url 'frontend:apiary-list' %}">
+        Beez API
+    </a>
+{% endblock %}
