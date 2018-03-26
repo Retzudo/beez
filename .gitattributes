@@ -1,0 +1,3 @@
+*.html linguist-language=HTML+Django
+beez/frontend/static/css linguist-vendored
+beez/frontend/static/webfonts linguist-vendored
