@@ -7,4 +7,6 @@ RUN cd /beez && pipenv install --system
 RUN cd /beez/beez && python manage.py collectstatic --no-input
 
 WORKDIR /beez/beez
+EXPOSE 5000
+
 CMD ["gunicorn", "--bind", "0.0.0.0:5000", "beez.wsgi", "--log-file=-"]
