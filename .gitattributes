@@ -1,4 +1,4 @@
 *.html linguist-language=HTML+Django
-beez/frontend/static/css/* linguist-vendored
-beez/frontend/static/js/* linguist-vendored
-beez/frontend/static/webfonts/* linguist-vendored
+beez/frontend/static/css/* linguist-vendored=true
+beez/frontend/static/js/* linguist-vendored=true
+beez/frontend/static/webfonts/* linguist-vendored=true
