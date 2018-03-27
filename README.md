@@ -19,7 +19,7 @@ the same Docker network.
 
 1. Create a Docker network or use an existing one.
 2. Run a PostgreSQL container.
-3. Build an image for with app and run a container while setting the
+3. Build an image with the provided Dockerfile and run a container while setting the
    necessary environment variables, see below.
 4. run `python /beez/beez/manage.py migrate` with `docker exec`.
 5. Reverse proxy to the app.
