@@ -13,6 +13,7 @@ class ApiaryViewSet(viewsets.ModelViewSet):
 
 class HiveViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.HiveSerializer
+    filter_fields = ['apiary']
 
     def get_queryset(self):
         return models.Hive.objects.filter(
@@ -32,6 +33,7 @@ class HiveViewSet(viewsets.ModelViewSet):
 
 class InspectionViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.InspectionSerializer
+    filter_fields = ['hive']
 
     def get_queryset(self):
         return models.Inspection.objects.filter(
@@ -51,6 +53,7 @@ class InspectionViewSet(viewsets.ModelViewSet):
 
 class HarvestViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.HarvestSerializer
+    filter_fields = ['hive']
 
     def get_queryset(self):
         return models.Harvest.objects.filter(

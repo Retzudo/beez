@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'api',
     'rest_framework',
     'rest_framework_jwt',
+    'django_filters',
     'django.contrib.admin',
     'bulma',
 ]
@@ -118,6 +119,7 @@ LOGIN_REDIRECT_URL = reverse_lazy('frontend:apiary-list')
 
 REST_FRAMEWORK = {
     'COERCE_DECIMAL_TO_STRING': False,  # Don't render lat/lon as string. We don't need the precision
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
