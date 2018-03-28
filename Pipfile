@@ -19,6 +19,7 @@ django-markdown-deux = "*"
 "psycopg2-binary" = "*"
 djangorestframework = "*"
 djangorestframework-jwt = "*"
+django-filter = "*"
 
 
 [dev-packages]
