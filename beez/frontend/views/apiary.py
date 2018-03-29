@@ -1,15 +1,23 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Count, Sum
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
-from core.models import Apiary
+from core.models import Apiary, Hive
 from frontend import weather
 
 
 class ApiaryListView(LoginRequiredMixin, ListView):
     template_name = 'frontend/apiary/list.html'
+    context_object_name = 'apiaries'
 
     def get_queryset(self):
         return self.request.user.apiaries.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['total_hives'] = Hive.objects.filter(apiary__owner=self.request.user).count()
+
+        return context
 
 
 class ApiaryDetailView(LoginRequiredMixin, DetailView):
@@ -26,6 +34,7 @@ class ApiaryDetailView(LoginRequiredMixin, DetailView):
             latitude=apiary.latitude,
             longitude=apiary.longitude,
         )
+        context['total_weight'] = sum(hive.last_recorded_weight for hive in apiary.hives.all())
 
         return context
 

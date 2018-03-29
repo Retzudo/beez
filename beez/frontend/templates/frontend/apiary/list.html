@@ -15,7 +15,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for apiary in user.apiaries.all %}
+                {% for apiary in apiaries %}
                     <tr>
                         <td>
                             <a href="{% url 'frontend:apiary-detail' pk=apiary.pk %}">{{ apiary.name }}</a>
@@ -57,6 +57,13 @@
                         </td>
                     </tr>
                 {% endfor %}
+                    <tr>
+                        <td><em>Total: {{ apiaries.count }}</em></td>
+                        <td></td>
+                        <td></td>
+                        <td><em>{{ total_hives }}</em></td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
             {% if user.apiaries.count > 0 %}
