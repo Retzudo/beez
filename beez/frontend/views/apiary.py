@@ -30,14 +30,10 @@ class ApiaryDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         apiary = context.get('apiary')
-        units = {
-            'celsius': 'metric',
-            'fahrenheit': 'imperial'
-        }
         context['weather'] = weather.get_daily_forecast(
             latitude=apiary.latitude,
             longitude=apiary.longitude,
-            units=units[self.request.user.settings.temperature],
+            units=self.request.user.settings.temperature_unit,
         )
         context['total_weight'] = sum(hive.last_recorded_weight for hive in apiary.hives.all())
 

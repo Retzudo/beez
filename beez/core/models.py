@@ -6,35 +6,20 @@ from django.urls import reverse
 UNITS_METRIC = 'metric'
 UNITS_IMPERIAL = 'imperial'
 
-TEMP_CELSIUS = 'celsius'
-TEMP_FAHRENHEIT = 'fahrenheit'
-
 unit_choices = [
     (UNITS_METRIC, 'Metric'),
     (UNITS_IMPERIAL, 'Imperial'),
 ]
 
-temp_choices = [
-    (TEMP_CELSIUS, 'Celsius'),
-    (TEMP_FAHRENHEIT, 'Fahrenheit'),
-]
-
 unit_map = {
     UNITS_METRIC: {
-        'weight': 'kg'
-    },
-    UNITS_IMPERIAL: {
-        'weight': 'lb'
-    },
-}
-
-temp_map = {
-    TEMP_CELSIUS: {
+        'weight': 'kg',
         'temp': '°C'
     },
-    TEMP_FAHRENHEIT: {
+    UNITS_IMPERIAL: {
+        'weight': 'lb',
         'temp': '°F'
-    }
+    },
 }
 
 
@@ -114,7 +99,7 @@ class Harvest(models.Model):
     weight = models.FloatField(validators=[validators.MinValueValidator(0)])
 
     def __str__(self):
-        return 'Harvest on {} ({} {})'.format(self.date, self.weight, self.hive.apiary.owner.settings.weight_unit)
+        return 'Harvest on {} ({} {})'.format(self.date, self.weight, self.hive.apiary.owner.settings.current_weight_unit)
 
 
 class Settings(models.Model):
@@ -123,15 +108,15 @@ class Settings(models.Model):
         ('imperial', 'Imperial'),
     ]
     user = models.OneToOneField(get_user_model(), related_name='settings', on_delete=models.CASCADE)
-    units = models.CharField(choices=unit_choices, default=UNITS_METRIC, max_length=10)
-    temperature = models.CharField(choices=temp_choices, default=TEMP_CELSIUS, max_length=10)
+    weight_unit = models.CharField(choices=unit_choices, default=UNITS_METRIC, max_length=10)
+    temperature_unit = models.CharField(choices=unit_choices, default=UNITS_METRIC, max_length=10)
 
     def __str__(self):
         return 'Settings for {}'.format(self.user)
 
     @property
-    def weight_unit(self):
-        return unit_map[self.units]['weight']
+    def current_weight_unit(self):
+        return unit_map[self.weight_unit]['weight']
 
-    def temp_unit(self):
-        return temp_map[self.temperature]['temp']
+    def current_temp_unit(self):
+        return unit_map[self.temperature_unit]['temp']
