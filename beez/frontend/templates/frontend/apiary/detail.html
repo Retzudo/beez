@@ -60,7 +60,7 @@
                             </td>
                             <td class="is-hidden-touch">
                                 {% if hive.last_recorded_weight %}
-                                    {{ hive.last_recorded_weight|floatformat }} kg
+                                    {{ hive.last_recorded_weight|floatformat }} {{ user.settings.weight_unit }}
                                 {% else %}
                                     <em>N/A</em>
                                 {% endif %}
@@ -93,7 +93,7 @@
                     <tr>
                         <td><em>total {{ apiary.hives.count }}</em></td>
                         <td></td>
-                        <td><em>{{ total_weight }} kg</em></td>
+                        <td><em>{{ total_weight|floatformat }} {{ user.settings.weight_unit }}</em></td>
                         <td></td>
                     </tr>
                 </tbody>

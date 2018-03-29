@@ -114,7 +114,7 @@ class Harvest(models.Model):
     weight = models.FloatField(validators=[validators.MinValueValidator(0)])
 
     def __str__(self):
-        return 'Harvest on {} ({} kg)'.format(self.date, self.weight)
+        return 'Harvest on {} ({} {})'.format(self.date, self.weight, self.hive.apiary.owner.settings.weight_unit)
 
 
 class Settings(models.Model):
@@ -128,3 +128,10 @@ class Settings(models.Model):
 
     def __str__(self):
         return 'Settings for {}'.format(self.user)
+
+    @property
+    def weight_unit(self):
+        return unit_map[self.units]['weight']
+
+    def temp_unit(self):
+        return temp_map[self.temperature]['temp']

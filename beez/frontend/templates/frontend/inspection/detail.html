@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <th>Weight</th>
-                    <td>{% if inspection.weight %}{{ inspection.weight }} kg{% else %}<em>N/A</em>{% endif %}</td>
+                    <td>{% if inspection.weight %}{{ inspection.weight }} {{ user.settings.weight_unit }}{% else %}<em>N/A</em>{% endif %}</td>
                 </tr>
                 <tr>
                     <th>Notes</th>
