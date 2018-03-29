@@ -39,7 +39,7 @@
                         <td><a href="{% url 'frontend:inspection-detail' pk=inspection.pk %}">{{ inspection.date }}</a></td>
                         <td>
                             {% if inspection.weight %}
-                                {{ inspection.weight }} kg
+                                {{ inspection.weight }} {{ user.settings.weight_unit }}
                             {% else %}
                                 <em>N/A</em>
                             {% endif %}
