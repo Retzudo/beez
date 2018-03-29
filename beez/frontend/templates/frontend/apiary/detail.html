@@ -90,6 +90,12 @@
                         </td>
                     </tr>
                 {% endfor %}
+                    <tr>
+                        <td><em>total {{ apiary.hives.count }}</em></td>
+                        <td></td>
+                        <td><em>{{ total_weight }} kg</em></td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
             {% if apiary.hives.count > 0 %}
