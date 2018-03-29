@@ -19,7 +19,7 @@
             </a>
         </li>
         <li{% if active == 'settings' %} class="is-active"{% endif %}>
-            <a href="#" title="Settings" class="is-hidden-touch">
+            <a href="{% url 'frontend:settings' %}" title="Settings" class="is-hidden-touch">
                 <span class="icon"><i class="fa fa-wrench"></i></span>
                 <span>Settings</span>
             </a>
