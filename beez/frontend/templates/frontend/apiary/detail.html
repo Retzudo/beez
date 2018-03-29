@@ -141,9 +141,9 @@
                                             <i class="wi wi-{{ day.weather.0.main|weather_icon }}"></i>
                                         </span>
                                         </td>
-                                        <td>{{ day.temp.day|floatformat }} °C</td>
-                                        <td class="is-hidden-touch">{{ day.temp.min|floatformat }} °C</td>
-                                        <td class="is-hidden-touch">{{ day.temp.max|floatformat }} °C</td>
+                                        <td>{{ day.temp.day|floatformat }} {{ user.settings.temp_unit }}</td>
+                                        <td class="is-hidden-touch">{{ day.temp.min|floatformat }} {{ user.settings.temp_unit }}</td>
+                                        <td class="is-hidden-touch">{{ day.temp.max|floatformat }} {{ user.settings.temp_unit }}</td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>
