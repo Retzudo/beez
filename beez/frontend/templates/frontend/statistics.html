@@ -1,0 +1,19 @@
+{% extends 'frontend/master.html' %}
+
+{% block body %}
+    <section class="section">
+        <div class="container">
+            {% include 'frontend/_dashboard_tabs.html' with active='statistics' %}
+            <div class="columns">
+                <div class="column is-one-third">
+                    <div class="box">
+                        <h1 class="title is-4">Summary</h1>
+                        <strong>Total apiaries:</strong> {{ total_apiaries }}<br>
+                        <strong>Total hives:</strong> {{ total_hives }}<br>
+                        <strong>Total weight:</strong> {{ total_weight }} kg<br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

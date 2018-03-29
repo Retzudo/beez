@@ -10,7 +10,7 @@
             </a>
         </li>
         <li{% if active == 'statistics' %} class="is-active"{% endif %}>
-            <a href="#" title="Statistics" class="is-hidden-touch">
+            <a href="{% url 'frontend:statistics' %}" title="Statistics" class="is-hidden-touch">
                 <span class="icon"><i class="fa fa-chart-line"></i></span>
                 <span>Statistics</span>
             </a>
