@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-from frontend.views import apiary, hive, user, inspection, statistics
+from frontend.views import apiary, hive, user, inspection, statistics, settings
 
 app_name = 'frontend'
 
@@ -27,5 +27,6 @@ urlpatterns = [
     path('dashboard/inspections/<int:pk>/edit', inspection.InspectionUpdateView.as_view(), name='inspection-edit'),
     path('dashboard/inspections/<int:pk>/delete', inspection.InspectionDeleteView.as_view(), name='inspection-delete'),
 
-    path('dashboard/statistics', statistics.StatisticsView.as_view(), name='statistics')
+    path('dashboard/statistics', statistics.StatisticsView.as_view(), name='statistics'),
+    path('dashboard/settings', settings.SettingsView.as_view(), name='settings'),
 ]
