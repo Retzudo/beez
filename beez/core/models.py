@@ -60,6 +60,7 @@ class Hive(models.Model):
     terminated = models.BooleanField(default=False)
     date_terminated = models.DateTimeField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
+    makes_honey = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

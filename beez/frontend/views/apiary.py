@@ -35,7 +35,7 @@ class ApiaryDetailView(LoginRequiredMixin, DetailView):
             longitude=apiary.longitude,
             units=self.request.user.settings.temperature_unit,
         )
-        context['total_weight'] = sum(hive.last_recorded_weight for hive in apiary.hives.all())
+        context['total_weight'] = sum(hive.last_recorded_weight or 0 for hive in apiary.hives.all())
 
         return context
 

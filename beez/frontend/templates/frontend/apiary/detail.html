@@ -50,7 +50,7 @@
                     {% if not hive.terminated %}
                         <tr>
                             {% url 'frontend:hive-detail' pk=hive.pk as hive_detail_url %}
-                            <td><a href="{{ hive_detail_url }}">{{ hive.name }}</a></td>
+                            <td><a href="{{ hive_detail_url }}">{{ hive.name }}{% if hive.makes_honey %} <span class="tag is-info"><i class="fa fa-dollar-sign"></i></span>{% endif %}</a></td>
                             <td>
                                 {% if hive.inspections.first %}
                                     <a href="{% url 'frontend:inspection-detail' pk=hive.inspections.first.pk %}">{{ hive.inspections.first.date }}</a>
