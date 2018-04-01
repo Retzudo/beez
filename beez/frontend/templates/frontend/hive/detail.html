@@ -18,7 +18,7 @@
             </nav>
 
             <h1 class="title">
-                <span>{{ hive.name }}</span>
+                <span>{{ hive.name }} {% if hive.makes_honey %} <span class="tag is-info is-medium"><i class="fa fa-dollar-sign"></i></span>{% endif %}</span>
                 <a href="{% url 'frontend:hive-edit' pk=hive.pk %}">
                     <span class="icon"><i class="fa fa-pencil-alt"></i></span>
                 </a>
