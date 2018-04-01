@@ -6,13 +6,21 @@
         <div class="container">
             {% include 'frontend/_dashboard_tabs.html' with active='apiary-list' %}
             <h1 class="title">Transfer Hive</h1>
-            <form action="" method="post">
-                {{ form|bulma }}
-                {% csrf_token %}
-                <button class="button is-primary">
-                    Transfer Hive
-                </button>
-            </form>
+            {% if can_transfer %}
+                <form action="" method="post">
+                    {{ form|bulma }}
+                    {% csrf_token %}
+                    <button class="button is-primary">
+                        Transfer Hive
+                    </button>
+                </form>
+            {% else %}
+                <p class="message is-info">
+                    <span class="message-body">
+                        You don't have any other apiaries.
+                    </span>
+                </p>
+            {% endif %}
         </div>
     </section>
 {% endblock %}
