@@ -1,10 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import render, redirect
-from django.views.generic import DetailView, CreateView, UpdateView, View, DeleteView
+from django.http import HttpResponseRedirect
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 
 from core.models import Hive, Apiary
-from frontend import forms
 
 
 class HiveDetailView(LoginRequiredMixin, DetailView):
@@ -34,38 +32,28 @@ class HiveUpdateView(LoginRequiredMixin, UpdateView):
         return Hive.objects.filter(apiary__owner=self.request.user)
 
 
-
-class HiveTransferView(LoginRequiredMixin, View):
+class HiveTransferView(LoginRequiredMixin, UpdateView):
     template_name = 'frontend/hive/transfer.html'
+    model = Hive
+    fields = ['apiary']
 
-    def _render(self, form):
-        return render(self.request, self.template_name, {
-            'form': form
-        })
+    def _get_available_apiaries(self):
+        current_apiary = self.get_object().apiary
+        current_user = self.request.user
 
-    def get(self, request, pk):
-        try:
-            hive = Hive.objects.filter(apiary__owner=request.user).get(pk=pk)
-        except Hive.DoesNotExist as e:
-            raise Http404 from e
+        return Apiary.objects.filter(owner=current_user).exclude(pk=current_apiary.pk)
 
-        form = forms.TransferHiveForm(user=request.user, current_apiary_pk=hive.apiary.pk)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['can_transfer'] = self._get_available_apiaries().count() > 0
 
-        return self._render(form)
+        return context
 
-    def post(self, request, pk):
-        try:
-            hive = Hive.objects.filter(apiary__owner=request.user).get(pk=pk)
-        except Hive.DoesNotExist as e:
-            raise Http404 from e
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields['apiary'].queryset = self._get_available_apiaries()
 
-        form = forms.TransferHiveForm(user=request.user, current_apiary_pk=hive.apiary.pk, data=request.POST)
-
-        if form.is_valid():
-            hive.apiary = form.cleaned_data['to_apiary']
-            return redirect(hive.get_absolute_url())
-        else:
-            return self._render(form)
+        return form
 
 
 class HiveTerminateView(LoginRequiredMixin, DeleteView):
