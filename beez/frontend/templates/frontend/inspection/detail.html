@@ -49,6 +49,13 @@
                     </td>
                 </tr>
             </table>
+
+            <hr>
+
+            <a href="{% url 'frontend:inspection-delete' pk=inspection.pk %}" class="button is-danger">
+                <span class="icon"><i class="fa fa-trash"></i></span>
+                <span>Delete Inspection</span>
+            </a>
         </div>
     </section>
 {% endblock %}
