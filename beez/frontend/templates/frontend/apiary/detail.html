@@ -141,9 +141,9 @@
                                             <i class="wi wi-{{ day.weather.0.main|weather_icon }}"></i>
                                         </span>
                                         </td>
-                                        <td>{{ day.temp.day|floatformat }} {{ user.settings.current_tempk_unit }}</td>
-                                        <td class="is-hidden-touch">{{ day.temp.min|floatformat }} {{ user.settings.current_tempk_unit }}</td>
-                                        <td class="is-hidden-touch">{{ day.temp.max|floatformat }} {{ user.settings.current_tempk_unit }}</td>
+                                        <td>{{ day.temp.day|floatformat }} {{ user.settings.current_temp_unit }}</td>
+                                        <td class="is-hidden-touch">{{ day.temp.min|floatformat }} {{ user.settings.current_temp_unit }}</td>
+                                        <td class="is-hidden-touch">{{ day.temp.max|floatformat }} {{ user.settings.current_temp_unit }}</td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>
@@ -171,7 +171,6 @@
                 </div>
                 {% if apiary.latitude and apiary.longitude %}
                     <div class="column is-half">
-                        <div id="apiary-map" class="box apiary-map is-hidden-touch"></div>
                         <div class="box is-hidden-desktop">
                             <h3 class="subtitle">Map</h3>
 
@@ -180,6 +179,7 @@
                                 <span>Show on Map</span>
                             </a>
                         </div>
+                        <div id="apiary-map" class="box apiary-map"></div>
                     </div>
                 {% endif %}
             </div>
