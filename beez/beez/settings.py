@@ -28,10 +28,12 @@ SECRET_KEY = os.getenv('BEEZ_SECRET_KEY', os.urandom(24))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True if os.getenv('BEEZ_DEBUG') else False
 
-ALLOWED_HOSTS = os.getenv('BEEZ_ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = []
 if not DEBUG:
     # We add these hosts to allow Dokku's CHECKS feature to work
     from socket import gethostname, gethostbyname
+
+    ALLOWED_HOSTS += os.getenv('BEEZ_ALLOWED_HOSTS', '').split(',')
     ALLOWED_HOSTS.append(gethostname())
     ALLOWED_HOSTS.append(gethostbyname(gethostname()))
 

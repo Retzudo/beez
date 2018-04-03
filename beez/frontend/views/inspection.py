@@ -39,3 +39,6 @@ class InspectionDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_queryset(self):
         return Inspection.objects.filter(hive__apiary__owner=self.request.user)
+
+    def get_success_url(self):
+        return self.object.hive.get_absolute_url()
