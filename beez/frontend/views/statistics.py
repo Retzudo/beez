@@ -13,6 +13,6 @@ class StatisticsView(TemplateView):
         hives = Hive.objects.filter(apiary__owner=self.request.user)
         context['total_apiaries'] = apiaries.count()
         context['total_hives'] = hives.count()
-        context['total_weight'] = sum(hive.last_recorded_weight for hive in hives)
+        context['total_weight'] = sum(hive.last_recorded_weight or 0 for hive in hives)
 
         return context
