@@ -1,3 +1,4 @@
+import pytz
 from django.contrib.auth import get_user_model
 from django.core import validators
 from django.db import models
@@ -21,6 +22,8 @@ unit_map = {
         'temp': '°F'
     },
 }
+
+timezone_choices = sorted(zip(pytz.common_timezones_set, [tz.replace('_', ' ') for tz in pytz.common_timezones_set]))
 
 
 class Apiary(models.Model):
@@ -100,7 +103,11 @@ class Harvest(models.Model):
     weight = models.FloatField(validators=[validators.MinValueValidator(0)])
 
     def __str__(self):
-        return 'Harvest on {} ({} {})'.format(self.date, self.weight, self.hive.apiary.owner.settings.current_weight_unit)
+        return 'Harvest on {} ({} {})'.format(
+            self.date,
+            self.weight,
+            self.hive.apiary.owner.settings.current_weight_unit
+        )
 
 
 class Settings(models.Model):
@@ -111,6 +118,10 @@ class Settings(models.Model):
     user = models.OneToOneField(get_user_model(), related_name='settings', on_delete=models.CASCADE)
     weight_unit = models.CharField(choices=unit_choices, default=UNITS_METRIC, max_length=10)
     temperature_unit = models.CharField(choices=unit_choices, default=UNITS_METRIC, max_length=10)
+    timezone = models.CharField(choices=timezone_choices, default='UTC', max_length=40)
+
+    class Meta:
+        verbose_name_plural = 'Settings'
 
     def __str__(self):
         return 'Settings for {}'.format(self.user)
