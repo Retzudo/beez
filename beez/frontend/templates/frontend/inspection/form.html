@@ -1,5 +1,6 @@
 {% extends 'frontend/master.html' %}
-{% load bulma_tags %}
+
+{% load bulma_tags staticfiles %}
 
 {% block body %}
     <section class="section">
@@ -18,7 +19,7 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js"></script>
+    <script src="{% static 'js/moment.min.js' %}"></script>
     <script>
         (function () {
             var $timeInput = document.getElementById('{{ form.date.id_for_label }}');
