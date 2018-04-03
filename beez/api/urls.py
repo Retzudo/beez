@@ -6,7 +6,7 @@ from api import views
 
 app_name = 'api'
 
-router = routers.SimpleRouter()
+router = routers.SimpleRouter(trailing_slash=False)
 router.register(r'apiaries', views.ApiaryViewSet, base_name='apiary')
 router.register(r'hives', views.HiveViewSet, base_name='hive')
 router.register(r'inspections', views.InspectionViewSet, base_name='inspection')
