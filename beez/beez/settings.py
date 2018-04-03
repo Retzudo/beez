@@ -28,9 +28,7 @@ SECRET_KEY = os.getenv('BEEZ_SECRET_KEY', os.urandom(24))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True if os.getenv('BEEZ_DEBUG') else False
 
-ALLOWED_HOSTS = []
-if not DEBUG:
-    ALLOWED_HOSTS += os.getenv('BEEZ_HOSTNAMES', '').split(',')
+ALLOWED_HOSTS = os.getenv('BEEZ_ALLOWED_HOSTS', '').split(',')
 
 
 # Application definition
