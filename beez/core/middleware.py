@@ -5,8 +5,9 @@ from django.utils.deprecation import MiddlewareMixin
 
 class TimezoneMiddleware(MiddlewareMixin):
     def process_request(self, request):
-        tzname = request.user.settings.timezone
-        if tzname:
-            timezone.activate(pytz.timezone(tzname))
-        else:
-            timezone.deactivate()
+        if request.user.is_authenticated:
+            tzname = request.user.settings.timezone
+            if tzname:
+                timezone.activate(pytz.timezone(tzname))
+            else:
+                timezone.deactivate()
