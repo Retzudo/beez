@@ -91,10 +91,10 @@
                     </tr>
                 {% endfor %}
                     <tr>
-                        <td><em>total {{ apiary.hives.count }}</em></td>
+                        <td><em>Total: {{ apiary.hives.count }}</em></td>
                         <td></td>
-                        <td><em>{{ total_weight|floatformat }} {{ user.settings.current_weight_unit }}</em></td>
-                        <td></td>
+                        <td class="is-hidden-touch"><em>{{ total_weight|floatformat }} {{ user.settings.current_weight_unit }}</em></td>
+                        <td class="is-hidden-touch"></td>
                     </tr>
                 </tbody>
             </table>
