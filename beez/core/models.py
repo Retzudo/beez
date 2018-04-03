@@ -84,7 +84,9 @@ class Inspection(models.Model):
     date = models.DateTimeField()
     weight = models.FloatField(blank=True, null=True, validators=[validators.MinValueValidator(0)])
     saw_queen = models.BooleanField(default=False)
-    # TODO: Add a whole bunch of parameters
+    needs_food = models.BooleanField(default=False)
+    gave_food = models.FloatField(blank=True, null=True, validators=[validators.MinValueValidator(0.1)])
+
     notes = models.TextField(blank=True, null=True)
 
     class Meta:
