@@ -28,15 +28,30 @@
                         <span>{{ request.user.username }}</span>
                     </div>
                     <div class="navbar-dropdown is-right">
-                        <a class="navbar-item" href="{% url 'frontend:apiary-list' %}"><span class="icon"><i class="fa fa-tachometer-alt"></i></span>  Dashboard</a>
-                        <a class="navbar-item" href="#"><span class="icon"><i class="fa fa-user-circle"></i></span> Profile</a>
+                        <a class="navbar-item" href="{% url 'frontend:apiary-list' %}">
+                            <span class="icon"><i class="fa fa-tachometer-alt"></i></span>
+                            <span>Dashboard</span>
+                        </a>
+                        <a class="navbar-item" href="#">
+                            <span class="icon"><i class="fa fa-user-circle"></i></span>
+                            <span>Profile</span>
+                        </a>
                         <hr class="navbar-divider">
-                        <a class="navbar-item" href="{% url 'frontend:logout' %}"><span class="icon"><i class="fa fa-sign-out-alt"></i></span> Log out</a>
+                        <a class="navbar-item" href="{% url 'frontend:logout' %}">
+                            <span class="icon"><i class="fa fa-sign-out-alt"></i></span>
+                            <span>Log out</span>
+                        </a>
                     </div>
                 </div>
             {% else %}
-                <a href="{% url 'frontend:register' %}" class="navbar-item">Register</a>
-                <a href="{% url 'frontend:login' %}" class="navbar-item">Log in</a>
+                <a href="{% url 'frontend:register' %}" class="navbar-item">
+                    <span class="icon"><i class="fa fa-hashtag"></i></span>
+                    <span>Register</span>
+                </a>
+                <a href="{% url 'frontend:login' %}" class="navbar-item">
+                    <span class="icon"><i class="fa fa-sign-in-alt"></i></span>
+                    <span>Log in</span>
+                </a>
             {% endif %}
         </div>
     </div>
