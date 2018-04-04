@@ -43,8 +43,9 @@ Beez runs on Python ≥3.5.
 
 - `BEEZ_SECRET_KEY` -- Defaults to a randomly generated key.
   I strongly recommend that you set this to something static.
-- `BEEZ_DEBUG` -- Django's debugging mode is disabled by default unless this env has any value.
 - `BEEZ_HOSTNAMES` -- Add hostnames to `ALLOWED_HOSTS` which is empty by default. List of hosts separated with `,`, e. g. `beez.com,localhost`
 - `BEEZ_OWM_API_KEY` -- API key for OpenWeatherMap.
 - `DATABASE_URL` -- Set a database URL, e. g. `postgres://user:password@localhost:5432/beez`.
   If this is not set, a local SQLite database file will be used instead.
+- `DJANGO_SETTINGS_MODULE` -- Defaults to `beez.settings` which in turn defaults to `beez.settings.prod`. Set to
+  `beez.settings.dev` when developing
