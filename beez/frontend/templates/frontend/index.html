@@ -8,10 +8,12 @@
             <div class="content">
                 <p><strong>Beez</strong> is an open-source software project that aims to help beekeepers with different tasks.</p>
 
-                <p>
-                    <strong>Beez</strong> is in its <em>alpha stage</em> which means things constantly change. New
-                    features are added while others may disappear. Data loss is also a possibility.
-                </p>
+                <div class="message is-warning">
+                    <div class="message-body">
+                        <strong>Beez</strong> is in its <em>alpha stage</em> which means things constantly change. New
+                        features are added while others may disappear. Data loss is also a possibility.
+                    </div>
+                </div>
 
                 <h2>Features</h2>
                 <p>
@@ -21,8 +23,19 @@
                         <li>Show your apiary on a map and track what area your bees can cover.</li>
                         <li>Create inspections for your hives and collect data.</li>
                         <li>Print out QR codes and stick them to your hives for quick access on mobile phones.</li>
-                        <li>A browsable, RESTful API.</li>
+                        <li>A browsable, Swagger/OpenAPI documented, RESTful <a href="{% url 'api:schema-json' format='.json' %}" target="_blank">API</a>.</li>
                     </ul>
+                </p>
+
+                <h2>Possible future features</h2>
+                <p>
+                    <ul>
+                        <li>Weather alerts.</li>
+                        <li>Detailed statistics.</li>
+                        <li>Beekeeping related alerts like missed Varroa treatments.</li>
+                    </ul>
+
+                    If you'd like to see a feature, let us know on the project's <a href="https://github.com/Retzudo/beez/issues" target="_blank">GitHub issues page</a>.
                 </p>
             </div>
 
