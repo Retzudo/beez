@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'api',
     'rest_framework',
     'rest_framework_jwt',
+    'drf_yasg',
     'django_filters',
     'django.contrib.admin',
     'bulma',
@@ -87,4 +88,14 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
+}
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'jwt': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    }
 }
