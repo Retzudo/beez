@@ -1,14 +1,71 @@
 {% extends 'frontend/master.html' %}
 
-{% load bulma_tags %}
-
 {% block body %}
     <section class="section">
         <div class="container">
             {% include 'frontend/_dashboard_tabs.html' with active='settings' %}
             <h1 class="title">Settings</h1>
             <form action="" method="post">
-                {{ form|bulma }}
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label for="{{ form.weight_unit.id_for_label }}" class="label">
+                            {{ form.weight_unit.label }}
+                        </label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                <div class="select{% if form.weight_units.errors|length > 0 %} is-danger{% endif %}">
+                                    {{ form.weight_unit }}
+                                </div>
+                            </div>
+                        </div>
+                        {% for error in form.weight_unit.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label for="{{ form.temperature_unit.id_for_label }}" class="label">
+                            {{ form.temperature_unit.label }}
+                        </label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                <div class="select{% if form.temperature_unit.errors|length > 0 %} is-danger{% endif %}">
+                                    {{ form.temperature_unit }}
+                                </div>
+                            </div>
+                        </div>
+                        {% for error in form.temperature_unit.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label for="{{ form.timezone.id_for_label }}" class="label">
+                            {{ form.timezone.label }}
+                        </label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                <div class="select{% if form.timezone.errors|length > 0 %} is-danger{% endif %}">
+                                    {{ form.timezone }}
+                                </div>
+                            </div>
+                        </div>
+                        {% for error in form.timezone.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
                 {% csrf_token %}
                 <button class="button is-primary">Save</button>
             </form>
