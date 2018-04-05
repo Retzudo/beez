@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django_filters',
     'django.contrib.admin',
     'bulma',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

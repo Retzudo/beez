@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "a7ac72a564043233fd2e25676566e0f8b8a155a3f9cf36e152e95913c50f1997"
+            "sha256": "ab9e7887132d0899f4b39ac6154aaefa8bac1bc967c9f9b9d026ed4f34c475cf"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -101,12 +101,19 @@
             ],
             "version": "==1.0.0"
         },
+        "django-widget-tweaks": {
+            "hashes": [
+                "sha256:f9961162c8ed272162e22e5877d29c7780476970441dce605118ef66da685e71",
+                "sha256:a31c8a2b88af98dba6471db4722a416d1c643c87efecf9a7f17f983a2a553632"
+            ],
+            "version": "==1.4.2"
+        },
         "djangorestframework": {
             "hashes": [
-                "sha256:bb9d74756a6b157bfb2e395b200b11f87c837f45f5e097b2308ed7a526e7dcbe",
-                "sha256:be299fb3f289e22ddca0ff88294924cd06aa3bcfa5043f72792d2a18d96dabe8"
+                "sha256:34b767078f967c6e513cd8b215f44457ac408ebc20c42f2c43ffef292b2e5c1b",
+                "sha256:89439264265d1b659194991a40061074036923842c3de7fc3998e00cc0217bcd"
             ],
-            "version": "==3.8.0"
+            "version": "==3.8.1"
         },
         "djangorestframework-jwt": {
             "hashes": [
