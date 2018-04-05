@@ -1,14 +1,99 @@
 {% extends 'frontend/master.html' %}
 
-{% load bulma_tags staticfiles %}
+{% load widget_tweaks staticfiles markdown_deux_tags %}
 
 {% block body %}
     <section class="section">
         <div class="container">
             {% include 'frontend/_dashboard_tabs.html' with active='apiary-list' %}
             <h1 class="title">{% if form.instance.pk %}Edit{% else %}Create{% endif %} Inspection</h1>
+            {% if form.non_field_errors %}
+                <div class="message is-danger">
+                    <div class="message-header">
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        {% for non_field_error in form.non_field_errors %}
+                            {{ non_field_error }}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        
             <form action="" method="post">
-                {{ form|bulma }}
+                <label for="{{ form.date.id_for_label }}" class="label">
+                    {{ form.date.label }} *
+                </label>
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                        {% render_field form.date|add_error_class:'is-danger' type='datetime-local' class+='input' %}
+                    </div>
+                    <div class="control">
+                        <button class="button is-info" id="button-now">
+                            <span class="icon"><i class="fa fa-clock"></i></span>
+                            <span>Now</span>
+                        </button>
+                    </div>
+                </div>
+
+                <label for="{{ form.weight.id_for_label }}" class="label">
+                    {{ form.weight.label }}
+                </label>
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                        {% render_field form.weight|add_error_class:'is-danger' type='number' min='1' class+='input' %}
+                    </div>
+                    <div class="control">
+                        <a class="button is-static">
+                            {{ request.user.settings.current_weight_unit }}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <label for="{{ form.saw_queen.id_for_label }}" class="checkbox">
+                            {{ form.saw_queen }}
+                            {{ form.saw_queen.label }}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <label for="{{ form.needs_food.id_for_label }}" class="checkbox">
+                            {{ form.needs_food }}
+                            {{ form.needs_food.label }}
+                        </label>
+                    </div>
+                </div>
+
+                <label for="{{ form.gave_food.id_for_label }}" class="label">
+                    {{ form.gave_food.label }}
+                </label>
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                        {% render_field form.gave_food|add_error_class:'is-danger' type='number' step='0.1' min='0' class+='input' %}
+                    </div>
+                    <div class="control">
+                        <a class="button is-static">
+                            {{ request.user.settings.current_weight_unit }}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="{{ form.notes.id_for_label }}" class="label">
+                        {{ form.notes.label }}
+                    </label>
+                    <div class="control">
+                        {% autoescape off %}{% markdown_allowed %}{% endautoescape %}
+                        {% render_field form.notes|add_error_class:'is-danger' class+='textarea' placeholder=form.notes.label %}
+                    </div>
+                    {% for error in form.notes.errors %}
+                        <p class="help is-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
                 {% csrf_token %}
                 <button class="button is-primary">
                     {% if form.instance.pk %}Save{% else %}Create{% endif %} Inspection
@@ -23,14 +108,7 @@
     <script>
         (function () {
             var $timeInput = document.getElementById('{{ form.date.id_for_label }}');
-            var $button = document.createElement('button');
-
-            $button.classList.add('button', 'is-info');
-            $button.innerHTML = '<span class="icon"><i class="fa fa-clock"></i></span><span>Now</span>';
-
-            var $insertTarget = $timeInput.parentNode.parentNode;
-
-            $insertTarget.parentNode.insertBefore($button, $insertTarget.nextSibling);
+            var $button = document.getElementById('button-now');
 
             $button.addEventListener('click', function (event) {
                 event.preventDefault();

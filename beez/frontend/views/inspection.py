@@ -16,7 +16,7 @@ class InspectionDetailView(LoginRequiredMixin, DetailView):
 class InspectionCreateView(LoginRequiredMixin, CreateView):
     template_name = 'frontend/inspection/form.html'
     model = Inspection
-    fields = ['date', 'weight', 'saw_queen', 'notes']
+    fields = ['date', 'weight', 'saw_queen', 'needs_food', 'gave_food', 'notes']
 
     def form_valid(self, form):
         form.instance.hive = Hive.objects.get(apiary__owner=self.request.user, pk=self.kwargs.get('pk'))
