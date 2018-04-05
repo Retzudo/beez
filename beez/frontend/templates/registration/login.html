@@ -1,5 +1,7 @@
 {% extends 'frontend/master.html' %}
 
+{% load widget_tweaks %}
+
 {% block body %}
     <section class="section">
         <div class="container">
@@ -18,10 +20,7 @@
             <form action="" method="post">
                 <div class="field">
                     <div class="control has-icons-left">
-                        <input type="text" id="{{ form.username.auto_id }}" name="{{ form.username.html_name }}"
-                               class="input{% if form.password.errors|length > 0 %} is-danger{% endif %}"
-                               placeholder="{{ form.username.label }}" required
-                               {% if form.username.value %}value="{{ form.username.value }}"{% endif %}>
+                        {% render_field form.username|add_error_class:'is-danger' class+="input" placeholder=form.username.label %}
                         <span class="icon is-small is-left">
                             <i class="fa fa-user"></i>
                         </span>
@@ -32,10 +31,7 @@
                 </div>
                 <div class="field">
                     <div class="control has-icons-left">
-                        <input type="password" id="{{ form.password.auto_id }}" name="{{ form.password.html_name }}"
-                               class="input{% if form.password.errors|length > 0 %} is-danger{% endif %}"
-                               placeholder="{{ form.password.label }}" required
-                               {% if form.password.value %}value="{{ form.password.value }}"{% endif %}>
+                        {% render_field form.password|add_error_class:'is-danger'  class+="input" placeholder=form.password.label %}
                         <span class="icon is-small is-left">
                             <i class="fa fa-key"></i>
                         </span>
