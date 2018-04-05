@@ -21,79 +21,123 @@
             {% endif %}
         
             <form action="" method="post">
-                <label for="{{ form.date.id_for_label }}" class="label">
-                    {{ form.date.label }} *
-                </label>
-                <div class="field has-addons">
-                    <div class="control is-expanded">
-                        {% render_field form.date|add_error_class:'is-danger' type='datetime-local' class+='input' %}
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label for="{{ form.date.id_for_label }}" class="label">
+                            {{ form.date.label }} *
+                        </label>
                     </div>
-                    <div class="control">
-                        <button class="button is-info" id="button-now">
-                            <span class="icon"><i class="fa fa-clock"></i></span>
-                            <span>Now</span>
-                        </button>
-                    </div>
-                </div>
-
-                <label for="{{ form.weight.id_for_label }}" class="label">
-                    {{ form.weight.label }}
-                </label>
-                <div class="field has-addons">
-                    <div class="control is-expanded">
-                        {% render_field form.weight|add_error_class:'is-danger' type='number' min='1' class+='input' %}
-                    </div>
-                    <div class="control">
-                        <a class="button is-static">
-                            {{ request.user.settings.current_weight_unit }}
-                        </a>
+                    <div class="field-body">
+                        <div class="field has-addons">
+                            <div class="control">
+                                <button class="button is-info" id="button-now">
+                                    <span class="icon"><i class="fa fa-clock"></i></span>
+                                    <span>Now</span>
+                                </button>
+                            </div>
+                            <div class="control is-expanded">
+                                {% render_field form.date|add_error_class:'is-danger' type='datetime-local' class+='input' %}
+                            </div>
+                        </div>
+                        {% for error in form.date.errors %}
+                            <p class="help is-danger is-fullwidth">{{ error }}</p>
+                        {% endfor %}
                     </div>
                 </div>
 
-                <div class="field">
-                    <div class="control">
-                        <label for="{{ form.saw_queen.id_for_label }}" class="checkbox">
-                            {{ form.saw_queen }}
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label for="{{ form.weight.id_for_label }}" class="label">
+                            {{ form.weight.label }}
+                        </label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field has-addons">
+                            <div class="control">
+                                <a class="button is-static">
+                                    {{ request.user.settings.current_weight_unit }}
+                                </a>
+                            </div>
+                            <div class="control is-expanded">
+                                {% render_field form.weight|add_error_class:'is-danger' type='number' min='1' class+='input' %}
+                            </div>
+                        </div>
+                        {% for error in form.weight.errors %}
+                            <p class="help is-danger is-fullwidth">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label for="{{ form.saw_queen.id_for_label }}" class="label">
                             {{ form.saw_queen.label }}
                         </label>
                     </div>
+                    <div class="field-body">
+                        {{ form.saw_queen }}
+                        {% for error in form.saw_queen.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
                 </div>
 
-                <div class="field">
-                    <div class="control">
-                        <label for="{{ form.needs_food.id_for_label }}" class="checkbox">
-                            {{ form.needs_food }}
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label for="{{ form.needs_food.id_for_label }}" class="label">
                             {{ form.needs_food.label }}
                         </label>
                     </div>
-                </div>
-
-                <label for="{{ form.gave_food.id_for_label }}" class="label">
-                    {{ form.gave_food.label }}
-                </label>
-                <div class="field has-addons">
-                    <div class="control is-expanded">
-                        {% render_field form.gave_food|add_error_class:'is-danger' type='number' step='0.1' min='0' class+='input' %}
-                    </div>
-                    <div class="control">
-                        <a class="button is-static">
-                            {{ request.user.settings.current_weight_unit }}
-                        </a>
+                    <div class="field-body">
+                        {{ form.needs_food }}
+                        {% for error in form.needs_food.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
                     </div>
                 </div>
 
-                <div class="field">
-                    <label for="{{ form.notes.id_for_label }}" class="label">
-                        {{ form.notes.label }}
-                    </label>
-                    <div class="control">
-                        {% autoescape off %}{% markdown_allowed %}{% endautoescape %}
-                        {% render_field form.notes|add_error_class:'is-danger' class+='textarea' placeholder=form.notes.label %}
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label for="{{ form.gave_food.id_for_label }}" class="label">
+                            {{ form.gave_food.label }}
+                        </label>
                     </div>
-                    {% for error in form.notes.errors %}
-                        <p class="help is-danger">{{ error }}</p>
-                    {% endfor %}
+                    <div class="field-body">
+                        <div class="field has-addons">
+                            <div class="control">
+                                <a class="button is-static">
+                                    {{ request.user.settings.current_weight_unit }}
+                                </a>
+                            </div>
+                            <div class="control is-expanded">
+                                {% render_field form.gave_food|add_error_class:'is-danger' type='number' step='0.1' min='0' class+='input' %}
+                            </div>
+                        </div>
+                        {% for error in form.gave_food.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
                 </div>
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label for="{{ form.notes.id_for_label }}" class="label">
+                            {{ form.notes.label }}
+                        </label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                {% autoescape off %}{% markdown_allowed %}{% endautoescape %}
+                                {% render_field form.notes|add_error_class:'is-danger' class+='textarea' placeholder=form.notes.label %}
+                            </div>
+                        </div>
+                        {% for error in form.notes.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
                 {% csrf_token %}
                 <button class="button is-primary">
                     {% if form.instance.pk %}Save{% else %}Create{% endif %} Inspection
