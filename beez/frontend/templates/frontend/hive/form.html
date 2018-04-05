@@ -1,13 +1,62 @@
 {% extends 'frontend/master.html' %}
-{% load bulma_tags %}
+
+{% load widget_tweaks markdown_deux_tags %}
 
 {% block body %}
     <section class="section">
         <div class="container">
             {% include 'frontend/_dashboard_tabs.html' with active='apiary-list' %}
             <h1 class="title">{% if form.instance.pk %}Edit{% else %}Create{% endif %} Hive</h1>
+            {% if form.non_field_errors %}
+                <div class="message is-danger">
+                    <div class="message-header">
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        {% for non_field_error in form.non_field_errors %}
+                            {{ non_field_error }}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
             <form action="" method="post">
-                {{ form|bulma }}
+                <div class="field">
+                    <label for="{{ form.name.id_for_label }}" class="label">
+                        {{ form.name.label }} *
+                    </label>
+                    <div class="control">
+                        {% render_field form.name|add_error_class:'is-danger' class+='input' placeholder=form.name.label %}
+                    </div>
+                    {% for error in form.name.errors %}
+                        <p class="help is-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="field">
+                    <label for="{{ form.description.id_for_label }}" class="label">
+                        {{ form.description.label }}
+                    </label>
+                    <div class="control">
+                        {% render_field form.description|add_error_class:'is-danger' class+='input' placeholder=form.description.label %}
+                    </div>
+                    {% for error in form.description.errors %}
+                        <p class="help is-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="field">
+                    <label for="{{ form.notes.id_for_label }}" class="label">
+                        {{ form.notes.label }}
+                    </label>
+                    <div class="control">
+                        {% autoescape off %}{% markdown_allowed %}{% endautoescape %}
+                        {% render_field form.notes|add_error_class:'is-danger' class+='textarea' placeholder=form.notes.label %}
+                    </div>
+                    {% for error in form.notes.errors %}
+                        <p class="help is-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
                 {% csrf_token %}
                 <button class="button is-primary">
                     {% if form.instance.pk %}Save{% else %}Create{% endif %} Hive
