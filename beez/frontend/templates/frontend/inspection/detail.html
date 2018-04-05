@@ -39,6 +39,14 @@
                     <td>{% if inspection.weight %}{{ inspection.weight }} {{ user.settings.current_weight_unit }}{% else %}<em>N/A</em>{% endif %}</td>
                 </tr>
                 <tr>
+                    <th>Needs food</th>
+                    <td>{{ inspection.needs_food|yesno|capfirst }}</td>
+                </tr>
+                <tr>
+                    <th>Gave food</th>
+                    <td>{% if inspection.gave_food %}{{ inspection.gave_food }} {{ user.settings.current_weight_unit }}{% else %}<em>N/A</em>{% endif %}</td>
+                </tr>
+                <tr>
                     <th>Notes</th>
                     <td>
                         {% if inspection.notes %}
