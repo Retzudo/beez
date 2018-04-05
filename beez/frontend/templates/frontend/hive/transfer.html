@@ -1,20 +1,48 @@
 {% extends 'frontend/master.html' %}
-{% load bulma_tags %}
+
+{% load widget_tweaks %}
 
 {% block body %}
     <section class="section">
         <div class="container">
             {% include 'frontend/_dashboard_tabs.html' with active='apiary-list' %}
             <h1 class="title">Transfer Hive</h1>
+
             {% if can_transfer %}
+                {% if form.non_field_errors %}
+                    <div class="message is-danger">
+                        <div class="message-header">
+                            <button class="delete" aria-label="delete"></button>
+                        </div>
+                        <div class="message-body">
+                            {% for non_field_error in form.non_field_errors %}
+                                {{ non_field_error }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
                 <form action="" method="post">
-                    {{ form|bulma }}
+                    <div class="field">
+                        <label for="{{ form.apiary.id_for_label }}" class="label">
+                            {{ form.apiary.label }}
+                        </label>
+                        <div class="control">
+                            <div class="select{% if form.apiary.errors|length > 0 %} is-danger{% endif %}">
+                                {{ form.apiary }}
+                            </div>
+                        </div>
+                        {% for error in form.apiary.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
                     {% csrf_token %}
                     <button class="button is-primary">
                         Transfer Hive
                     </button>
                 </form>
             {% else %}
+
                 <article class="message is-info">
                     <div class="message-body">
                         You don't have any other apiaries.
