@@ -1,12 +1,49 @@
 {% extends 'frontend/master.html' %}
 
-{% load bulma_tags %}
-
 {% block body %}
     <section class="section">
         <div class="container">
+            {% if form.non_field_errors %}
+                <div class="message is-danger">
+                    <div class="message-header">
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        {% for non_field_error in form.non_field_errors %}
+                            {{ non_field_error }}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
             <form action="" method="post">
-                {{ form|bulma }}
+                <div class="field">
+                    <div class="control has-icons-left">
+                        <input type="text" id="{{ form.username.auto_id }}" name="{{ form.username.html_name }}"
+                               class="input{% if form.password.errors|length > 0 %} is-danger{% endif %}"
+                               placeholder="{{ form.username.label }}" required
+                               {% if form.username.value %}value="{{ form.username.value }}"{% endif %}>
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-user"></i>
+                        </span>
+                    </div>
+                    {% for error in form.username.errors %}
+                        <p class="help is-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="field">
+                    <div class="control has-icons-left">
+                        <input type="password" id="{{ form.password.auto_id }}" name="{{ form.password.html_name }}"
+                               class="input{% if form.password.errors|length > 0 %} is-danger{% endif %}"
+                               placeholder="{{ form.password.label }}" required
+                               {% if form.password.value %}value="{{ form.password.value }}"{% endif %}>
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-key"></i>
+                        </span>
+                    </div>
+                    {% for error in form.password.errors %}
+                        <p class="help is-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
                 {% csrf_token %}
                 <button class="button is-primary">Log in</button>
             </form>

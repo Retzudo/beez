@@ -32,7 +32,7 @@
                     </label>
                     <div class="control">
                         <input type="text" id="{{ form.name.auto_id }}" name="{{ form.name.name }}" class="input{% if form.name.errors|length > 0 %} is-danger{% endif %}"
-                               placeholder="{{ form.name.label }}">
+                               placeholder="{{ form.name.label }}" {% if form.name.value %}value="{{ form.name.value }}"{% endif %}>
                     </div>
                     {% for error in form.name.errors %}
                         <p class="help is-danger">{{ error }}</p>
@@ -45,7 +45,7 @@
                     </label>
                     <div class="control">
                         <input type="number" min="-90" max="90" step="0.000001" id="{{ form.latitude.auto_id }}"
-                               name="{{ form.latitude.name }}" class="input{% if form.latitude.errors|length > 0 %} is-danger{% endif %}" placeholder="{{ form.latitude.label }}">
+                               name="{{ form.latitude.name }}" class="input{% if form.latitude.errors|length > 0 %} is-danger{% endif %}" placeholder="{{ form.latitude.label }}" {% if form.latitude.value %}value="{{ form.latitude.value }}"{% endif %}>
                     </div>
                     {% for error in form.latitude.errors %}
                         <p class="help is-danger">{{ error }}</p>
@@ -58,7 +58,7 @@
                     </label>
                     <div class="control">
                         <input type="number" min="-180" max="180" step="0.000001" id="{{ form.longitude.auto_id }}"
-                               name="{{ form.longitude.name }}" class="input{% if form.longitude.errors|length > 0 %} is-danger{% endif %}" placeholder="{{ form.longitude.label }}">
+                               name="{{ form.longitude.name }}" class="input{% if form.longitude.errors|length > 0 %} is-danger{% endif %}" placeholder="{{ form.longitude.label }}" {% if form.longitude.value %}value="{{ form.longitude.value }}"{% endif %}>
                     </div>
                     {% for error in form.longitude.errors %}
                         <p class="help is-danger">{{ error }}</p>
@@ -88,7 +88,7 @@
                     </label>
                     <div class="control">
                         <input type="text" id="{{ form.address.auto_id }}" name="{{ form.address.name }}" class="input{% if form.address.errors|length > 0 %} is-danger{% endif %}"
-                               placeholder="{{ form.address.label }}">
+                               placeholder="{{ form.address.label }}" {% if form.address.value %}value="{{ form.address.value }}"{% endif %}>
                     </div>
                     {% for error in form.address.errors %}
                         <p class="help is-danger">{{ error }}</p>
@@ -101,7 +101,7 @@
                     </label>
                     <div class="control">
                         <input type="number" min="0" max="10" step="0.1" id="{{ form.radius.auto_id }}" class="input{% if form.radius.errors|length > 0 %} is-danger{% endif %}"
-                               placeholder="{{ form.radius.label }}">
+                               placeholder="{{ form.radius.label }}" {% if form.radius.value %}value="{{ form.radius.value }}"{% endif %}>
                     </div>
                     {% for error in form.radius.errors %}
                         <p class="help is-danger">{{ error }}</p>
@@ -115,7 +115,7 @@
                     <div class="control">
                         {% autoescape off %}{% markdown_allowed %}{% endautoescape %}
                         <textarea id="{{ form.notes.auto_id }}" class="textarea{% if form.notes.errors|length > 0 %} is-danger{% endif %}"
-                                  placeholder="{{ form.notes.label }}"></textarea>
+                                  placeholder="{{ form.notes.label }}">{% if form.notes.value %}{{ form.notes.value }}{% endif %}</textarea>
                     </div>
                     {% for error in form.notes.errors %}
                         <p class="help is-danger">{{ error }}</p>
@@ -163,7 +163,12 @@
                 }
 
                 map = L.map($map);
-                map.setView([50, 0], 2);
+                if ($latInput.value && $lonInput.value) {
+                    map.setView([$latInput.value, $lonInput.value], 15);
+                    marker = L.marker([$latInput.value, $lonInput.value]).addTo(map);
+                } else {
+                    map.setView([50, 0], 2);
+                }
 
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
