@@ -1,12 +1,43 @@
 {% extends 'frontend/master.html' %}
 
-{% load bulma_tags %}
+{% load widget_tweaks %}
 
 {% block body %}
     <section class="section">
         <div class="container">
+            {% if form.non_field_errors %}
+                <div class="message is-danger">
+                    <div class="message-header">
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        {% for non_field_error in form.non_field_errors %}
+                            {{ non_field_error }}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
             <form action="" method="post">
-                {{ form|bulma }}
+                {% for field in form %}
+                    <div class="field">
+                        <label for="{{ field.label_for_id }}" class="label">
+                            {{ field.label }}
+                        </label>
+                        <div class="control">
+                            {% render_field field|add_error_class:'is-danger' class+='input' %}
+                        </div>
+                    </div>
+                    {% for error in field.errors %}
+                        <p class="help is-danger">{{ error }}</p>
+                    {% endfor %}
+                    {% if field.help_text %}
+                        <p class="help">
+                            {{ field.help_text|safe }}
+                        </p>
+                    {% endif %}
+                {% endfor %}
+
                 {% csrf_token %}
                 <button class="button is-primary">Register</button>
             </form>

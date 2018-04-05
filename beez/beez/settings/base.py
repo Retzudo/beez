@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'drf_yasg',
     'django_filters',
     'django.contrib.admin',
-    'bulma',
     'widget_tweaks',
 ]
 
