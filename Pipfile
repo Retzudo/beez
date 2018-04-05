@@ -8,7 +8,6 @@ name = "pypi"
 [packages]
 
 django = "*"
-django-bulma = "*"
 requests = "*"
 dj-database-url = "*"
 gunicorn = "*"

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "ab9e7887132d0899f4b39ac6154aaefa8bac1bc967c9f9b9d026ed4f34c475cf"
+            "sha256": "648b5179ca0832b8877ce3823c9a461b415449b61d3d1f403ff2b24147dac2f8"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -74,12 +74,6 @@
                 "sha256:d81a1652963c81488e709729a80b510394050e312f386037f26b54912a3a10d0"
             ],
             "version": "==2.0.4"
-        },
-        "django-bulma": {
-            "hashes": [
-                "sha256:fe59a53c72844e3e5124c1eb1c80b89efaadcf880818e01aa8f24fcedabdc96f"
-            ],
-            "version": "==0.4.0"
         },
         "django-filter": {
             "hashes": [
