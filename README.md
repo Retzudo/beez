@@ -14,6 +14,16 @@ Beez is a web based tool for beekeepers. Written in
 - A browsable, Swagger/OpenAPI documented, RESTful API.
 
 
+## Possible future features
+
+- Weather alerts.
+- Detailed statistics.
+- Beekeeping related alerts like missed Varroa treatments.
+- A native phone app.
+
+If you'd like to see a feature, let us know on the project's [GitHub issues page](https://github.com/Retzudo/beez/issues).
+
+
 ## Deployment
 
 This repository comes with a `Dockerfile` and a `Procfile`. This means
