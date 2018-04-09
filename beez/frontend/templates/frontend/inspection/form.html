@@ -6,6 +6,16 @@
     <section class="section">
         <div class="container">
             {% include 'frontend/_dashboard_tabs.html' with active='apiary-list' %}
+
+            <nav class="breadcrumb" aria-label="breadcrumbs">
+                <ul>
+                    <li><a href="{% url 'frontend:apiary-list' %}">Apiaries</a></li>
+                    <li><a href="{% url 'frontend:apiary-detail' pk=hive.apiary.pk %}">{{ hive.apiary.name }}</a></li>
+                    <li><a href="{% url 'frontend:hive-detail' pk=hive.pk %}">{{ hive.name }}</a></li>
+                    <li class="is-active"><a>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Inspection</a></li>
+                </ul>
+            </nav>
+
             <h1 class="title">{% if form.instance.pk %}Edit{% else %}Create{% endif %} Inspection</h1>
             {% if form.non_field_errors %}
                 <div class="message is-danger">
