@@ -16,7 +16,7 @@ class InspectionDetailView(LoginRequiredMixin, DetailView):
 class InspectionCreateView(LoginRequiredMixin, CreateView):
     template_name = 'frontend/inspection/form.html'
     model = Inspection
-    fields = ['date', 'weight', 'saw_queen', 'needs_food', 'gave_food', 'notes']
+    fields = ['date', 'weight', 'saw_queen', 'saw_eggs', 'needs_food', 'gave_food', 'how_much_food', 'mites_counted', 'mite_treatment', 'notes']
 
     def form_valid(self, form):
         form.instance.hive = Hive.objects.get(apiary__owner=self.request.user, pk=self.kwargs.get('pk'))
@@ -26,7 +26,7 @@ class InspectionCreateView(LoginRequiredMixin, CreateView):
 class InspectionUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'frontend/inspection/form.html'
     model = Inspection
-    fields = ['date', 'weight', 'saw_queen', 'notes']
+    fields = ['date', 'weight', 'saw_queen', 'saw_eggs', 'needs_food', 'gave_food', 'how_much_food', 'mites_counted', 'mite_treatment', 'notes']
 
     def get_queryset(self):
         return Inspection.objects.filter(hive__apiary__owner=self.request.user)

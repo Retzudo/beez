@@ -36,7 +36,7 @@
                                 </button>
                             </div>
                             <div class="control is-expanded">
-                                {% render_field form.date|add_error_class:'is-danger' type='datetime-local' class+='input' %}
+                                {% render_field form.date|add_error_class:'is-danger' type='datetime-local' class+='input' placeholder='YYYY-MM-DD MM:HH' %}
                             </div>
                         </div>
                         {% for error in form.date.errors %}
@@ -75,8 +75,26 @@
                         </label>
                     </div>
                     <div class="field-body">
-                        {{ form.saw_queen }}
+                        <div class="select">
+                            {{ form.saw_queen }}
+                        </div>
                         {% for error in form.saw_queen.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label for="{{ form.saw_eggs.id_for_label }}" class="label">
+                            {{ form.saw_eggs.label }}
+                        </label>
+                    </div>
+                    <div class="field-body">
+                        <div class="select">
+                            {{ form.saw_eggs }}
+                        </div>
+                        {% for error in form.saw_eggs.errors %}
                             <p class="help is-danger">{{ error }}</p>
                         {% endfor %}
                     </div>
@@ -89,7 +107,9 @@
                         </label>
                     </div>
                     <div class="field-body">
-                        {{ form.needs_food }}
+                        <div class="select">
+                            {{ form.needs_food }}
+                        </div>
                         {% for error in form.needs_food.errors %}
                             <p class="help is-danger">{{ error }}</p>
                         {% endfor %}
@@ -103,6 +123,25 @@
                         </label>
                     </div>
                     <div class="field-body">
+                        <div class="field">
+                            <div class="control is-expanded">
+                                {% render_field form.gave_food|add_error_class:'is-danger' class+='input' placeholder='Syrup, dough etc.' %}
+                            </div>
+                        </div>
+                        {% for error in form.gave_food.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label for="{{ form.how_much_food.id_for_label }}" class="label">
+                            {# {{ form.how_much_food.label }} #}
+                            How much?
+                        </label>
+                    </div>
+                    <div class="field-body">
                         <div class="field has-addons">
                             <div class="control">
                                 <a class="button is-static">
@@ -110,10 +149,46 @@
                                 </a>
                             </div>
                             <div class="control is-expanded">
-                                {% render_field form.gave_food|add_error_class:'is-danger' type='number' step='0.1' min='0' class+='input' %}
+                                {% render_field form.how_much_food|add_error_class:'is-danger' type='number' step='0.1' min='0' class+='input' %}
                             </div>
                         </div>
-                        {% for error in form.gave_food.errors %}
+                        {% for error in form.how_much_food.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label for="{{ form.mites_counted.id_for_label }}" class="label">
+                            {{ form.mites_counted.label }}
+                        </label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control is-expanded">
+                                {% render_field form.mites_counted|add_error_class:'is-danger' type='number' min='1' class+='input' %}
+                            </div>
+                        </div>
+                        {% for error in form.mites_counted.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label for="{{ form.mite_treatment.id_for_label }}" class="label">
+                            {{ form.mite_treatment.label }}
+                        </label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control is-expanded">
+                                {% render_field form.mite_treatment|add_error_class:'is-danger' class+='input' placeholder='Formic acid, oxalic acid etc.' %}
+                            </div>
+                        </div>
+                        {% for error in form.mite_treatment.errors %}
                             <p class="help is-danger">{{ error }}</p>
                         {% endfor %}
                     </div>
