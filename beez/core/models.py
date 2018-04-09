@@ -83,9 +83,13 @@ class Inspection(models.Model):
     hive = models.ForeignKey(Hive, related_name='inspections', on_delete=models.CASCADE)
     date = models.DateTimeField()
     weight = models.FloatField(blank=True, null=True, validators=[validators.MinValueValidator(0)])
-    saw_queen = models.BooleanField(default=False)
-    needs_food = models.BooleanField(default=False)
-    gave_food = models.FloatField(blank=True, null=True, validators=[validators.MinValueValidator(0.1)])
+    saw_queen = models.NullBooleanField(choices=((True, 'Yes'), (False, 'No')))
+    saw_eggs = models.NullBooleanField(choices=((True, 'Yes'), (False, 'No')))
+    needs_food = models.NullBooleanField(choices=((True, 'Yes'), (False, 'No')))
+    gave_food = models.CharField(blank=True, null=True, max_length=255)
+    how_much_food = models.FloatField(blank=True, null=True, validators=[validators.MinValueValidator(0.1)])
+    mites_counted = models.PositiveSmallIntegerField(blank=True, null=True)
+    mite_treatment = models.CharField(max_length=255, blank=True, null=True)
 
     notes = models.TextField(blank=True, null=True)
 
@@ -97,6 +101,10 @@ class Inspection(models.Model):
 
     def get_absolute_url(self):
         return reverse('frontend:inspection-detail', args=[self.pk])
+
+    @property
+    def estimated_mite_population(self):
+        return self.mites_counted * 200
 
 
 class Harvest(models.Model):

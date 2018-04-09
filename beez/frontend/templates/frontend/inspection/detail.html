@@ -1,6 +1,6 @@
 {% extends 'frontend/master.html' %}
 
-{% load markdown_deux_tags %}
+{% load markdown_deux_tags humanize %}
 
 {% block title %}Inspection - {{ block.super }}{% endblock %}
 
@@ -30,32 +30,69 @@
                     <th>Date</th>
                     <td>{{ inspection.date }}</td>
                 </tr>
-                <tr>
-                    <th>Saw Queen</th>
-                    <td>{{ inspection.saw_queen|yesno|capfirst }}</td>
-                </tr>
-                <tr>
-                    <th>Weight</th>
-                    <td>{% if inspection.weight %}{{ inspection.weight }} {{ user.settings.current_weight_unit }}{% else %}<em>N/A</em>{% endif %}</td>
-                </tr>
-                <tr>
-                    <th>Needs food</th>
-                    <td>{{ inspection.needs_food|yesno|capfirst }}</td>
-                </tr>
-                <tr>
-                    <th>Gave food</th>
-                    <td>{% if inspection.gave_food %}{{ inspection.gave_food }} {{ user.settings.current_weight_unit }}{% else %}<em>N/A</em>{% endif %}</td>
-                </tr>
-                <tr>
-                    <th>Notes</th>
-                    <td>
-                        {% if inspection.notes %}
-                            <div class="content">{{ inspection.notes|markdown }}</div>
-                        {% else %}
-                            <em>N/A</em>
-                        {% endif %}
-                    </td>
-                </tr>
+                {% if inspection.saw_queen != None %}
+                    <tr>
+                        <th>Saw Queen</th>
+                        <td>{{ inspection.saw_queen|yesno|capfirst }}</td>
+                    </tr>
+                {% endif %}
+                {% if inspection.saw_eggs != None %}
+                    <tr>
+                        <th>Saw Queen</th>
+                        <td>{{ inspection.saw_eggs|yesno|capfirst }}</td>
+                    </tr>
+                {% endif %}
+                {% if inspection.needs_food != None %}
+                    <tr>
+                        <th>Needs food</th>
+                        <td>{{ inspection.needs_food|yesno|capfirst }}</td>
+                    </tr>
+                {% endif %}
+                {% if inspection.weight %}
+                    <tr>
+                        <th>Weight</th>
+                        <td>{{ inspection.weight|floatformat }} {{ user.settings.current_weight_unit }}</td>
+                    </tr>
+                {% endif %}
+                {% if inspection.gave_food or inspection.how_much_food %}
+                    <tr>
+                        <th>Gave food</th>
+                        <td>
+                            {% if inspection.how_much_food %}
+                                {{ inspection.how_much_food|floatformat }} {{ user.settings.current_weight_unit }}
+                            {% endif %}
+                            {% if inspection.gave_food %}
+                                <em>{{ inspection.gave_food }}</em>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if inspection.mites_counted %}
+                    <tr>
+                        <th>Mites counted</th>
+                        <td>{{ inspection.mites_counted }}</td>
+                    </tr>
+                    <tr>
+                        <th>Est. mite pop.</th>
+                        <td>{{ inspection.estimated_mite_population|intcomma }}</td>
+                    </tr>
+                {% endif %}
+                {% if inspection.mite_treatment %}
+                    <tr>
+                        <th>Mite treatment</th>
+                        <td>{{ inspection.mite_treatment }}</td>
+                    </tr>
+                {% endif %}
+                {% if inspection.notes %}
+                    <tr>
+                        <th>Notes</th>
+                        <td>
+                            <div class="content">
+                                {{ inspection.notes|markdown }}
+                            </div>
+                        </td>
+                    </tr>
+                {% endif %}
             </table>
 
             <hr>
