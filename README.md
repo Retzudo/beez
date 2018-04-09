@@ -4,6 +4,16 @@
 Beez is a web based tool for beekeepers. Written in
 [Python](https://python.org/) and powered by [Django](https://djangoproject.com/).
 
+## Features
+
+- Manage a number of apiaries and hives.
+- Weather forecast for an apiary's location.
+- Show your apiary on a map and track what area your bees can cover.
+- Create inspections for your hives and collect data.
+- Print out QR codes and stick them to your hives for quick access on mobile phones.
+- A browsable, Swagger/OpenAPI documented, RESTful API.
+
+
 ## Deployment
 
 This repository comes with a `Dockerfile` and a `Procfile`. This means
