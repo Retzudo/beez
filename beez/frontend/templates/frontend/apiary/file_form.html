@@ -1,0 +1,47 @@
+{% extends 'frontend/master.html' %}
+
+{% load widget_tweaks %}
+
+{% block body %}
+    <section class="section">
+        <div class="container">
+            {% include 'frontend/_dashboard_tabs.html' with active='apiary-list' %}
+
+            <h1 class="title">{% block title %}Add file to apiary{% endblock %}</h1>
+            {% if form.non_field_errors %}
+                <div class="message is-danger">
+                    <div class="message-header">
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        {% for non_field_error in form.non_field_errors %}
+                            {{ non_field_error }}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <form action="" method="post" enctype=multipart/form-data>
+                <div class="file">
+                    <label class="file-label">
+                        {{ form.file|add_class:'file-input'|add_error_class:'is-danger' }}
+                        <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="fas fa-upload"></i>
+                            </span>
+                            <span class="file-label">
+                                Choose a file
+                            </span>
+                        </span>
+                    </label>
+                </div>
+                {% for error in form.file.errors %}
+                    <p class="help is-danger">{{ error }}</p>
+                {% endfor %}
+
+                {% csrf_token %}
+                <button class="button is-primary">Upload</button>
+            </form>
+        </div>
+    </section>
+{% endblock %}

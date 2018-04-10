@@ -106,6 +106,49 @@
 
             <hr>
 
+            <h2 class="title is-4">Files</h2>
+            <table class="table is-fullwidth is-striped">
+                <tr>
+                    <th>Filename</th>
+                    <th></th>
+                </tr>
+                {% for file in hive.files.all %}
+                    <tr>
+                        <td>{{ file.file.name }}</td>
+                        <td>
+                            <a href="{{ file.file.url }}" class="button">
+                                <span class="icon">
+                                    <i class="fa fa-download"></i>
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4">
+                            <em>No files yet.</em>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {% if hive.files.count > 0 %}
+                <div class="buttons">
+                    <a class="button is-success" href="{% url 'frontend:hive-add-file' pk=hive.pk %}">
+                        <span class="icon"><i class="fa fa-plus"></i></span>
+                        <span>Add File</span>
+                    </a>
+                </div>
+            {% else %}
+                <div class="buttons is-centered">
+                    <a href="{% url 'frontend:hive-add-file' pk=hive.pk %}" class="button is-primary is-big">
+                        <span class="icon"><i class="fa fa-plus"></i></span>
+                        <span>Add Your First File</span>
+                    </a>
+                </div>
+            {% endif %}
+
+            <hr>
+
             <div class="buttons">
                 <a href="{% url 'frontend:hive-transfer' pk=hive.pk %}" class="button">
                     <span class="icon"><i class="fa fa-exchange-alt"></i></span>

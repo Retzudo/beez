@@ -16,7 +16,10 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, '../static')
+STATIC_ROOT = os.getenv('BEEZ_STATIC_ROOT', os.path.join(BASE_DIR, '../static'))
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.getenv('BEEZ_MEDIA_ROOT', os.path.join(BASE_DIR, '../media'))
 
 OWM_API_KEY = os.getenv('BEEZ_OWM_API_KEY')
 

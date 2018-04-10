@@ -1,9 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 
-from core.models import Hive, Apiary
+from core.models import Hive, Apiary, File
 
 
 class HiveDetailView(LoginRequiredMixin, DetailView):
@@ -83,3 +84,16 @@ class HiveTerminateView(LoginRequiredMixin, DeleteView):
 
         success_url = self.get_success_url()
         return HttpResponseRedirect(success_url)
+
+
+class HiveFileView(LoginRequiredMixin, CreateView):
+    template_name = 'frontend/hive/file_form.html'
+    model = File
+    fields = ['file']
+
+    def get_success_url(self):
+        return reverse('frontend:hive-detail', args=[self.kwargs.get('pk')])
+
+    def form_valid(self, form):
+        form.instance.hive = get_object_or_404(Hive, pk=self.kwargs.get('pk'))
+        return super().form_valid(form)

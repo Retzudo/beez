@@ -14,10 +14,12 @@ urlpatterns = [
     path('dashboard/apiaries/create-apiary', apiary.ApiaryCreateView.as_view(), name='apiary-create'),
     path('dashboard/apiaries/<int:pk>', apiary.ApiaryDetailView.as_view(), name='apiary-detail'),
     path('dashboard/apiaries/<int:pk>/edit', apiary.ApiaryUpdateView.as_view(), name='apiary-edit'),
+    path('dashboard/apiaries/<int:pk>/add-file', apiary.ApiaryFileView.as_view(), name='apiary-add-file'),
     path('dashboard/apiaries/<int:pk>/create-hive', hive.HiveCreateView.as_view(), name='hive-create'),
 
     path('dashboard/hives/<int:pk>', hive.HiveDetailView.as_view(), name='hive-detail'),
     path('dashboard/hives/<int:pk>/edit', hive.HiveUpdateView.as_view(), name='hive-edit'),
+    path('dashboard/hives/<int:pk>/add-file', hive.HiveFileView.as_view(), name='hive-add-file'),
     path('dashboard/hives/<int:pk>/transfer', hive.HiveTransferView.as_view(), name='hive-transfer'),
     path('dashboard/hives/<int:pk>/terminate', hive.HiveTerminateView.as_view(), name='hive-terminate'),
     path('dashboard/hives/<int:pk>/delete', lambda x: None, name='hive-delete'),

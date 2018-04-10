@@ -1,8 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Count, Sum
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
-from core.models import Apiary, Hive
+from core.models import Apiary, Hive, File
 from frontend import weather
 
 
@@ -57,3 +58,17 @@ class ApiaryUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_queryset(self):
         return self.request.user.apiaries.all()
+
+
+class ApiaryFileView(LoginRequiredMixin, CreateView):
+    template_name = 'frontend/apiary/file_form.html'
+    model = File
+    fields = ['file']
+
+    def get_success_url(self):
+        return reverse('frontend:apiary-detail', args=[self.kwargs.get('pk')])
+
+    def form_valid(self, form):
+        form.instance.apiary = get_object_or_404(Apiary, pk=self.kwargs.get('pk'))
+        return super().form_valid(form)
+
