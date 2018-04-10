@@ -1,6 +1,7 @@
 import pytz
 from django.contrib.auth import get_user_model
 from django.core import validators
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
 
@@ -142,3 +143,21 @@ class Settings(models.Model):
 
     def current_temp_unit(self):
         return unit_map[self.temperature_unit]['temp']
+
+
+class File(models.Model):
+    file = models.FileField()
+    date_created = models.DateTimeField(auto_now_add=True)
+    apiary = models.ForeignKey(Apiary, null=True, blank=True, related_name='files', on_delete=models.CASCADE)
+    hive = models.ForeignKey(Hive, null=True, blank=True, related_name='files', on_delete=models.CASCADE)
+
+    def clean(self):
+        if self.apiary and self.hive:
+            raise ValidationError('File cannot have both an apiary and a hive')
+
+    def __str__(self):
+        if self.apiary:
+            return 'Apiary file for {} ({})'.format(self.apiary, self.apiary.pk)
+
+        if self.hive:
+            return 'Hive file for {} ({})'.format(self.hive, self.hive.pk)
