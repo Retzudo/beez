@@ -18,8 +18,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.getenv('BEEZ_STATIC_ROOT', os.path.join(BASE_DIR, '../static'))
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.getenv('BEEZ_MEDIA_ROOT', os.path.join(BASE_DIR, '../media'))
+PRIVATE_STORAGE_ROOT  = os.getenv('BEEZ_PRIVATE_STORAGE_ROOT', os.path.join(BASE_DIR, '../media'))
+PRIVATE_STORAGE_AUTH_FUNCTION = 'private_storage.permissions.allow_staff'
 
 OWM_API_KEY = os.getenv('BEEZ_OWM_API_KEY')
 
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django_filters',
     'django.contrib.admin',
     'widget_tweaks',
+    'private_storage',
 ]
 
 MIDDLEWARE = [

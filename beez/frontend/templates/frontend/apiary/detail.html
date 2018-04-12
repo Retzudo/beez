@@ -196,7 +196,7 @@
                     <tr>
                         <td>{{ file.file.name }}</td>
                         <td>
-                            <a href="{{ file.file.url }}" class="button">
+                            <a href="{% url 'frontend:apiary-file' pk=file.pk %}" class="button">
                                 <span class="icon">
                                     <i class="fa fa-download"></i>
                                 </span>
