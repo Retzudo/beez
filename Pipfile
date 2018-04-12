@@ -21,6 +21,7 @@ djangorestframework-jwt = "*"
 django-filter = "*"
 drf-yasg = "*"
 django-widget-tweaks = "*"
+django-private-storage = "*"
 
 
 [dev-packages]

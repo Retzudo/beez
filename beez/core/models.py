@@ -4,6 +4,7 @@ from django.core import validators
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
+from private_storage.fields import PrivateFileField
 
 UNITS_METRIC = 'metric'
 UNITS_IMPERIAL = 'imperial'
@@ -146,7 +147,7 @@ class Settings(models.Model):
 
 
 class File(models.Model):
-    file = models.FileField()
+    file = PrivateFileField(content_types='application/pdf', max_file_size=10 * 1024 * 1024)
     date_created = models.DateTimeField(auto_now_add=True)
     apiary = models.ForeignKey(Apiary, null=True, blank=True, related_name='files', on_delete=models.CASCADE)
     hive = models.ForeignKey(Hive, null=True, blank=True, related_name='files', on_delete=models.CASCADE)
