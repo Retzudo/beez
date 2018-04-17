@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from private_storage.views import PrivateStorageDetailView
 
 from core.models import Apiary, Hive, File
@@ -81,3 +81,15 @@ class ApiaryFileDownloadView(LoginRequiredMixin, PrivateStorageDetailView):
 
     def get_queryset(self):
         return super().get_queryset().filter(apiary__isnull=False, apiary__owner=self.request.user)
+
+
+class ApiaryFileDeleteView(LoginRequiredMixin, DeleteView):
+    template_name = 'frontend/apiary/file_delete.html'
+    model = File
+    context_object_name = 'file'
+
+    def get_queryset(self):
+        return File.objects.filter(apiary__owner=self.request.user)
+
+    def get_success_url(self):
+        return self.object.apiary.get_absolute_url()

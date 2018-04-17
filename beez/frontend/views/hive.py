@@ -107,3 +107,15 @@ class HiveFileDownloadView(LoginRequiredMixin, PrivateStorageDetailView):
 
     def get_queryset(self):
         return super().get_queryset().filter(hive__isnull=False, hive__owner=self.request.user)
+
+
+class HiveFileDeleteView(LoginRequiredMixin, DeleteView):
+    template_name = 'frontend/hive/file_delete.html'
+    model = File
+    context_object_name = 'file'
+
+    def get_queryset(self):
+        return File.objects.filter(hive__apiary__owner=self.request.user)
+
+    def get_success_url(self):
+        return self.object.hive.get_absolute_url()
