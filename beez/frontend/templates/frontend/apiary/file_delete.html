@@ -4,20 +4,20 @@
     <section class="section">
         <div class="container">
             {% include 'frontend/_dashboard_tabs.html' with active='apiary-list' %}
-            <h1 class="title">Delete Inspection</h1>
+            <h1 class="title">Delete File</h1>
             <div class="message is-danger">
                 <p class="message-body">
-                    Do you really want to delete this inspection of the hive <em>{{ inspection.hive }}</em> from {{ inspection.date }}?
+                    Do you really want to delete the file <strong>{{ file.file.name }}</strong>?
                 </p>
             </div>
             <form action="" method="post">
                 {% csrf_token %}
                 <div class="has-text-centered">
-                    <a href="{% url 'frontend:hive-detail' pk=inspection.hive.pk %}" class="button">
+                    <a href="{% url 'frontend:apiary-detail' pk=file.apiary.pk %}" class="button">
                         Cancel
                     </a>
                     <button class="button is-danger">
-                        Delete Inspection
+                        Delete File
                     </button>
                 </div>
             </form>

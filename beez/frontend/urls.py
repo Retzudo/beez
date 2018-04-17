@@ -17,6 +17,7 @@ urlpatterns = [
     path('dashboard/apiaries/<int:pk>/add-file', apiary.ApiaryFileView.as_view(), name='apiary-add-file'),
     path('dashboard/apiaries/<int:pk>/create-hive', hive.HiveCreateView.as_view(), name='hive-create'),
     path('dashboard/apiaries/files/<int:pk>', apiary.ApiaryFileDownloadView.as_view(), name='apiary-file'),
+    path('dashboard/apiaries/files/<int:pk>/delete', apiary.ApiaryFileDeleteView.as_view(), name='apiary-file-delete'),
 
     path('dashboard/hives/<int:pk>', hive.HiveDetailView.as_view(), name='hive-detail'),
     path('dashboard/hives/<int:pk>/edit', hive.HiveUpdateView.as_view(), name='hive-edit'),
@@ -26,6 +27,7 @@ urlpatterns = [
     path('dashboard/hives/<int:pk>/delete', lambda x: None, name='hive-delete'),
     path('dashboard/hives/<int:pk>/create-inspection', inspection.InspectionCreateView.as_view(), name='inspection-create'),
     path('dashboard/hives/files/<int:pk>', hive.HiveFileDownloadView.as_view(), name='hive-file'),
+    path('dashboard/hives/files/<int:pk>/delete', hive.HiveFileDeleteView.as_view(), name='hive-file-delete'),
 
     path('dashboard/inspections/<int:pk>', inspection.InspectionDetailView.as_view(), name='inspection-detail'),
     path('dashboard/inspections/<int:pk>/edit', inspection.InspectionUpdateView.as_view(), name='inspection-edit'),
