@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-from frontend.views import apiary, hive, user, inspection, statistics, settings, files
+from frontend.views import apiary, hive, user, inspection, statistics, settings
 
 app_name = 'frontend'
 
@@ -16,6 +16,7 @@ urlpatterns = [
     path('dashboard/apiaries/<int:pk>/edit', apiary.ApiaryUpdateView.as_view(), name='apiary-edit'),
     path('dashboard/apiaries/<int:pk>/add-file', apiary.ApiaryFileView.as_view(), name='apiary-add-file'),
     path('dashboard/apiaries/<int:pk>/create-hive', hive.HiveCreateView.as_view(), name='hive-create'),
+    path('dashboard/apiaries/files/<int:pk>', apiary.ApiaryFileDownloadView.as_view(), name='apiary-file'),
 
     path('dashboard/hives/<int:pk>', hive.HiveDetailView.as_view(), name='hive-detail'),
     path('dashboard/hives/<int:pk>/edit', hive.HiveUpdateView.as_view(), name='hive-edit'),
@@ -24,6 +25,7 @@ urlpatterns = [
     path('dashboard/hives/<int:pk>/terminate', hive.HiveTerminateView.as_view(), name='hive-terminate'),
     path('dashboard/hives/<int:pk>/delete', lambda x: None, name='hive-delete'),
     path('dashboard/hives/<int:pk>/create-inspection', inspection.InspectionCreateView.as_view(), name='inspection-create'),
+    path('dashboard/hives/files/<int:pk>', hive.HiveFileDownloadView.as_view(), name='hive-file'),
 
     path('dashboard/inspections/<int:pk>', inspection.InspectionDetailView.as_view(), name='inspection-detail'),
     path('dashboard/inspections/<int:pk>/edit', inspection.InspectionUpdateView.as_view(), name='inspection-edit'),
@@ -31,7 +33,4 @@ urlpatterns = [
 
     path('dashboard/statistics', statistics.StatisticsView.as_view(), name='statistics'),
     path('dashboard/settings', settings.SettingsView.as_view(), name='settings'),
-
-    path('file/apiary/<int:pk>', files.ApiaryFileDownloadView.as_view(), name='apiary-file'),
-    path('file/hive/<int:pk>', files.HiveFileDownloadView.as_view(), name='hive-file'),
 ]

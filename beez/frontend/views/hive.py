@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
+from private_storage.views import PrivateStorageDetailView
 
 from core.models import Hive, Apiary, File
 
@@ -97,3 +98,12 @@ class HiveFileView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.hive = get_object_or_404(Hive, pk=self.kwargs.get('pk'))
         return super().form_valid(form)
+
+
+class HiveFileDownloadView(LoginRequiredMixin, PrivateStorageDetailView):
+    model = File
+    model_file_field = 'file'
+    content_disposition = True
+
+    def get_queryset(self):
+        return super().get_queryset().filter(hive__isnull=False, hive__owner=self.request.user)

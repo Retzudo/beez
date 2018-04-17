@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from private_storage.views import PrivateStorageDetailView
 
 from core.models import Apiary, Hive, File
 from frontend import weather
@@ -72,3 +73,11 @@ class ApiaryFileView(LoginRequiredMixin, CreateView):
         form.instance.apiary = get_object_or_404(Apiary, pk=self.kwargs.get('pk'))
         return super().form_valid(form)
 
+
+class ApiaryFileDownloadView(LoginRequiredMixin, PrivateStorageDetailView):
+    model = File
+    model_file_field = 'file'
+    content_disposition = True
+
+    def get_queryset(self):
+        return super().get_queryset().filter(apiary__isnull=False, apiary__owner=self.request.user)
