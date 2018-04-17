@@ -7,6 +7,7 @@ from core.models import File
 class ApiaryFileDownloadView(LoginRequiredMixin, PrivateStorageDetailView):
     model = File
     model_file_field = 'file'
+    content_disposition = True
 
     def get_queryset(self):
         return super().get_queryset().filter(apiary__isnull=False, apiary__owner=self.request.user)
@@ -15,6 +16,7 @@ class ApiaryFileDownloadView(LoginRequiredMixin, PrivateStorageDetailView):
 class HiveFileDownloadView(LoginRequiredMixin, PrivateStorageDetailView):
     model = File
     model_file_field = 'file'
+    content_disposition = True
 
     def get_queryset(self):
         return super().get_queryset().filter(hive__isnull=False, hive__owner=self.request.user)
