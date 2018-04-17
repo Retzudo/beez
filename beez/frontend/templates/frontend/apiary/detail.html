@@ -189,23 +189,27 @@
             <h2 class="title is-4">Files</h2>
             <table class="table is-fullwidth is-striped">
                 <tr>
-                    <th>Filename</th>
-                    <th></th>
+                    <th>File</th>
+                    <th>Uploaded</th>
+                    <th class="is-hidden-touch">Size</th>
                 </tr>
                 {% for file in apiary.files.all %}
                     <tr>
-                        <td>{{ file.file.name }}</td>
                         <td>
-                            <a href="{% url 'frontend:apiary-file' pk=file.pk %}" class="button">
-                                <span class="icon">
-                                    <i class="fa fa-download"></i>
-                                </span>
+                            <a href="{% url 'frontend:apiary-file' pk=file.pk %}" target="_blank">
+                                {{ file.file.name }} <span class="icon"><i class="fa fa-download"></i></span>
                             </a>
+                        </td>
+                        <td>
+                            {{ file.date_created }}
+                        </td>
+                        <td class="is-hidden-touch">
+                            {{ file.file.size|filesizeformat }}
                         </td>
                     </tr>
                 {% empty %}
                     <tr>
-                        <td colspan="4">
+                        <td colspan="3">
                             <em>No files yet.</em>
                         </td>
                     </tr>
