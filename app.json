@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dokku": {
-      "postdeploy": "python beez/manage.py migrate"
+      "postdeploy": "python beez/manage.py collectstatic && python beez/manage.py migrate"
     }
   }
 }
