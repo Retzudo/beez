@@ -1,3 +1,4 @@
+import datetime
 import os
 
 import dj_database_url
@@ -105,4 +106,11 @@ SWAGGER_SETTINGS = {
             'in': 'header'
         }
     }
+}
+
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
 }
