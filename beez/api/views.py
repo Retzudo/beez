@@ -10,6 +10,9 @@ class ApiaryViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return self.request.user.apiaries.all()
 
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
 
 class HiveViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.HiveSerializer
