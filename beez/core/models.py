@@ -193,3 +193,6 @@ class Queen(models.Model):
     hive = models.OneToOneField(Hive, related_name='queen', on_delete=models.CASCADE)
     year = models.PositiveIntegerField(default=datetime.now().year)
     number = models.CharField(max_length=25)
+
+    def get_absolute_url(self):
+        return reverse('frontend:hive-detail', args=[self.hive.pk])

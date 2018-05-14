@@ -43,13 +43,13 @@
                 </div>
 
                 <div class="field">
-                    <label for="{{ form.name.id_for_label }}" class="label">
-                        {{ form.name.label }}
+                    <label for="{{ form.number.id_for_label }}" class="label">
+                        {{ form.number.label }}
                     </label>
                     <div class="control">
-                        {% render_field form.name|add_error_class:'is-danger' class+='input' placeholder=form.name.label %}
+                        {% render_field form.number|add_error_class:'is-danger' class+='input' placeholder=form.number.label %}
                     </div>
-                    {% for error in form.name.errors %}
+                    {% for error in form.number.errors %}
                         <p class="help is-danger">{{ error }}</p>
                     {% endfor %}
                 </div>

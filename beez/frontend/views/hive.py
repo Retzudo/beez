@@ -1,11 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import QuerySet
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from private_storage.views import PrivateStorageDetailView
 
-from core.models import Hive, Apiary, File
+from core.models import Hive, Apiary, File, Queen
 
 
 class HiveDetailView(LoginRequiredMixin, DetailView):
@@ -119,3 +120,22 @@ class HiveFileDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return self.object.hive.get_absolute_url()
+
+
+class QueenEditView(LoginRequiredMixin, UpdateView):
+    template_name = 'frontend/hive/queen/form.html'
+    model = Queen
+    fields = ['year', 'number']
+
+    def get_queryset(self):
+        return Queen.objects.filter(hive__apiary__owner=self.request.user)
+
+    def get_object(self, queryset=None):
+        qs = self.get_queryset() if queryset is None else queryset
+        return qs.get(hive__pk=self.kwargs['pk'])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['hive'] = self.get_object().hive
+
+        return context
