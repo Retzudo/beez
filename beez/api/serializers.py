@@ -12,7 +12,7 @@ class ApiarySerializer(serializers.ModelSerializer):
 class QueenSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Queen
-        fields = '__all__'
+        fields = ['year', 'number']
 
 
 class HiveSerializer(serializers.ModelSerializer):
