@@ -2,12 +2,23 @@
 
 {% block body %}
     <section class="section">
-        <div class="container">
-            {% if apiaries|length > 0 %}
-                <h1 class="title"><em>{{ apiaries|length }}</em> Apiaries found</h1>
+        <div class="container content">
+            {% if apiaries.count > 0 %}
+                <h1 class="title"><em>{{ apiaries|length }}</em> Apiar{% if apiaries.count > 1 %}ies{% else %}y{% endif %} found</h1>
+                <ul>
+                    {% for apiary in apiaries %}
+                        <li><a href="{% url 'frontend:apiary-detail' pk=apiary.pk %}">{{ apiary.name }}</a></li>
+                    {% endfor %}
+                </ul>
             {% endif %}
-            {% if hives|length > 0 %}
-                <h1 class="title"><em>{{ hives|length }}</em> Hives found</h1>
+
+            {% if hives.count > 0 %}
+                <h1 class="title"><em>{{ hives|length }}</em> Hive{{ hives.count|pluralize }} found</h1>
+                <ul>
+                    {% for hive in hives %}
+                        <li><a href="{% url 'frontend:hive-detail' pk=hive.pk %}">{{ hive.name }}</a></li>
+                    {% endfor %}
+                </ul>
             {% endif %}
         </div>
     </section>
