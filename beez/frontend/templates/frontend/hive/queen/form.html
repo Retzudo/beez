@@ -1,0 +1,64 @@
+{% extends 'frontend/master.html' %}
+
+{% load widget_tweaks markdown_deux_tags %}
+
+{% block body %}
+    <section class="section">
+        <div class="container">
+            {% include 'frontend/_dashboard_tabs.html' with active='apiary-list' %}
+
+            <nav class="breadcrumb" aria-label="breadcrumbs">
+                <ul>
+                    <li><a href="{% url 'frontend:apiary-list' %}">Apiaries</a></li>
+                    <li><a href="{% url 'frontend:apiary-detail' pk=hive.apiary.pk %}">{{ hive.apiary.name }}</a></li>
+                    <li><a href="{% url 'frontend:hive-detail' pk=hive.pk %}">{{ hive.name }}</a></li>
+                    <li class="is-active"><a>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Queen</a></li>
+                </ul>
+            </nav>
+
+            <h1 class="title">{% if form.instance.pk %}Edit{% else %}Create{% endif %} Queen</h1>
+            {% if form.non_field_errors %}
+                <div class="message is-danger">
+                    <div class="message-header">
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        {% for non_field_error in form.non_field_errors %}
+                            {{ non_field_error }}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+            <form action="" method="post">
+                <div class="field">
+                    <label for="{{ form.year.id_for_label }}" class="label">
+                        {{ form.year.label }} *
+                    </label>
+                    <div class="control">
+                        {% render_field form.year|add_error_class:'is-danger' class+='input' placeholder=form.year.label type='number' min='0'%}
+                    </div>
+                    {% for error in form.year.errors %}
+                        <p class="help is-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="field">
+                    <label for="{{ form.name.id_for_label }}" class="label">
+                        {{ form.name.label }}
+                    </label>
+                    <div class="control">
+                        {% render_field form.name|add_error_class:'is-danger' class+='input' placeholder=form.name.label %}
+                    </div>
+                    {% for error in form.name.errors %}
+                        <p class="help is-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                {% csrf_token %}
+                <button class="button is-primary">
+                    {% if form.instance.pk %}Save{% else %}Create{% endif %} Queen
+                </button>
+            </form>
+        </div>
+    </section>
+{% endblock %}
