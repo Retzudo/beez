@@ -1,5 +1,6 @@
 import pytz
 from django.contrib.auth import get_user_model
+from django.contrib.postgres.search import SearchVector
 from django.core import validators
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -57,6 +58,12 @@ class Apiary(models.Model):
     def get_absolute_url(self):
         return reverse('frontend:apiary-detail', args=[self.pk])
 
+    @classmethod
+    def search(cls, query):
+        vector = SearchVector('name', weight='A') + \
+                 SearchVector('notes', weight='B')
+        return cls.objects.annotate(search=vector).filter(search=query)
+
 
 class Hive(models.Model):
     apiary = models.ForeignKey(Apiary, related_name='hives', on_delete=models.CASCADE)
@@ -76,6 +83,13 @@ class Hive(models.Model):
 
     def get_absolute_url(self):
         return reverse('frontend:hive-detail', args=[self.pk])
+
+    @classmethod
+    def search(cls, query):
+        vector = SearchVector('name', weight='A') + \
+                 SearchVector('description', weight='B') + \
+                 SearchVector('notes', weight='C')
+        return cls.objects.annotate(search=vector).filter(search=query)
 
     @property
     def last_recorded_weight(self):

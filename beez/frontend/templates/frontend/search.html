@@ -1,0 +1,14 @@
+{% extends 'frontend/master.html' %}
+
+{% block body %}
+    <section class="section">
+        <div class="container">
+            {% if apiaries|length > 0 %}
+                <h1 class="title"><em>{{ apiaries|length }}</em> Apiaries found</h1>
+            {% endif %}
+            {% if hives|length > 0 %}
+                <h1 class="title"><em>{{ hives|length }}</em> Hives found</h1>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}
