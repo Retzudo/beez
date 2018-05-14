@@ -1,4 +1,6 @@
 from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from api import serializers
 from core import models
@@ -9,6 +11,9 @@ class ApiaryViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return self.request.user.apiaries.all()
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 class HiveViewSet(viewsets.ModelViewSet):
@@ -69,3 +74,16 @@ class HarvestViewSet(viewsets.ModelViewSet):
         )
 
         return serializer
+
+
+class SearchView(APIView):
+    def get(self, request, format=None):
+        query = request.query_params.get('q')
+
+        apiaries = models.Apiary.search(query)
+        hives = models.Hive.search(query)
+
+        return Response({
+            'apiaries': serializers.ApiarySerializer(apiaries, many=True).data,
+            'hives': serializers.HiveSerializer(hives, many=True).data,
+        })

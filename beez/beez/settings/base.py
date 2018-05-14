@@ -1,3 +1,4 @@
+import datetime
 import os
 
 import dj_database_url
@@ -17,6 +18,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.getenv('BEEZ_STATIC_ROOT', os.path.join(BASE_DIR, '../static'))
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 PRIVATE_STORAGE_ROOT  = os.getenv('BEEZ_PRIVATE_STORAGE_ROOT', os.path.join(BASE_DIR, '../media'))
 PRIVATE_STORAGE_AUTH_FUNCTION = 'private_storage.permissions.allow_staff'
@@ -28,7 +30,7 @@ LOGIN_REDIRECT_URL = reverse_lazy('frontend:apiary-list')
 WSGI_APPLICATION = 'beez.wsgi.application'
 
 DATABASES = {
-    'default': dj_database_url.config(default='sqlite:///'+os.path.abspath(os.path.join(BASE_DIR, 'db.sqlite3')))
+    'default': dj_database_url.config(default='postgresql://postgres:postgres@localhost:5432/postgres')
 }
 
 INSTALLED_APPS = [
@@ -54,6 +56,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -103,4 +106,11 @@ SWAGGER_SETTINGS = {
             'in': 'header'
         }
     }
+}
+
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
 }

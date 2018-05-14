@@ -1,5 +1,6 @@
 import pytz
 from django.contrib.auth import get_user_model
+from django.contrib.postgres.search import SearchVector
 from django.core import validators
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -49,12 +50,19 @@ class Apiary(models.Model):
 
     class Meta:
         verbose_name_plural = 'Apiaries'
+        ordering = ('date_created',)
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('frontend:apiary-detail', args=[self.pk])
+
+    @classmethod
+    def search(cls, query):
+        vector = SearchVector('name', weight='A') + \
+                 SearchVector('notes', weight='B')
+        return cls.objects.annotate(search=vector).filter(search=query)
 
 
 class Hive(models.Model):
@@ -67,11 +75,21 @@ class Hive(models.Model):
     notes = models.TextField(blank=True, null=True)
     makes_honey = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ('date_created',)
+
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('frontend:hive-detail', args=[self.pk])
+
+    @classmethod
+    def search(cls, query):
+        vector = SearchVector('name', weight='A') + \
+                 SearchVector('description', weight='B') + \
+                 SearchVector('notes', weight='C')
+        return cls.objects.annotate(search=vector).filter(search=query)
 
     @property
     def last_recorded_weight(self):
@@ -96,7 +114,7 @@ class Inspection(models.Model):
     notes = models.TextField(blank=True, null=True)
 
     class Meta:
-        ordering = ['-date']
+        ordering = ('-date',)
 
     def __str__(self):
         return 'Inspection on {}'.format(self.date)
@@ -113,6 +131,9 @@ class Harvest(models.Model):
     hive = models.ForeignKey(Hive, related_name='harvests', on_delete=models.CASCADE)
     date = models.DateField()
     weight = models.FloatField(validators=[validators.MinValueValidator(0)])
+
+    class Meta:
+        ordering = ('-date',)
 
     def __str__(self):
         return 'Harvest on {} ({} {})'.format(

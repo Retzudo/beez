@@ -4,4 +4,5 @@ python:
 install:
   - pip install pipenv
   - pipenv install --system
+before_script: python beez/manage.py collectstatic
 script: python beez/manage.py test api

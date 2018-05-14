@@ -3,7 +3,7 @@ from django.urls import path, include
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import routers
-from rest_framework_jwt.views import obtain_jwt_token
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 from api import views
 
@@ -28,5 +28,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=None), name='schema-json'),
     path('auth', obtain_jwt_token),
+    path('auth/refresh', refresh_jwt_token),
+    path('search', views.SearchView.as_view()),
     path('', include(router.urls)),
 ]

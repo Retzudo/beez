@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-from frontend.views import apiary, hive, user, inspection, statistics, settings
+from frontend.views import apiary, hive, user, inspection, statistics, settings, search
 
 app_name = 'frontend'
 
@@ -9,6 +9,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='frontend/index.html'), name='index'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/register', user.RegisterView.as_view(), name='register'),
+    path('search', search.search, name='search'),
 
     path('dashboard/apiaries', apiary.ApiaryListView.as_view(), name='apiary-list'),
     path('dashboard/apiaries/create-apiary', apiary.ApiaryCreateView.as_view(), name='apiary-create'),

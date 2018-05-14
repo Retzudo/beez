@@ -16,6 +16,18 @@
     <div class="navbar-menu" id="navbar-menu">
         <div class="navbar-end">
             {% if user.is_authenticated %}
+                <div class="navbar-item">
+                    <form action="{% url 'frontend:search' %}" method="get">
+                        <div class="field">
+                            <p class="control has-icons-left">
+                                <input type="text" class="input is-rounded" placeholder="Search" name="q">
+                                <span class="icon is-left">
+                                    <i class="fa fa-search"></i>
+                                </span>
+                            </p>
+                        </div>
+                    </form>
+                </div>
                 {% if user.is_superuser %}
                     <a href="/admin" class="navbar-item">
                         <span class="icon"><fa class="fa fa-bug"></fa></span>
