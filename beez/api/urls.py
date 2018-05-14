@@ -29,5 +29,6 @@ urlpatterns = [
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=None), name='schema-json'),
     path('auth', obtain_jwt_token),
     path('auth/refresh', refresh_jwt_token),
+    path('search', views.SearchView.as_view()),
     path('', include(router.urls)),
 ]
