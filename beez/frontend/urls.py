@@ -30,6 +30,8 @@ urlpatterns = [
     path('dashboard/hives/files/<int:pk>', hive.HiveFileDownloadView.as_view(), name='hive-file'),
     path('dashboard/hives/files/<int:pk>/delete', hive.HiveFileDeleteView.as_view(), name='hive-file-delete'),
     path('dashboard/hives/<int:pk>/edit-queen', hive.QueenEditView.as_view(), name='hive-edit-queen'),
+    path('dashboard/hives/<int:pk>/add-queen', hive.QueenCreateView.as_view(), name='hive-add-queen'),
+    path('dashboard/hives/<int:pk>/delete-queen', hive.QueenDeleteView.as_view(), name='hive-delete-queen'),
 
     path('dashboard/inspections/<int:pk>', inspection.InspectionDetailView.as_view(), name='inspection-detail'),
     path('dashboard/inspections/<int:pk>/edit', inspection.InspectionUpdateView.as_view(), name='inspection-edit'),

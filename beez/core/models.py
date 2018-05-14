@@ -91,8 +91,9 @@ class Hive(models.Model):
     @classmethod
     def search(cls, query):
         vector = SearchVector('name', weight='A') + \
-                 SearchVector('description', weight='B') + \
-                 SearchVector('notes', weight='C')
+                 SearchVector('queen__number', weight='B') + \
+                 SearchVector('description', weight='C') + \
+                 SearchVector('notes', weight='D')
         return cls.objects.annotate(search=vector).filter(search=query)
 
     @property

@@ -139,3 +139,38 @@ class QueenEditView(LoginRequiredMixin, UpdateView):
         context['hive'] = self.get_object().hive
 
         return context
+
+
+class QueenCreateView(LoginRequiredMixin, CreateView):
+    template_name = 'frontend/hive/queen/form.html'
+    model = Queen
+    fields = ['year', 'number']
+
+    def get_success_url(self):
+        return reverse('frontend:hive-detail', args=[self.kwargs.get('pk')])
+
+    def form_valid(self, form):
+        form.instance.hive = get_object_or_404(Hive, pk=self.kwargs.get('pk'))
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['hive'] = get_object_or_404(Hive, pk=self.kwargs.get('pk'))
+
+        return context
+
+
+class QueenDeleteView(LoginRequiredMixin, DeleteView):
+    template_name = 'frontend/hive/queen/delete.html'
+    model = Queen
+    context_object_name = 'queen'
+
+    def get_queryset(self):
+        return Queen.objects.filter(hive__apiary__owner=self.request.user)
+
+    def get_object(self, queryset=None):
+        qs = self.get_queryset() if queryset is None else queryset
+        return qs.get(hive__pk=self.kwargs['pk'])
+
+    def get_success_url(self):
+        return self.object.hive.get_absolute_url()

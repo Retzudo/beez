@@ -144,11 +144,18 @@
                                 <h3 class="subtitle">Queen</h3>
                             </div>
                             <div class="level-right">
-                                <a class="button is-small" href="{% url 'frontend:hive-edit-queen' pk=hive.pk %}">
-                                    <span class="icon">
-                                        <i class="fa fa-edit"></i>
-                                    </span>
-                                </a>
+                                {% if hive.queen %}
+                                    <a class="button is-small" href="{% url 'frontend:hive-edit-queen' pk=hive.pk %}">
+                                        <span class="icon">
+                                            <i class="fa fa-edit"></i>
+                                        </span>
+                                    </a>
+                                    <a class="button is-small" href="{% url 'frontend:hive-delete-queen' pk=hive.pk %}">
+                                        <span class="icon">
+                                            <i class="fa fa-trash"></i>
+                                        </span>
+                                    </a>
+                                {% endif %}
                             </div>
                         </div>
                         {% if hive.queen %}
@@ -157,14 +164,14 @@
                                     <dt>Year</dt>
                                     <dd><span class="year-circle {{ hive.queen.year|year_color }}"></span> {{ hive.queen.year }}</dd>
 
-                                    {% if hive.queen.name %}
+                                    {% if hive.queen.number %}
                                         <dt>Name</dt>
-                                        <dd>{{ hive.queen.name }}</dd>
+                                        <dd>{{ hive.queen.number }}</dd>
                                     {% endif %}
                                 </dl>
                             </div>
                         {% else %}
-                            <a href="#" class="button">Specify queen</a>
+                            <a href="{% url 'frontend:hive-add-queen' pk=hive.pk %}" class="button">Specify queen</a>
                         {% endif %}
                     </div>
                 </div>
