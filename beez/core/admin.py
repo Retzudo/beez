@@ -10,15 +10,23 @@ class SettingsInline(admin.StackedInline):
     can_delete = False
 
 
+class QueenInline(admin.StackedInline):
+    model = models.Queen
+
+
 class UserAdmin(BaseUserAdmin):
     inlines = [SettingsInline]
+
+
+class HiveAdmin(admin.ModelAdmin):
+    inlines = [QueenInline]
 
 
 admin.site.unregister(get_user_model())
 admin.site.register(get_user_model(), UserAdmin)
 
 admin.site.register(models.Apiary)
-admin.site.register(models.Hive)
+admin.site.register(models.Hive, HiveAdmin)
 admin.site.register(models.Inspection)
 admin.site.register(models.Harvest)
 admin.site.register(models.File)

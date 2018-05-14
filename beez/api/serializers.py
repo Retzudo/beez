@@ -9,7 +9,15 @@ class ApiarySerializer(serializers.ModelSerializer):
         exclude = ['owner']
 
 
+class QueenSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Queen
+        fields = '__all__'
+
+
 class HiveSerializer(serializers.ModelSerializer):
+    queen = QueenSerializer()
+
     class Meta:
         model = models.Hive
         fields = '__all__'
