@@ -49,6 +49,7 @@ class Apiary(models.Model):
 
     class Meta:
         verbose_name_plural = 'Apiaries'
+        ordering = ('date_created',)
 
     def __str__(self):
         return self.name
@@ -66,6 +67,9 @@ class Hive(models.Model):
     date_terminated = models.DateTimeField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
     makes_honey = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('date_created',)
 
     def __str__(self):
         return self.name
@@ -96,7 +100,7 @@ class Inspection(models.Model):
     notes = models.TextField(blank=True, null=True)
 
     class Meta:
-        ordering = ['-date']
+        ordering = ('-date',)
 
     def __str__(self):
         return 'Inspection on {}'.format(self.date)
@@ -113,6 +117,9 @@ class Harvest(models.Model):
     hive = models.ForeignKey(Hive, related_name='harvests', on_delete=models.CASCADE)
     date = models.DateField()
     weight = models.FloatField(validators=[validators.MinValueValidator(0)])
+
+    class Meta:
+        ordering = ('-date',)
 
     def __str__(self):
         return 'Harvest on {} ({} {})'.format(
