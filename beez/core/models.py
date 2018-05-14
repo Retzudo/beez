@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import pytz
 from django.contrib.auth import get_user_model
 from django.contrib.postgres.search import SearchVector
@@ -6,6 +8,8 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
 from private_storage.fields import PrivateFileField
+
+from core import utils
 
 UNITS_METRIC = 'metric'
 UNITS_IMPERIAL = 'imperial'
@@ -183,3 +187,13 @@ class File(models.Model):
 
         if self.hive:
             return 'Hive file for {} ({})'.format(self.hive, self.hive.pk)
+
+
+class Queen(models.Model):
+    hive = models.OneToOneField(Hive, related_name='queen', on_delete=models.CASCADE)
+    year = models.PositiveIntegerField(default=datetime.now().year)
+    number = models.CharField(max_length=25)
+
+    @property
+    def color(self):
+        return utils.color_for_year(self.year)
