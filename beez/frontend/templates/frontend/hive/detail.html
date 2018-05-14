@@ -1,8 +1,43 @@
 {% extends 'frontend/master.html' %}
 
-{% load qr_code markdown_deux_tags %}
+{% load qr_code markdown_deux_tags colors %}
 
 {% block title %}{{ hive.name }} - {{ block.super }}{% endblock %}
+
+{% block head %}
+    <style>
+        .year-circle:before {
+            content: '';
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+            background-color: grey;
+        }
+
+        .year-circle.blue:before {
+            background-color: hsl(240, 80%, 50%);
+        }
+
+        .year-circle.white:before {
+            background-color: hsl(0, 80%, 100%);
+        }
+
+        .year-circle.yellow:before {
+            background-color: hsl(60, 80%, 50%);
+        }
+
+        .year-circle.red:before {
+            background-color: hsl(0, 80%, 50%);
+        }
+
+        .year-circle.green:before {
+            background-color: hsl(120, 80%, 50%);
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
     <section class="section">
@@ -81,7 +116,7 @@
             <hr>
 
             <h2 class="title is-4">Details</h2>
-            <div class="columns">
+            <div class="columns is-multiline">
                 <div class="column is-half">
                     <div class="box">
                         <h3 class="subtitle">Description</h3>
@@ -99,6 +134,26 @@
                             <div class="content">{{ hive.notes|markdown }}</div>
                         {% else %}
                             <em>N/A</em>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="column is-half">
+                    <div class="box">
+                        <h3 class="subtitle">Queen</h3>
+                        {% if hive.queen %}
+                            <div class="content">
+                                <dl>
+                                    <dt>Year</dt>
+                                    <dd><span class="year-circle {{ hive.queen.year|year_color }}"></span> {{ hive.queen.year }}</dd>
+
+                                    {% if hive.queen.name %}
+                                        <dt>Name</dt>
+                                        <dd>{{ hive.queen.name }}</dd>
+                                    {% endif %}
+                                </dl>
+                            </div>
+                        {% else %}
+                            <a href="#" class="button">Specify queen</a>
                         {% endif %}
                     </div>
                 </div>
