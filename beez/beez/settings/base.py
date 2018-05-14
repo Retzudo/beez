@@ -30,7 +30,7 @@ LOGIN_REDIRECT_URL = reverse_lazy('frontend:apiary-list')
 WSGI_APPLICATION = 'beez.wsgi.application'
 
 DATABASES = {
-    'default': dj_database_url.config(default='sqlite:///'+os.path.abspath(os.path.join(BASE_DIR, 'db.sqlite3')))
+    'default': dj_database_url.config(default='postgresql://postgres:postgres@localhost:5432/postgres')
 }
 
 INSTALLED_APPS = [
