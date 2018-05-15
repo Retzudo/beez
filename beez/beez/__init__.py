@@ -1,4 +1,4 @@
-__version__ = '0.7.1-alpha'
+__version__ = '0.7.2-alpha'
 
 
 def version(request):
