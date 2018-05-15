@@ -52,6 +52,22 @@ class HiveTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
+class QueenTestCase(APITestCase):
+    def setUp(self):
+        self.user = User.objects.create(username='user', password='user')
+        self.apiary = Apiary.objects.create(name='Apiary', owner=self.user)
+        self.hive = Hive.objects.create(name='Hive', apiary=self.apiary)
+
+    def test_queen_creation(self):
+        self.assertTrue(False)
+
+    def test_queen_update(self):
+        self.assertTrue(False)
+
+    def test_queen_deletion(self):
+        self.assertTrue(False)
+
+
 class InspectionTestCase(APITestCase):
     def setUp(self):
         self.user_one = User.objects.create(username='userone', password='userone')

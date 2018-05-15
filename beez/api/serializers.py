@@ -23,23 +23,25 @@ class HiveSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        queen_data = validated_data.pop('queen')
+        queen_data = validated_data.pop('queen') if 'queen' in validated_data else None
+
         hive = super().create(validated_data)
 
-        models.Queen.objects.create(hive=hive, **queen_data)
+        if queen_data:
+            models.Queen.objects.create(hive=hive, **queen_data)
 
         return hive
 
     def update(self, hive, validated_data):
-        if 'queen' not in validated_data or validated_data['queen'] is None:
-            queen = None
+        queen_data = validated_data.pop('queen') if 'queen' in validated_data else None
+        queen = None
+
+        if queen_data is None:
             try:
                 hive.queen.delete()
             except models.Queen.DoesNotExist:
                 pass
         else:
-            queen_data = validated_data.pop('queen')
-
             try:
                 queen = hive.queen
             except models.Queen.DoesNotExist:
