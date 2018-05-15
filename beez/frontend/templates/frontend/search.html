@@ -3,23 +3,26 @@
 {% block body %}
     <section class="section">
         <div class="container content">
-            {% if apiaries.count > 0 %}
-                <h1 class="title"><em>{{ apiaries|length }}</em> Apiar{% if apiaries.count > 1 %}ies{% else %}y{% endif %} found</h1>
-                <ul>
-                    {% for apiary in apiaries %}
-                        <li><a href="{% url 'frontend:apiary-detail' pk=apiary.pk %}">{{ apiary.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+            <h1 class="title"><em>{{ apiaries.count }}</em> Apiar{% if apiaries.count == 1 %}y{% else %}ies{% endif %} found</h1>
+            <ul>
+                {% for apiary in apiaries %}
+                    <li><a href="{% url 'frontend:apiary-detail' pk=apiary.pk %}">{{ apiary.name }}</a></li>
+                {% endfor %}
+            </ul>
 
-            {% if hives.count > 0 %}
-                <h1 class="title"><em>{{ hives|length }}</em> Hive{{ hives.count|pluralize }} found</h1>
-                <ul>
-                    {% for hive in hives %}
-                        <li><a href="{% url 'frontend:hive-detail' pk=hive.pk %}">{{ hive.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+            <h1 class="title"><em>{{ hives.count }}</em> Hive{{ hives.count|pluralize }} found</h1>
+            <ul>
+                {% for hive in hives %}
+                    <li><a href="{% url 'frontend:hive-detail' pk=hive.pk %}">{{ hive.name }}</a></li>
+                {% endfor %}
+            </ul>
+
+            <h1 class="title"><em>{{ queens.count }}</em> Queen{{ hives.count|pluralize }} found</h1>
+            <ul>
+                {% for queen in queens %}
+                    <li><a href="{% url 'frontend:hive-detail' pk=queen.hive.pk %}">{{ queen.hive.name }}</a></li>
+                {% endfor %}
+            </ul>
         </div>
     </section>
 {% endblock %}

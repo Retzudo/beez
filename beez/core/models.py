@@ -91,9 +91,8 @@ class Hive(models.Model):
     @classmethod
     def search(cls, query):
         vector = SearchVector('name', weight='A') + \
-                 SearchVector('queen__number', weight='B') + \
-                 SearchVector('description', weight='C') + \
-                 SearchVector('notes', weight='D')
+                 SearchVector('description', weight='B') + \
+                 SearchVector('notes', weight='C')
         return cls.objects.annotate(search=vector).filter(search=query)
 
     @property
@@ -197,3 +196,8 @@ class Queen(models.Model):
 
     def get_absolute_url(self):
         return reverse('frontend:hive-detail', args=[self.hive.pk])
+
+    @classmethod
+    def search(cls, query):
+        vector = SearchVector('number', weight='A')
+        return cls.objects.annotate(search=vector).filter(search=query)

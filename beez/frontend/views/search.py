@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from core.models import Apiary, Hive
+from core.models import Apiary, Hive, Queen
 
 
 def search(request):
@@ -8,8 +8,10 @@ def search(request):
 
     apiaries = Apiary.search(query)
     hives = Hive.search(query)
+    queens = Queen.search(query)
 
     return render(request, 'frontend/search.html', {
         'apiaries': apiaries,
         'hives': hives,
+        'queens': queens,
     })
