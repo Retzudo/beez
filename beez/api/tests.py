@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
 
-from core.models import Apiary, Hive
+from core.models import Apiary, Hive, Queen
 
 
 class HiveTestCase(APITestCase):
@@ -59,13 +59,96 @@ class QueenTestCase(APITestCase):
         self.hive = Hive.objects.create(name='Hive', apiary=self.apiary)
 
     def test_queen_creation(self):
-        self.assertTrue(False)
+        self.client.force_login(self.user)
+
+        response = self.client.put(
+            path=reverse('api:hive-detail', kwargs={'pk': self.hive.pk}),
+            data={
+                'apiary': self.apiary.pk,
+                'name': 'Hive',
+                'queen': {
+                    'year': 2018,
+                    'number': 'B33#1'
+                }
+            }
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(self.hive.queen.year, 2018)
+        self.assertEqual(self.hive.queen.number, 'B33#1')
 
     def test_queen_update(self):
-        self.assertTrue(False)
+        self.client.force_login(self.user)
 
-    def test_queen_deletion(self):
-        self.assertTrue(False)
+        Queen.objects.create(hive=self.hive, year=1998, number='wrong number')
+
+        self.assertEqual(self.hive.queen.year, 1998)
+        self.assertEqual(self.hive.queen.number, 'wrong number')
+
+        response = self.client.put(
+            path=reverse('api:hive-detail', kwargs={'pk': self.hive.pk}),
+            data={
+                'apiary': self.apiary.pk,
+                'name': 'Hive',
+                'queen': {
+                    'year': 2018,
+                    'number': 'B33#1'
+                }
+            }
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        self.hive.queen.refresh_from_db()
+        self.assertEqual(self.hive.queen.year, 2018)
+        self.assertEqual(self.hive.queen.number, 'B33#1')
+
+    def test_queen_deletion_by_omission(self):
+        self.client.force_login(self.user)
+
+        Queen.objects.create(hive=self.hive, year=1998, number='wrong number')
+
+        self.assertEqual(self.hive.queen.year, 1998)
+        self.assertEqual(self.hive.queen.number, 'wrong number')
+
+        response = self.client.put(
+            path=reverse('api:hive-detail', kwargs={'pk': self.hive.pk}),
+            data={
+                'apiary': self.apiary.pk,
+                'name': 'Hive'
+            }
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        self.hive.refresh_from_db()
+        with self.assertRaises(Queen.DoesNotExist):
+            # noinspection PyStatementEffect
+            self.hive.queen
+
+    def test_queen_deletion_by_null(self):
+        self.client.force_login(self.user)
+
+        Queen.objects.create(hive=self.hive, year=1998, number='wrong number')
+
+        self.assertEqual(self.hive.queen.year, 1998)
+        self.assertEqual(self.hive.queen.number, 'wrong number')
+
+        response = self.client.put(
+            path=reverse('api:hive-detail', kwargs={'pk': self.hive.pk}),
+            data={
+                'apiary': self.apiary.pk,
+                'name': 'Hive',
+                'queen': None
+            }
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        self.hive.refresh_from_db()
+        with self.assertRaises(Queen.DoesNotExist):
+            # noinspection PyStatementEffect
+            self.hive.queen
 
 
 class InspectionTestCase(APITestCase):
