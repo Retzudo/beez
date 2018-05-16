@@ -150,6 +150,54 @@ class QueenTestCase(APITestCase):
             # noinspection PyStatementEffect
             self.hive.queen
 
+    def test_queen_partial_update(self):
+        self.client.force_login(self.user)
+
+        Queen.objects.create(hive=self.hive, year=1998, number='wrong number')
+
+        self.assertEqual(self.hive.queen.year, 1998)
+        self.assertEqual(self.hive.queen.number, 'wrong number')
+
+        response = self.client.patch(
+            path=reverse('api:hive-detail', kwargs={'pk': self.hive.pk}),
+            data={
+                'queen': {
+                    'year': 2018,
+                    'number': 'B33#1'
+                }
+            }
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        self.hive.queen.refresh_from_db()
+        self.assertEqual(self.hive.name, 'Hive')
+        self.assertEqual(self.hive.queen.year, 2018)
+        self.assertEqual(self.hive.queen.number, 'B33#1')
+
+    def test_queen_partial_update_delete(self):
+        self.client.force_login(self.user)
+
+        Queen.objects.create(hive=self.hive, year=1998, number='wrong number')
+
+        self.assertEqual(self.hive.queen.year, 1998)
+        self.assertEqual(self.hive.queen.number, 'wrong number')
+
+        response = self.client.patch(
+            path=reverse('api:hive-detail', kwargs={'pk': self.hive.pk}),
+            data={
+                'queen': None
+            }
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        self.hive.refresh_from_db()
+        self.assertEqual(self.hive.name, 'Hive')
+        with self.assertRaises(Queen.DoesNotExist):
+            # noinspection PyStatementEffect
+            self.hive.queen
+
 
 class InspectionTestCase(APITestCase):
     def setUp(self):
