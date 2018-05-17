@@ -74,8 +74,6 @@ class Hive(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(blank=True, null=True, max_length=255)
     date_created = models.DateTimeField(auto_now_add=True)
-    terminated = models.BooleanField(default=False)
-    date_terminated = models.DateTimeField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
     makes_honey = models.BooleanField(default=False)
 

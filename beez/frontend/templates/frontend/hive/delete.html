@@ -4,10 +4,10 @@
     <section class="section">
         <div class="container">
             {% include 'frontend/_dashboard_tabs.html' with active='apiary-list' %}
-            <h1 class="title">Terminate Hive</h1>
-            <div class="message is-warning">
+            <h1 class="title">Delete Hive</h1>
+            <div class="message is-danger">
                 <p class="message-body">
-                    A terminated hive will not be deleted but marked as <em>defunct</em>. Do you want to proceed?
+                    Do you really want to delete this hive?
                 </p>
             </div>
             <form action="" method="post">
@@ -17,7 +17,7 @@
                         Cancel
                     </a>
                     <button class="button is-danger">
-                        Terminate Hive
+                        Delete Hive
                     </button>
                 </div>
             </form>

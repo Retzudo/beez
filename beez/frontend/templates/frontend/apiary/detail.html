@@ -80,63 +80,61 @@
                 </thead>
                 <tbody>
                 {% for hive in apiary.hives.all %}
-                    {% if not hive.terminated %}
-                        <tr>
-                            {% url 'frontend:hive-detail' pk=hive.pk as hive_detail_url %}
-                            <td><a href="{{ hive_detail_url }}">{{ hive.name }}{% if hive.makes_honey %} <span class="tag is-info"><i class="fa fa-dollar-sign"></i></span>{% endif %}</a></td>
-                            <td>
-                                {% if hive.inspections.first %}
-                                    <a href="{% url 'frontend:inspection-detail' pk=hive.inspections.first.pk %}">{{ hive.inspections.first.date }}</a>
-                                {% else %}
-                                    <em>N/A</em>
+                    <tr>
+                        {% url 'frontend:hive-detail' pk=hive.pk as hive_detail_url %}
+                        <td><a href="{{ hive_detail_url }}">{{ hive.name }}{% if hive.makes_honey %} <span class="tag is-info"><i class="fa fa-dollar-sign"></i></span>{% endif %}</a></td>
+                        <td>
+                            {% if hive.inspections.first %}
+                                <a href="{% url 'frontend:inspection-detail' pk=hive.inspections.first.pk %}">{{ hive.inspections.first.date }}</a>
+                            {% else %}
+                                <em>N/A</em>
+                            {% endif %}
+                        </td>
+                        <td class="is-hidden-desktop">
+                            {% if hive.queen %}
+                                {% if hive.queen.year %}
+                                    <span class="year-circle {{ hive.queen.year|year_color }}"></span>
                                 {% endif %}
-                            </td>
-                            <td class="is-hidden-desktop">
-                                {% if hive.queen %}
-                                    {% if hive.queen.year %}
-                                        <span class="year-circle {{ hive.queen.year|year_color }}"></span>
-                                    {% endif %}
+                                {% if hive.queen.number %}
+                                    <em>{{ hive.queen.number }}</em>
+                                {% endif %}
+                            {% else %}
+                                <em>N/A</em>
+                            {% endif %}
+                        </td>
+                        <td class="is-hidden-touch">
+                            {% if hive.queen %}
+                                {% if hive.queen.year %}
+                                    <span class="year-circle {{ hive.queen.year|year_color }}"></span>
+                                    {{ hive.queen.year }}
                                     {% if hive.queen.number %}
-                                        <em>{{ hive.queen.number }}</em>
+                                    <span> &mdash; </span>
                                     {% endif %}
-                                {% else %}
-                                    <em>N/A</em>
                                 {% endif %}
-                            </td>
-                            <td class="is-hidden-touch">
-                                {% if hive.queen %}
-                                    {% if hive.queen.year %}
-                                        <span class="year-circle {{ hive.queen.year|year_color }}"></span>
-                                        {{ hive.queen.year }}
-                                        {% if hive.queen.number %}
-                                        <span> &mdash; </span>
-                                        {% endif %}
-                                    {% endif %}
-                                    {% if hive.queen.number %}
-                                        <em>{{ hive.queen.number }}</em>
-                                    {% endif %}
-                                {% else %}
-                                    <em>N/A</em>
+                                {% if hive.queen.number %}
+                                    <em>{{ hive.queen.number }}</em>
                                 {% endif %}
-                            </td>
-                            <td class="is-hidden-touch has-text-right">
-                                <a href="{% url 'frontend:inspection-create' pk=hive.pk %}" class="button is-small" title="Create Inspection">
-                                    <span class="icon"><i class="fa fa-clipboard-list"></i></span>
-                                </a>
-                                <a href="{% url 'frontend:hive-transfer' pk=hive.pk %}" class="button is-small" title="Transfer Hive">
-                                    <span class="icon"><i class="fa fa-exchange-alt"></i></span>
-                                </a>
-                                <a href="{% url 'frontend:hive-edit' pk=hive.pk %}" class="button is-small" title="Edit">
-                                    <span class="icon"><i class="fa fa-edit"></i></span>
-                                </a>
-                                {% with absolute_url=request.scheme|add:'://'|add:request.get_host|add:hive_detail_url %}
-                                <a href="{% qr_url_from_text absolute_url size="h" image_format="svg" border="1" %}" target="_blank" class="button is-small is-hidden-touch" title="QR Code">
-                                    <span class="icon"><i class="fa fa-qrcode"></i></span>
-                                </a>
-                                {% endwith %}
-                            </td>
-                        </tr>
-                    {% endif %}
+                            {% else %}
+                                <em>N/A</em>
+                            {% endif %}
+                        </td>
+                        <td class="is-hidden-touch has-text-right">
+                            <a href="{% url 'frontend:inspection-create' pk=hive.pk %}" class="button is-small" title="Create Inspection">
+                                <span class="icon"><i class="fa fa-clipboard-list"></i></span>
+                            </a>
+                            <a href="{% url 'frontend:hive-transfer' pk=hive.pk %}" class="button is-small" title="Transfer Hive">
+                                <span class="icon"><i class="fa fa-exchange-alt"></i></span>
+                            </a>
+                            <a href="{% url 'frontend:hive-edit' pk=hive.pk %}" class="button is-small" title="Edit">
+                                <span class="icon"><i class="fa fa-edit"></i></span>
+                            </a>
+                            {% with absolute_url=request.scheme|add:'://'|add:request.get_host|add:hive_detail_url %}
+                            <a href="{% qr_url_from_text absolute_url size="h" image_format="svg" border="1" %}" target="_blank" class="button is-small is-hidden-touch" title="QR Code">
+                                <span class="icon"><i class="fa fa-qrcode"></i></span>
+                            </a>
+                            {% endwith %}
+                        </td>
+                    </tr>
                 {% empty %}
                     <tr>
                         <td colspan="4">

@@ -72,20 +72,15 @@ class HiveTransferView(LoginRequiredMixin, UpdateView):
         return form
 
 
-class HiveTerminateView(LoginRequiredMixin, DeleteView):
-    template_name = 'frontend/hive/terminate.html'
+class HiveDeleteView(LoginRequiredMixin, DeleteView):
+    template_name = 'frontend/hive/delete.html'
     model = Hive
+
+    def get_queryset(self):
+        return Hive.objects.filter(apiary__owner=self.request.user)
 
     def get_success_url(self):
         return self.get_object().apiary.get_absolute_url()
-
-    def delete(self, request, *args, **kwargs):
-        hive = self.get_object()
-        hive.terminated = True
-        hive.save()
-
-        success_url = self.get_success_url()
-        return HttpResponseRedirect(success_url)
 
 
 class HiveFileView(LoginRequiredMixin, CreateView):
