@@ -38,5 +38,6 @@ urlpatterns = [
     path('dashboard/inspections/<int:pk>/delete', inspection.InspectionDeleteView.as_view(), name='inspection-delete'),
 
     path('dashboard/statistics', statistics.StatisticsView.as_view(), name='statistics'),
+    path('dashboard/statistics/hive/<int:pk>', statistics.HiveStatisticsView.as_view(), name='statistics-hive'),
     path('dashboard/settings', settings.SettingsView.as_view(), name='settings'),
 ]

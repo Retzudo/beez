@@ -27,8 +27,13 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=None), name='schema-json'),
+
     path('auth', obtain_jwt_token),
     path('auth/refresh', refresh_jwt_token),
+
+    path('stats/hives/<int:pk>/weight', views.HiveWeightView.as_view()),
+
     path('search', views.SearchView.as_view()),
+
     path('', include(router.urls)),
 ]

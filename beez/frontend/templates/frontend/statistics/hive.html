@@ -1,0 +1,10 @@
+{% extends 'frontend/master.html' %}
+
+{% block body %}
+    <section class="section">
+        <div class="container">
+            {% include 'frontend/_dashboard_tabs.html' with active='statistics' %}
+            Hive stats, yo
+        </div>
+    </section>
+{% endblock %}

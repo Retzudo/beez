@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -77,7 +78,7 @@ class HarvestViewSet(viewsets.ModelViewSet):
 
 
 class SearchView(APIView):
-    def get(self, request, format=None):
+    def get(self, request):
         query = request.query_params.get('q')
 
         apiaries = models.Apiary.search(query)
@@ -86,4 +87,23 @@ class SearchView(APIView):
         return Response({
             'apiaries': serializers.ApiarySerializer(apiaries, many=True).data,
             'hives': serializers.HiveSerializer(hives, many=True).data,
+        })
+
+
+class HiveWeightView(APIView):
+    def get(self, request, pk):
+        hive = get_object_or_404(models.Hive, pk=pk, apiary__owner=request.user)
+
+        inspections_with_weight = hive.inspections.filter(weight__isnull=False)
+
+        data = []
+        for inspection in inspections_with_weight:
+            data.append({
+                'date': inspection.date,
+                'weight': inspection.weight,
+            })
+
+        return Response({
+            'unit': request.user.settings.current_weight_unit,
+            'data': data,
         })
