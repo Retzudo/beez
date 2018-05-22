@@ -21,6 +21,7 @@ class StatisticsView(LoginRequiredMixin, TemplateView):
 
 class HiveStatisticsView(LoginRequiredMixin, DetailView):
     template_name = 'frontend/statistics/hive.html'
+    context_object_name = 'hive'
 
     def get_queryset(self):
         return Hive.objects.filter(apiary__owner=self.request.user)

@@ -1,10 +1,67 @@
 {% extends 'frontend/master.html' %}
 
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/c3-0.6.1.min.css' %}">
+{% endblock %}
+
 {% block body %}
     <section class="section">
         <div class="container">
             {% include 'frontend/_dashboard_tabs.html' with active='statistics' %}
             Hive stats, yo
+            <div id="weight-chart"></div>
         </div>
     </section>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/d3-5.4.0.min.js' %}"></script>
+    <script src="{% static 'js/c3-0.6.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script>
+        $(function () {
+            $.get('/api/stats/hives/{{ hive.pk }}/weight', function (response) {
+                c3.generate({
+                    bindto: '#weight-chart',
+                    padding: {
+                        left: 40,
+                        right: 40
+                    },
+                    data: {
+                        json: response.data,
+                        xFormat: '%Y-%m-%dT%H:%M:%SZ',
+                        keys: {
+                            x: 'date',
+                            value: ['weight']
+                        },
+                        names: {
+                            weight: 'Weight'
+                        }
+                    },
+                    axis: {
+                        x: {
+                            type: 'timeseries',
+                            tick: {
+                                format: '%b %d'
+                            }
+                        },
+                        y: {
+                            label: {
+                                text: response.unit
+                            }
+                        }
+                    },
+                    tooltip: {
+                        format: {
+                            value: function (value, ratio, id, index) {
+                                return value + ' ' + response.unit;
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}
