@@ -1,0 +1,8 @@
+.navbar {
+    background-color: #ffc40d;
+}
+
+a.navbar-item:hover, .navbar-item.has-dropdown:hover .navbar-link, .navbar-item.has-dropdown.is-active .navbar-link {
+    background-color: #ffda69;
+    color: inherit;
+}
