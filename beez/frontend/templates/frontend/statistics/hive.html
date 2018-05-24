@@ -9,7 +9,40 @@
 {% block body %}
     <section class="section">
         <div class="container">
-            Hive stats, yo
+            <nav class="breadcrumb" aria-label="breadcrumbs">
+                <ul>
+                    <li><a href="{% url 'frontend:apiary-list' %}">Apiaries</a></li>
+                    <li><a href="{% url 'frontend:apiary-detail' pk=hive.apiary.pk %}">{{ hive.apiary.name }}</a></li>
+                    <li class="is-active"><a href="{% url 'frontend:hive-detail' pk=hive.pk %}">{{ hive.name }}</a></li>
+                </ul>
+            </nav>
+
+            <h1 class="title">
+                <span>{{ hive.name }} {% if hive.makes_honey %} <span class="tag is-info is-medium"><i class="fa fa-dollar-sign"></i></span>{% endif %}</span>
+                <a href="{% url 'frontend:hive-edit' pk=hive.pk %}">
+                    <span class="icon"><i class="fa fa-pencil-alt"></i></span>
+                </a>
+            </h1>
+
+            <div class="tabs is-centered">
+                <ul>
+                    <li>
+                        <a href="{% url 'frontend:hive-detail' pk=hive.pk %}">
+                            <span class="icon"><i class="fa fa-archive"></i></span>
+                            <span>Hive</span>
+                        </a>
+                    </li>
+                    <li class="is-active">
+                        <a href="{% url 'frontend:statistics-hive' pk=hive.pk %}">
+                            <span class="icon"><i class="fa fa-chart-line"></i></span>
+                            <span>Statistics</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <h1 class="title">Weight</h1>
+
             <div id="weight-chart"></div>
         </div>
     </section>
