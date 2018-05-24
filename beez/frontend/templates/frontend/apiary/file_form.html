@@ -5,8 +5,6 @@
 {% block body %}
     <section class="section">
         <div class="container">
-            {% include 'frontend/_dashboard_tabs.html' with active='apiary-list' %}
-
             <h1 class="title">{% block title %}Add file to apiary{% endblock %}</h1>
             {% if form.non_field_errors %}
                 <div class="message is-danger">
