@@ -28,6 +28,8 @@ schema_view = get_schema_view(
 urlpatterns = [
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=None), name='schema-json'),
 
+    path('settings', views.UpdateSettingsView.as_view()),
+
     path('auth', obtain_jwt_token),
     path('auth/refresh', refresh_jwt_token),
 

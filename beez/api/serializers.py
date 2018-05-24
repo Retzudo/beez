@@ -66,3 +66,9 @@ class HarvestSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Harvest
         fields = '__all__'
+
+
+class SettingsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Settings
+        exclude = ['id', 'user']
