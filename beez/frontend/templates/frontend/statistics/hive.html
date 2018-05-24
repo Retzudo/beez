@@ -54,45 +54,57 @@
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <script>
         $(function () {
-            $.get('/api/inspections?hive={{ hive.pk }}&has_weight=1', function (response) {
-                c3.generate({
-                    bindto: '#weight-chart',
-                    padding: {
-                        left: 40,
-                        right: 40
+            var chart = c3.generate({
+                bindto: '#weight-chart',
+                padding: {
+                    left: 40,
+                    right: 40
+                },
+                data: {
+                    json: [],
+                    xFormat: '%Y-%m-%dT%H:%M:%SZ',
+                    keys: {
+                        x: 'date',
+                        value: ['weight']
                     },
-                    data: {
-                        json: response,
-                        xFormat: '%Y-%m-%dT%H:%M:%SZ',
-                        keys: {
-                            x: 'date',
-                            value: ['weight']
-                        },
-                        names: {
-                            weight: 'Weight'
+                    names: {
+                        weight: 'Weight'
+                    }
+                },
+                axis: {
+                    x: {
+                        type: 'timeseries',
+                        tick: {
+                            format: '%b %d'
                         }
                     },
-                    axis: {
-                        x: {
-                            type: 'timeseries',
-                            tick: {
-                                format: '%b %d'
-                            }
-                        },
-                        y: {
-                            label: {
-                                text: '{{ user.settings.current_weight_unit }}'
-                            }
-                        }
-                    },
-                    tooltip: {
-                        format: {
-                            value: function (value, ratio, id, index) {
-                                return value + ' ' + response.unit;
-                            }
+                    y: {
+                        label: {
+                            text: '{{ user.settings.current_weight_unit }}'
                         }
                     }
-                });
+                },
+                tooltip: {
+                    format: {
+                        value: function (value, ratio, id, index) {
+                            return value + ' ' + response.unit;
+                        }
+                    }
+                }
+            });
+
+            $.get('/api/inspections?hive={{ hive.pk }}&has_weight=1', function (response) {
+                chart.load({
+                    json: response,
+                    xFormat: '%Y-%m-%dT%H:%M:%SZ',
+                    keys: {
+                        x: 'date',
+                        value: ['weight']
+                    },
+                    names: {
+                        weight: 'Weight'
+                    }
+                })
             });
         });
     </script>
