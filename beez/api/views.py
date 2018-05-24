@@ -1,4 +1,5 @@
 from django.utils.decorators import method_decorator
+from drf_yasg.openapi import Parameter
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
 from rest_framework.generics import RetrieveUpdateAPIView
@@ -82,6 +83,11 @@ class HarvestViewSet(viewsets.ModelViewSet):
 
 
 class SearchView(APIView):
+    @swagger_auto_schema(
+        manual_parameters=[
+            Parameter('q', 'query', 'Search query', type='string')
+        ]
+    )
     def get(self, request):
         query = request.query_params.get('q')
 
