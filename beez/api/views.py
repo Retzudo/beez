@@ -42,9 +42,14 @@ class InspectionViewSet(viewsets.ModelViewSet):
     filter_fields = ['hive']
 
     def get_queryset(self):
-        return models.Inspection.objects.filter(
+        query_set = models.Inspection.objects.filter(
             hive__apiary__owner=self.request.user
         )
+
+        if self.request.query_params.get('hasWeight'):
+            query_set = query_set.filter(weight__isnull=False)
+
+        return query_set.order_by('date')
 
     def get_serializer(self, *args, **kwargs):
         serializer = super().get_serializer(*args, **kwargs)
@@ -87,23 +92,4 @@ class SearchView(APIView):
         return Response({
             'apiaries': serializers.ApiarySerializer(apiaries, many=True).data,
             'hives': serializers.HiveSerializer(hives, many=True).data,
-        })
-
-
-class HiveWeightView(APIView):
-    def get(self, request, pk):
-        hive = get_object_or_404(models.Hive, pk=pk, apiary__owner=request.user)
-
-        inspections_with_weight = hive.inspections.filter(weight__isnull=False)
-
-        data = []
-        for inspection in inspections_with_weight:
-            data.append({
-                'date': inspection.date,
-                'weight': inspection.weight,
-            })
-
-        return Response({
-            'unit': request.user.settings.current_weight_unit,
-            'data': data,
         })

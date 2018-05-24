@@ -22,7 +22,7 @@
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <script>
         $(function () {
-            $.get('/api/stats/hives/{{ hive.pk }}/weight', function (response) {
+            $.get('/api/inspections?hive={{ hive.pk }}&hasWeight=true', function (response) {
                 c3.generate({
                     bindto: '#weight-chart',
                     padding: {
@@ -30,7 +30,7 @@
                         right: 40
                     },
                     data: {
-                        json: response.data,
+                        json: response,
                         xFormat: '%Y-%m-%dT%H:%M:%SZ',
                         keys: {
                             x: 'date',
@@ -49,7 +49,7 @@
                         },
                         y: {
                             label: {
-                                text: response.unit
+                                text: '{{ user.settings.current_weight_unit }}'
                             }
                         }
                     },

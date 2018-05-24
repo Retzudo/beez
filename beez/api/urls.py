@@ -31,8 +31,6 @@ urlpatterns = [
     path('auth', obtain_jwt_token),
     path('auth/refresh', refresh_jwt_token),
 
-    path('stats/hives/<int:pk>/weight', views.HiveWeightView.as_view()),
-
     path('search', views.SearchView.as_view()),
 
     path('', include(router.urls)),
