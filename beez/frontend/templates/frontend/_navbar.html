@@ -44,9 +44,9 @@
                             <span class="icon"><i class="fa fa-tachometer-alt"></i></span>
                             <span>Dashboard</span>
                         </a>
-                        <a class="navbar-item" href="#">
-                            <span class="icon"><i class="fa fa-user-circle"></i></span>
-                            <span>Profile</span>
+                        <a class="navbar-item" href="{% url 'frontend:settings' %}">
+                            <span class="icon"><i class="fa fa-wrench"></i></span>
+                            <span>Settings</span>
                         </a>
                         <hr class="navbar-divider">
                         <a class="navbar-item" href="{% url 'frontend:logout' %}">
