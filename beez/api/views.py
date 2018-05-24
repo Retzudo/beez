@@ -1,9 +1,11 @@
+from django.utils.decorators import method_decorator
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
 from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from api import serializers
+from api import serializers, filters
 from core import models
 
 
@@ -39,15 +41,12 @@ class HiveViewSet(viewsets.ModelViewSet):
 
 class InspectionViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.InspectionSerializer
-    filter_fields = ['hive']
+    filter_class = filters.InspectionFilter
 
     def get_queryset(self):
         query_set = models.Inspection.objects.filter(
             hive__apiary__owner=self.request.user
         )
-
-        if self.request.query_params.get('hasWeight'):
-            query_set = query_set.filter(weight__isnull=False)
 
         return query_set.order_by('date')
 

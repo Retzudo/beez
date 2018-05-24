@@ -22,7 +22,7 @@
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <script>
         $(function () {
-            $.get('/api/inspections?hive={{ hive.pk }}&hasWeight=true', function (response) {
+            $.get('/api/inspections?hive={{ hive.pk }}&has_weight=1', function (response) {
                 c3.generate({
                     bindto: '#weight-chart',
                     padding: {
