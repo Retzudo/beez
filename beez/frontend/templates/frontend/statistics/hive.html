@@ -87,7 +87,7 @@
                 tooltip: {
                     format: {
                         value: function (value, ratio, id, index) {
-                            return value + ' ' + response.unit;
+                            return value + ' {{ user.settings.current_weight_unit }}';
                         }
                     }
                 }
