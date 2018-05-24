@@ -65,6 +65,23 @@
                 </a>
             </h1>
 
+            <div class="tabs is-centered">
+                <ul>
+                    <li class="is-active">
+                        <a href="{% url 'frontend:apiary-detail' pk=apiary.pk %}">
+                            <span class="icon"><i class="fa fa-archive"></i></span>
+                            <span>Apiary</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="icon"><i class="fa fa-chart-line"></i></span>
+                            <span>Statistics</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
             <h2 class="title is-4">Hives</h2>
             <table class="table is-striped is-fullwidth is-striped is-hoverable">
                 <thead>

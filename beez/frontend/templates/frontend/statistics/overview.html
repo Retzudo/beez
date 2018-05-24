@@ -3,6 +3,22 @@
 {% block body %}
     <section class="section">
         <div class="container">
+            <div class="tabs is-centered">
+                <ul>
+                    <li>
+                        <a href="{% url 'frontend:apiary-list' %}">
+                            <span class="icon"><i class="fa fa-archive"></i></span>
+                            <span>Apiaries</span>
+                        </a>
+                    </li>
+                    <li class="is-active">
+                        <a href="{% url 'frontend:statistics' %}">
+                            <span class="icon"><i class="fa fa-chart-line"></i></span>
+                            <span>Statistics</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
             <div class="columns">
                 <div class="column is-one-third">
                     <div class="box">
