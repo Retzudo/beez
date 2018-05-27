@@ -1,6 +1,6 @@
 {% extends 'frontend/master.html' %}
 
-{% load staticfiles timestamp weather qr_code markdown_deux_tags colors %}
+{% load staticfiles timestamp weather qr_code markdown_deux_tags colors i18n %}
 
 {% block title %}{{ apiary.name }} - {{ block.super }}{% endblock %}
 
@@ -70,26 +70,26 @@
                     <li class="is-active">
                         <a href="{% url 'frontend:apiary-detail' pk=apiary.pk %}">
                             <span class="icon"><i class="fa fa-archive"></i></span>
-                            <span>Apiary</span>
+                            <span>{% trans 'Apiary' %}</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
                             <span class="icon"><i class="fa fa-chart-line"></i></span>
-                            <span>Statistics</span>
+                            <span>{% trans 'Statistics' %}</span>
                         </a>
                     </li>
                 </ul>
             </div>
 
-            <h2 class="title is-4">Hives</h2>
+            <h2 class="title is-4">{% trans 'Hives' %}</h2>
             <table class="table is-striped is-fullwidth is-striped is-hoverable">
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th><abbr title="Last Inspection">Insp</abbr></th>
-                    <th class="is-hidden-desktop"><abbr title="Queen">Qn</abbr></th>
-                    <th class="is-hidden-touch"><abbr title="Queen">Qn</abbr></th>
+                    <th>{% trans 'Name' %}</th>
+                    <th><abbr title="{% trans 'Last Inspection' %}">{% trans 'Insp' %}</abbr></th>
+                    <th class="is-hidden-desktop"><abbr title="{% trans 'Queen' %}">{% trans 'Qn' %}</abbr></th>
+                    <th class="is-hidden-touch"><abbr title="{% trans 'Queen' %}">{% trans 'Qn' %}</abbr></th>
                     <th class="is-hidden-touch"></th>
                 </tr>
                 </thead>
@@ -102,7 +102,7 @@
                             {% if hive.inspections.first %}
                                 <a href="{% url 'frontend:inspection-detail' pk=hive.inspections.first.pk %}">{{ hive.inspections.first.date }}</a>
                             {% else %}
-                                <em>N/A</em>
+                                <em>{% trans 'N/A' %}</em>
                             {% endif %}
                         </td>
                         <td class="is-hidden-desktop">
@@ -114,7 +114,7 @@
                                     <em>{{ hive.queen.number }}</em>
                                 {% endif %}
                             {% else %}
-                                <em>N/A</em>
+                                <em>{% trans 'N/A' %}</em>
                             {% endif %}
                         </td>
                         <td class="is-hidden-touch">
@@ -130,21 +130,21 @@
                                     <em>{{ hive.queen.number }}</em>
                                 {% endif %}
                             {% else %}
-                                <em>N/A</em>
+                                <em>{% trans 'N/A' %}</em>
                             {% endif %}
                         </td>
                         <td class="is-hidden-touch has-text-right">
-                            <a href="{% url 'frontend:inspection-create' pk=hive.pk %}" class="button is-small" title="Create Inspection">
+                            <a href="{% url 'frontend:inspection-create' pk=hive.pk %}" class="button is-small" title="{% trans 'Create Inspection' %}">
                                 <span class="icon"><i class="fa fa-clipboard-list"></i></span>
                             </a>
-                            <a href="{% url 'frontend:hive-transfer' pk=hive.pk %}" class="button is-small" title="Transfer Hive">
+                            <a href="{% url 'frontend:hive-transfer' pk=hive.pk %}" class="button is-small" title="{% trans 'Transfer Hive' %}">
                                 <span class="icon"><i class="fa fa-exchange-alt"></i></span>
                             </a>
-                            <a href="{% url 'frontend:hive-edit' pk=hive.pk %}" class="button is-small" title="Edit">
+                            <a href="{% url 'frontend:hive-edit' pk=hive.pk %}" class="button is-small" title="{% trans 'Edit' %}">
                                 <span class="icon"><i class="fa fa-edit"></i></span>
                             </a>
                             {% with absolute_url=request.scheme|add:'://'|add:request.get_host|add:hive_detail_url %}
-                            <a href="{% qr_url_from_text absolute_url size="h" image_format="svg" border="1" %}" target="_blank" class="button is-small is-hidden-touch" title="QR Code">
+                            <a href="{% qr_url_from_text absolute_url size="h" image_format="svg" border="1" %}" target="_blank" class="button is-small is-hidden-touch" title="{% trans 'QR Code' %}">
                                 <span class="icon"><i class="fa fa-qrcode"></i></span>
                             </a>
                             {% endwith %}
@@ -153,12 +153,12 @@
                 {% empty %}
                     <tr>
                         <td colspan="4">
-                            <em>No hives</em>
+                            <em>{% trans 'No hives' %}</em>
                         </td>
                     </tr>
                 {% endfor %}
                     <tr>
-                        <td><em>Total: {{ apiary.hives.count }}</em></td>
+                        <td><em>{% trans 'Total' %}: {{ apiary.hives.count }}</em></td>
                         <td></td>
                         <td class="is-hidden-touch"><em>{{ total_weight|floatformat }} {{ user.settings.current_weight_unit }}</em></td>
                         <td class="is-hidden-touch"></td>
@@ -169,21 +169,21 @@
                 <div class="buttons">
                     <a class="button is-success" href="{% url 'frontend:hive-create' pk=apiary.pk %}">
                         <span class="icon"><i class="fa fa-plus"></i></span>
-                        <span>Add Hive</span>
+                        <span>{% trans 'Add Hive' %}</span>
                     </a>
                 </div>
             {% else %}
                 <div class="buttons is-centered">
                     <a href="{% url 'frontend:hive-create' pk=apiary.pk %}" class="button is-primary is-big">
                         <span class="icon"><i class="fa fa-plus"></i></span>
-                        <span>Add Your First Hive</span>
+                        <span>{% trans 'Add Your First Hive' %}</span>
                     </a>
                 </div>
             {% endif %}
 
             <hr>
 
-            <h2 class="title is-4">Details</h2>
+            <h2 class="title is-4">{% trans 'Details' %}</h2>
             <div class="columns">
                 <div class="column is-half">
                     {% if apiary.latitude and apiary.longitude %}
@@ -193,10 +193,10 @@
                                 <thead>
                                 <tr>
                                     <th></th>
-                                    <th><abbr title="Condition">Con</abbr></th>
-                                    <th ><abbr title="Average">Avg</abbr></th>
-                                    <th class="is-hidden-touch"><abbr title="Minimum">Min</abbr></th>
-                                    <th class="is-hidden-touch"><abbr title="Maximum">Max</abbr></th>
+                                    <th><abbr title="Condition">{% trans 'Con' %}</abbr></th>
+                                    <th ><abbr title="Average">{% trans 'Avg' %}</abbr></th>
+                                    <th class="is-hidden-touch"><abbr title="Minimum">{% trans 'Min' %}</abbr></th>
+                                    <th class="is-hidden-touch"><abbr title="Maximum">{% trans 'Max' %}</abbr></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -219,31 +219,31 @@
                     {% endif %}
 
                     <div class="box">
-                        <h3 class="subtitle">Address</h3>
+                        <h3 class="subtitle">{% trans 'Address' %}</h3>
                         {% if apiary.address %}
                             <address>{{ apiary.address }}</address>
                         {% else %}
-                            <em>N/A</em>
+                            <em>{% trans 'N/A' %}</em>
                         {% endif %}
                     </div>
 
                     <div class="box">
-                        <h3 class="subtitle">Notes</h3>
+                        <h3 class="subtitle">{% trans 'Notes' %}</h3>
                         {% if apiary.notes %}
                             <div class="content">{{ apiary.notes|markdown }}</div>
                         {% else %}
-                            <em>N/A</em>
+                            <em>{% trans 'N/A' %}</em>
                         {% endif %}
                     </div>
                 </div>
                 {% if apiary.latitude and apiary.longitude %}
                     <div class="column is-half">
                         <div class="box is-hidden-desktop">
-                            <h3 class="subtitle">Map</h3>
+                            <h3 class="subtitle">{% trans 'Map' %}</h3>
 
                             <a href="geo:{{ apiary.latitude }}, {{ apiary.longitude }}">
                                 <span class="icon"><i class="fa fa-external-link-alt"></i></span>
-                                <span>Show on Map</span>
+                                <span>{% trans 'Show on Map' %}</span>
                             </a>
                         </div>
                         <div id="apiary-map" class="box apiary-map"></div>
@@ -253,12 +253,12 @@
 
             <hr>
 
-            <h2 class="title is-4">Files</h2>
+            <h2 class="title is-4">{% trans 'Files' %}</h2>
             <table class="table is-fullwidth is-striped">
                 <tr>
-                    <th>File</th>
-                    <th>Uploaded</th>
-                    <th class="is-hidden-touch">Size</th>
+                    <th>{% trans 'File' %}</th>
+                    <th>{% trans 'Uploaded' %}</th>
+                    <th class="is-hidden-touch">{% trans 'Size' %}</th>
                     <th></th>
                 </tr>
                 {% for file in apiary.files.all %}
@@ -275,7 +275,7 @@
                             {{ file.file.size|filesizeformat }}
                         </td>
                         <td>
-                            <a href="{% url 'frontend:apiary-file-delete' pk=file.pk %}" class="button is-danger is-small" title="Delete file">
+                            <a href="{% url 'frontend:apiary-file-delete' pk=file.pk %}" class="button is-danger is-small" title="{% trans 'Delete file' %}">
                                 <span class="icon">
                                     <i class="fa fa-trash"></i>
                                 </span>
@@ -285,7 +285,7 @@
                 {% empty %}
                     <tr>
                         <td colspan="4">
-                            <em>No files yet.</em>
+                            <em>{% trans 'No files yet.' %}</em>
                         </td>
                     </tr>
                 {% endfor %}
@@ -294,14 +294,14 @@
                 <div class="buttons">
                     <a class="button is-success" href="{% url 'frontend:apiary-add-file' pk=apiary.pk %}">
                         <span class="icon"><i class="fa fa-plus"></i></span>
-                        <span>Add File</span>
+                        <span>{% trans 'Add File' %}</span>
                     </a>
                 </div>
             {% else %}
                 <div class="buttons is-centered">
                     <a href="{% url 'frontend:apiary-add-file' pk=apiary.pk %}" class="button is-primary is-big">
                         <span class="icon"><i class="fa fa-plus"></i></span>
-                        <span>Add Your First File</span>
+                        <span>{% trans 'Add Your First File' %}</span>
                     </a>
                 </div>
             {% endif %}

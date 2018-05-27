@@ -5,7 +5,7 @@
 {% block body %}
     <section class="section">
         <div class="container">
-            <h1 class="title">Transfer Hive</h1>
+            <h1 class="title">{% trans 'Transfer Hive' %}</h1>
 
             {% if can_transfer %}
                 {% if form.non_field_errors %}
@@ -37,7 +37,7 @@
                     </div>
                     {% csrf_token %}
                     <button class="button is-primary">
-                        Transfer Hive
+                        {% trans 'Transfer Hive' %}
                     </button>
                 </form>
             {% else %}

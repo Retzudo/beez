@@ -1,20 +1,20 @@
 {% extends 'frontend/master.html' %}
 
-{% load widget_tweaks markdown_deux_tags %}
+{% load widget_tweaks markdown_deux_tags i18n %}
 
 {% block body %}
     <section class="section">
         <div class="container">
             <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
-                    <li><a href="{% url 'frontend:apiary-list' %}">Apiaries</a></li>
+                    <li><a href="{% url 'frontend:apiary-list' %}">{% trans 'Apiaries' %}</a></li>
                     <li><a href="{% url 'frontend:apiary-detail' pk=hive.apiary.pk %}">{{ hive.apiary.name }}</a></li>
                     <li><a href="{% url 'frontend:hive-detail' pk=hive.pk %}">{{ hive.name }}</a></li>
-                    <li class="is-active"><a>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Queen</a></li>
+                    <li class="is-active"><a>{% if form.instance.pk %}{% trans 'Edit Queen' %}{% else %}{% trans 'Create Queen' %}{% endif %}</a></li>
                 </ul>
             </nav>
 
-            <h1 class="title">{% if form.instance.pk %}Edit{% else %}Create{% endif %} Queen</h1>
+            <h1 class="title">{% if form.instance.pk %}{% trans 'Edit Queen' %}{% else %}{% trans 'Create Queen' %}{% endif %}</h1>
             {% if form.non_field_errors %}
                 <div class="message is-danger">
                     <div class="message-header">
@@ -54,7 +54,7 @@
 
                 {% csrf_token %}
                 <button class="button is-primary">
-                    {% if form.instance.pk %}Save{% else %}Create{% endif %} Queen
+                    {% if form.instance.pk %}{% trans 'Save Queen' %}{% else %}{% trans 'Create Queen' %}{% endif %}
                 </button>
             </form>
         </div>

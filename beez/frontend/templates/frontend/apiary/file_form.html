@@ -1,11 +1,11 @@
 {% extends 'frontend/master.html' %}
 
-{% load widget_tweaks %}
+{% load widget_tweaks i18n %}
 
 {% block body %}
     <section class="section">
         <div class="container">
-            <h1 class="title">{% block title %}Add file to apiary{% endblock %}</h1>
+            <h1 class="title">{% block title %}{% trans 'Add file to apiary' %}{% endblock %}</h1>
             {% if form.non_field_errors %}
                 <div class="message is-danger">
                     <div class="message-header">
@@ -28,7 +28,7 @@
                                 <i class="fas fa-upload"></i>
                             </span>
                             <span class="file-label">
-                                Choose a file
+                                {% trans 'Choose a file' %}
                             </span>
                         </span>
                     </label>
@@ -38,7 +38,7 @@
                 {% endfor %}
 
                 {% csrf_token %}
-                <button class="button is-primary">Upload</button>
+                <button class="button is-primary">{% trans 'Upload' %}</button>
             </form>
         </div>
     </section>

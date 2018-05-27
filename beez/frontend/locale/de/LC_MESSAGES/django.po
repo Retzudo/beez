@@ -3,20 +3,24 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-27 21:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2018-05-27 21:55+0000\n"
+"PO-Revision-Date: 2018-05-27 23:55+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: frontend/templates/frontend/_navbar.html:23
+msgid "Search"
+msgstr "Suchen"
 
 #: frontend/templates/frontend/_navbar.html:34
 msgid "Admin"
@@ -42,6 +46,369 @@ msgstr "Registrieren"
 #: frontend/templates/frontend/_navbar.html:65
 msgid "Log in"
 msgstr "Einloggen"
+
+#: frontend/templates/frontend/apiary/detail.html:73
+msgid "Apiary"
+msgstr "Bienenstand"
+
+#: frontend/templates/frontend/apiary/detail.html:79
+#: frontend/templates/frontend/apiary/list.html:19
+#: frontend/templates/frontend/hive/detail.html:71
+#: frontend/templates/frontend/statistics/hive.html:38
+#: frontend/templates/frontend/statistics/overview.html:19
+msgid "Statistics"
+msgstr "Statistiken"
+
+#: frontend/templates/frontend/apiary/detail.html:85
+#: frontend/templates/frontend/apiary/list.html:30
+msgid "Hives"
+msgstr "Bienenstöcke"
+
+#: frontend/templates/frontend/apiary/detail.html:89
+#: frontend/templates/frontend/apiary/list.html:27
+msgid "Name"
+msgstr "Name"
+
+#: frontend/templates/frontend/apiary/detail.html:90
+msgid "Last Inspection"
+msgstr "Letzte Durchsicht"
+
+#: frontend/templates/frontend/apiary/detail.html:90
+msgid "Insp"
+msgstr "Durchs"
+
+#: frontend/templates/frontend/apiary/detail.html:91
+#: frontend/templates/frontend/apiary/detail.html:92
+#: frontend/templates/frontend/hive/detail.html:159
+msgid "Queen"
+msgstr "Königin"
+
+#: frontend/templates/frontend/apiary/detail.html:91
+#: frontend/templates/frontend/apiary/detail.html:92
+msgid "Qn"
+msgstr "Kn"
+
+#: frontend/templates/frontend/apiary/detail.html:105
+#: frontend/templates/frontend/apiary/detail.html:117
+#: frontend/templates/frontend/apiary/detail.html:133
+#: frontend/templates/frontend/apiary/detail.html:226
+#: frontend/templates/frontend/apiary/detail.html:235
+#: frontend/templates/frontend/apiary/list.html:44
+#: frontend/templates/frontend/apiary/list.html:60
+#: frontend/templates/frontend/hive/detail.html:94
+#: frontend/templates/frontend/hive/detail.html:141
+#: frontend/templates/frontend/hive/detail.html:151
+msgid "N/A"
+msgstr "k. A."
+
+#: frontend/templates/frontend/apiary/detail.html:137
+#: frontend/templates/frontend/inspection/form.html:13
+#: frontend/templates/frontend/inspection/form.html:17
+#: frontend/templates/frontend/inspection/form.html:225
+msgid "Create Inspection"
+msgstr "Durchsicht erstellen"
+
+#: frontend/templates/frontend/apiary/detail.html:140
+#: frontend/templates/frontend/hive/detail.html:255
+#: frontend/templates/frontend/hive/transfer.html:8
+#: frontend/templates/frontend/hive/transfer.html:40
+msgid "Transfer Hive"
+msgstr "Bienenstock übertragen"
+
+#: frontend/templates/frontend/apiary/detail.html:143
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: frontend/templates/frontend/apiary/detail.html:147
+msgid "QR Code"
+msgstr "QR-Code"
+
+#: frontend/templates/frontend/apiary/detail.html:156
+msgid "No hives"
+msgstr "Keine Bienenstöcke"
+
+#: frontend/templates/frontend/apiary/detail.html:161
+#: frontend/templates/frontend/apiary/list.html:78
+msgid "Total"
+msgstr "Gesamt"
+
+#: frontend/templates/frontend/apiary/detail.html:172
+msgid "Add Hive"
+msgstr "Bienenstock hinzufügen"
+
+#: frontend/templates/frontend/apiary/detail.html:179
+msgid "Add Your First Hive"
+msgstr "Ersten Bienenstock hinzufügen"
+
+#: frontend/templates/frontend/apiary/detail.html:186
+#: frontend/templates/frontend/hive/detail.html:133
+msgid "Details"
+msgstr "Details"
+
+#: frontend/templates/frontend/apiary/detail.html:196
+msgid "Con"
+msgstr "Lage"
+
+#: frontend/templates/frontend/apiary/detail.html:197
+msgid "Avg"
+msgstr "Durchschn."
+
+#: frontend/templates/frontend/apiary/detail.html:198
+msgid "Min"
+msgstr "Min"
+
+#: frontend/templates/frontend/apiary/detail.html:199
+msgid "Max"
+msgstr "Max"
+
+#: frontend/templates/frontend/apiary/detail.html:222
+#: frontend/templates/frontend/apiary/list.html:28
+msgid "Address"
+msgstr "Adresse"
+
+#: frontend/templates/frontend/apiary/detail.html:231
+#: frontend/templates/frontend/hive/detail.html:147
+#: frontend/templates/frontend/inspection/detail.html:86
+msgid "Notes"
+msgstr "Notizen"
+
+#: frontend/templates/frontend/apiary/detail.html:242
+#: frontend/templates/frontend/apiary/list.html:57
+msgid "Map"
+msgstr "Karte"
+
+#: frontend/templates/frontend/apiary/detail.html:246
+msgid "Show on Map"
+msgstr "Auf Karte anzeigen"
+
+#: frontend/templates/frontend/apiary/detail.html:256
+msgid "Files"
+msgstr "Dateien"
+
+#: frontend/templates/frontend/apiary/detail.html:259
+#: frontend/templates/frontend/hive/detail.html:200
+msgid "File"
+msgstr "Datei"
+
+#: frontend/templates/frontend/apiary/detail.html:260
+#: frontend/templates/frontend/hive/detail.html:201
+msgid "Uploaded"
+msgstr "Hochgeladen"
+
+#: frontend/templates/frontend/apiary/detail.html:261
+#: frontend/templates/frontend/hive/detail.html:202
+msgid "Size"
+msgstr "Größe"
+
+#: frontend/templates/frontend/apiary/detail.html:278
+#: frontend/templates/frontend/apiary/file_delete.html:21
+msgid "Delete file"
+msgstr "Datei löschen"
+
+#: frontend/templates/frontend/apiary/detail.html:288
+#: frontend/templates/frontend/hive/detail.html:229
+msgid "No files yet."
+msgstr "Noch keine Dateien."
+
+#: frontend/templates/frontend/apiary/detail.html:297
+#: frontend/templates/frontend/hive/detail.html:238
+msgid "Add File"
+msgstr "Datei hinzufügen"
+
+#: frontend/templates/frontend/apiary/detail.html:304
+#: frontend/templates/frontend/hive/detail.html:245
+msgid "Add Your First File"
+msgstr "Erste Datei hinzufügen"
+
+#: frontend/templates/frontend/apiary/file_delete.html:11
+#: frontend/templates/frontend/hive/file_delete.html:11
+#, python-format
+msgid ""
+"Do you really want to delete the file <strong>%(file.file.name)s</strong>?"
+msgstr ""
+"Willst du die Datei <strong>%(file.file.name)s</strong> wirklich löschen?"
+
+#: frontend/templates/frontend/apiary/file_delete.html:18
+#: frontend/templates/frontend/hive/delete.html:18
+#: frontend/templates/frontend/hive/file_delete.html:18
+#: frontend/templates/frontend/hive/queen/delete.html:18
+#: frontend/templates/frontend/inspection/delete.html:18
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: frontend/templates/frontend/apiary/file_form.html:8
+msgid "Add file to apiary"
+msgstr "Datei zu Bienenstand hinzufügen"
+
+#: frontend/templates/frontend/apiary/file_form.html:31
+msgid "Choose a file"
+msgstr "Datei auswählen"
+
+#: frontend/templates/frontend/apiary/file_form.html:41
+msgid "Upload"
+msgstr "Hochladen"
+
+#: frontend/templates/frontend/apiary/form.html:26
+#: frontend/templates/frontend/apiary/form.html:30
+msgid "Edit Apiary"
+msgstr "Bienenstand bearbeiten"
+
+#: frontend/templates/frontend/apiary/form.html:26
+#: frontend/templates/frontend/apiary/form.html:30
+#: frontend/templates/frontend/apiary/form.html:137
+msgid "Create Apiary"
+msgstr "Bienenstand hinzufügen"
+
+#: frontend/templates/frontend/apiary/form.html:86
+msgid "Detect"
+msgstr "Erkennen"
+
+#: frontend/templates/frontend/apiary/form.html:90
+msgid "Select on map"
+msgstr "Auf Karte auswählen"
+
+#: frontend/templates/frontend/apiary/form.html:137
+msgid "Save Apairy"
+msgstr "Bienenstand speichern"
+
+#: frontend/templates/frontend/apiary/list.html:13
+#: frontend/templates/frontend/hive/detail.html:47
+#: frontend/templates/frontend/hive/form.html:10
+#: frontend/templates/frontend/hive/queen/form.html:10
+#: frontend/templates/frontend/inspection/detail.html:12
+#: frontend/templates/frontend/inspection/form.html:10
+#: frontend/templates/frontend/statistics/overview.html:13
+msgid "Apiaries"
+msgstr "Bienenstände"
+
+#: frontend/templates/frontend/apiary/list.html:29
+msgid "Coords"
+msgstr "Koord."
+
+#: frontend/templates/frontend/apiary/list.html:52
+msgid "Open Map"
+msgstr "Karte öffnen"
+
+#: frontend/templates/frontend/apiary/list.html:73
+msgid "No apiaries"
+msgstr "Keine Bienenstände"
+
+#: frontend/templates/frontend/apiary/list.html:90
+msgid "Add Apiary"
+msgstr "Bienenstand hinzufügen"
+
+#: frontend/templates/frontend/apiary/list.html:97
+msgid "Add Your First Apiary"
+msgstr "Ersten Bienenstand hinzufügen"
+
+#: frontend/templates/frontend/hive/delete.html:11
+msgid "Do you really want to delete this hive?"
+msgstr "Willst du diesen Bienenstock wirklich löschen?"
+
+#: frontend/templates/frontend/hive/delete.html:21
+#: frontend/templates/frontend/hive/detail.html:259
+msgid "Delete Hive"
+msgstr "Bienenstock löschen"
+
+#: frontend/templates/frontend/hive/detail.html:65
+#: frontend/templates/frontend/statistics/hive.html:32
+msgid "Hive"
+msgstr "Bienenstock"
+
+#: frontend/templates/frontend/hive/detail.html:77
+msgid "Inspections"
+msgstr "Durchsichten"
+
+#: frontend/templates/frontend/hive/detail.html:81
+#: frontend/templates/frontend/inspection/detail.html:28
+msgid "Date"
+msgstr "Datum"
+
+#: frontend/templates/frontend/hive/detail.html:82
+msgid "Last Recorded Weight"
+msgstr "Zuletzt notiertes Gewicht"
+
+#: frontend/templates/frontend/hive/detail.html:82
+msgid "Wgt"
+msgstr "Gew"
+
+#: frontend/templates/frontend/hive/detail.html:109
+msgid "No Inspections"
+msgstr "Keine Durchsichten"
+
+#: frontend/templates/frontend/hive/detail.html:119
+msgid "Add Inspection"
+msgstr "Durchsicht erstellen"
+
+#: frontend/templates/frontend/hive/detail.html:126
+msgid "Create Your First Inspection"
+msgstr "Durchsicht erstellen"
+
+#: frontend/templates/frontend/hive/detail.html:137
+msgid "Description"
+msgstr "Beschreibung"
+
+#: frontend/templates/frontend/hive/detail.html:179
+msgid "Year"
+msgstr "Jahr"
+
+#: frontend/templates/frontend/hive/detail.html:183
+msgid "Number"
+msgstr "Nummer"
+
+#: frontend/templates/frontend/hive/detail.html:189
+msgid "Specify queen"
+msgstr "Königin festlegen"
+
+#: frontend/templates/frontend/hive/file_delete.html:21
+msgid "Delete File"
+msgstr "Datei löschen"
+
+#: frontend/templates/frontend/hive/form.html:12
+#: frontend/templates/frontend/hive/form.html:16
+msgid "Edit Hive"
+msgstr "Bienenstock bearbeiten"
+
+#: frontend/templates/frontend/hive/form.html:12
+#: frontend/templates/frontend/hive/form.html:16
+#: frontend/templates/frontend/hive/form.html:69
+msgid "Create Hive"
+msgstr "Bienenstock hinzufügen"
+
+#: frontend/templates/frontend/hive/form.html:69
+msgid "Save Hive"
+msgstr "Bienenstock speichern"
+
+#: frontend/templates/frontend/hive/queen/delete.html:11
+#, python-format
+msgid ""
+"Do you really want to delete this queen of the hive <em>%(queen.hive)s</em>?"
+msgstr ""
+"Willst du die diese Königin des Bienenstocks <strong>%(queen.hive)s</strong> "
+"wirklich löschen?"
+
+#: frontend/templates/frontend/hive/queen/delete.html:21
+msgid "Delete Queen"
+msgstr "Königin löschen"
+
+#: frontend/templates/frontend/hive/queen/form.html:13
+#: frontend/templates/frontend/hive/queen/form.html:17
+msgid "Edit Queen"
+msgstr "Königin bearbeiten"
+
+#: frontend/templates/frontend/hive/queen/form.html:13
+#: frontend/templates/frontend/hive/queen/form.html:17
+#: frontend/templates/frontend/hive/queen/form.html:57
+msgid "Create Queen"
+msgstr "Königin erstellen"
+
+#: frontend/templates/frontend/hive/queen/form.html:57
+msgid "Save Queen"
+msgstr "Königin speichern"
+
+#: frontend/templates/frontend/index.html:8
+msgid "Welcome to Beez!"
+msgstr "Willkommen bei Beez!"
 
 #: frontend/templates/frontend/index.html:11
 msgid ""
@@ -139,9 +506,9 @@ msgstr ""
 "                            <li>Eine native Handy-App.</li>\n"
 "                        </ul>\n"
 "\n"
-"                        Wenn dir ein Feature abgeht, lass es uns auf der "
-"<a href=\"https://github.com/Retzudo/beez/issues\" target=\"_blank"
-"\">GitHub Issues-Seite</a> des Projekts wissen.\n"
+"                        Wenn dir ein Feature abgeht, lass es uns auf der <a "
+"href=\"https://github.com/Retzudo/beez/issues\" target=\"_blank\">GitHub "
+"Issues-Seite</a> des Projekts wissen.\n"
 "                    </p>\n"
 "                "
 
@@ -151,8 +518,73 @@ msgid ""
 "<a href=\"%(register_url)s\">Create an account</a> or <a href=\"%(login_url)s"
 "\">log in.</a>"
 msgstr ""
-"<a href=\"%(register_url)s\">Einen Account erstellen</a> oder <a href=\"%(login_url)s"
-"\">einloggen.</a>"
+"<a href=\"%(register_url)s\">Einen Account erstellen</a> oder <a href="
+"\"%(login_url)s\">einloggen.</a>"
+
+#: frontend/templates/frontend/inspection/delete.html:8
+#: frontend/templates/frontend/inspection/delete.html:21
+#: frontend/templates/frontend/inspection/detail.html:100
+msgid "Delete Inspection"
+msgstr "Durchsicht löschen"
+
+#: frontend/templates/frontend/inspection/delete.html:11
+#, python-format
+msgid ""
+"Do you really want to delete this inspection of the hive <em>"
+"%(inspection.hive)s</em> from %(inspection.date)s?"
+msgstr ""
+"Willst diese Durchsicht für den Bienenstock <em>%(inspection.hive)s</em> vom "
+"%(inspection.date)s wirklich löschen?"
+
+#: frontend/templates/frontend/inspection/detail.html:5
+#: frontend/templates/frontend/inspection/detail.html:15
+#: frontend/templates/frontend/inspection/detail.html:20
+msgid "Inspection"
+msgstr "Durchsicht"
+
+#: frontend/templates/frontend/inspection/detail.html:33
+#: frontend/templates/frontend/inspection/detail.html:39
+msgid "Saw Queen"
+msgstr "Königin gesichtet"
+
+#: frontend/templates/frontend/inspection/detail.html:45
+msgid "Needs food"
+msgstr "Braucht Futter"
+
+#: frontend/templates/frontend/inspection/detail.html:51
+#: frontend/templates/frontend/statistics/hive.html:44
+#: frontend/templates/frontend/statistics/hive.html:71
+msgid "Weight"
+msgstr "Gewicht"
+
+#: frontend/templates/frontend/inspection/detail.html:57
+msgid "Gave food"
+msgstr "Futter gegeben"
+
+#: frontend/templates/frontend/inspection/detail.html:70
+msgid "Mites counted"
+msgstr "Milben gezählt"
+
+#: frontend/templates/frontend/inspection/detail.html:74
+msgid "Est. mite pop."
+msgstr "Gesch. Milbenbef."
+
+#: frontend/templates/frontend/inspection/detail.html:80
+msgid "Mite treatment"
+msgstr "Milbenbehandlung"
+
+#: frontend/templates/frontend/inspection/form.html:13
+#: frontend/templates/frontend/inspection/form.html:17
+msgid "Edit Inspection"
+msgstr "Durchsicht bearbeiten"
+
+#: frontend/templates/frontend/inspection/form.html:43
+msgid "Now"
+msgstr "Jetzt"
+
+#: frontend/templates/frontend/inspection/form.html:225
+msgid "Save Inspection"
+msgstr "Durchsicht speichern"
 
 #: frontend/templates/frontend/master.html:62
 #, python-format
@@ -196,3 +628,19 @@ msgstr[1] "Königinnen gefunden"
 #: frontend/templates/frontend/settings.html:91
 msgid "Save"
 msgstr "Speichern"
+
+#: frontend/templates/frontend/statistics/overview.html:27
+msgid "Summary"
+msgstr "Zusammenfassung"
+
+#: frontend/templates/frontend/statistics/overview.html:28
+msgid "Total apiaries"
+msgstr "Bienenstände gesamt"
+
+#: frontend/templates/frontend/statistics/overview.html:29
+msgid "Total hives"
+msgstr "Bienenstöcke gesamt"
+
+#: frontend/templates/frontend/statistics/overview.html:30
+msgid "Total weight"
+msgstr "Gewicht gesamt"

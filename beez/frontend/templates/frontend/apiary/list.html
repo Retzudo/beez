@@ -1,5 +1,7 @@
 {% extends 'frontend/master.html' %}
 
+{% load i18n %}
+
 {% block body %}
     <section class="section">
         <div class="container">
@@ -8,13 +10,13 @@
                     <li class="is-active">
                         <a href="{% url 'frontend:apiary-list' %}">
                             <span class="icon"><i class="fa fa-archive"></i></span>
-                            <span>Apiaries</span>
+                            <span>{% trans 'Apiaries' %}</span>
                         </a>
                     </li>
                     <li>
                         <a href="{% url 'frontend:statistics' %}">
                             <span class="icon"><i class="fa fa-chart-line"></i></span>
-                            <span>Statistics</span>
+                            <span>{% trans 'Statistics' %}</span>
                         </a>
                     </li>
                 </ul>
@@ -22,10 +24,10 @@
             <table class="table is-striped is-hoverable is-fullwidth">
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Coords</th>
-                    <th class="is-hidden-touch"># Hives</th>
+                    <th>{% trans 'Name' %}</th>
+                    <th>{% trans 'Address' %}</th>
+                    <th>{% trans 'Coords' %}</th>
+                    <th class="is-hidden-touch"># {% trans 'Hives' %}</th>
                     <th class="is-hidden-touch"></th>
                 </tr>
                 </thead>
@@ -39,7 +41,7 @@
                             {% if apiary.address %}
                                 {{ apiary.address }}
                             {% else %}
-                                <em>N/A</em>
+                                <em>{% trans 'N/A' %}</em>
                             {% endif %}
                         </td>
                         <td>
@@ -47,15 +49,15 @@
                                 <a class="is-hidden-touch" target="_blank"
                                    href="https://www.openstreetmap.org/?mlat={{ apiary.latitude }}&mlon={{ apiary.longitude }}&zoom=16">
                                     <span class="icon"><i class="fa fa-external-link-alt"></i></span>
-                                    <span>Open Map</span>
+                                    <span>{% trans 'Open Map' %}</span>
                                 </a>
                                 <a class="is-hidden-desktop"
                                    href="geo:{{ apiary.latitude }}, {{ apiary.longitude }}">
                                     <span class="icon"><i class="fa fa-external-link-alt"></i></span>
-                                    <span>Map</span>
+                                    <span>{% trans 'Map' %}</span>
                                 </a>
                             {% else %}
-                                <em>N/A</em>
+                                <em>{% trans 'N/A' %}</em>
                             {% endif %}
                         </td>
                         <td class="is-hidden-touch">{{ apiary.hives.count }}</td>
@@ -68,12 +70,12 @@
                 {% empty %}
                     <tr>
                         <td colspan="5">
-                            <em>No apiaries</em>
+                            <em>{% trans 'No apiaries' %}</em>
                         </td>
                     </tr>
                 {% endfor %}
                     <tr>
-                        <td><em>Total: {{ apiaries.count }}</em></td>
+                        <td><em>{% trans 'Total' %}: {{ apiaries.count }}</em></td>
                         <td></td>
                         <td></td>
                         <td class="is-hidden-touch"><em>{{ total_hives }}</em></td>
@@ -85,14 +87,14 @@
                 <div class="buttons">
                     <a class="button is-success" href="{% url 'frontend:apiary-create' %}">
                         <span class="icon"><i class="fa fa-plus"></i></span>
-                        <span>Add Apiary</span>
+                        <span>{% trans 'Add Apiary' %}</span>
                     </a>
                 </div>
             {% else %}
                 <div class="buttons is-centered">
                     <a href="{% url 'frontend:apiary-create' %}" class="button is-primary is-big">
                         <span class="icon"><i class="fa fa-plus"></i></span>
-                        <span>Add Your First Apiary</span>
+                        <span>{% trans 'Add Your First Apiary' %}</span>
                     </a>
                 </div>
             {% endif %}

@@ -1,22 +1,24 @@
 {% extends 'frontend/master.html' %}
 
+{% load i18n %}
+
 {% block body %}
     <section class="section">
         <div class="container">
             <h1 class="title">Delete File</h1>
             <div class="message is-danger">
                 <p class="message-body">
-                    Do you really want to delete the file <strong>{{ file.file.name }}</strong>?
+                    {% blocktrans %}Do you really want to delete the file <strong>{{ file.file.name }}</strong>?{% endblocktrans %}
                 </p>
             </div>
             <form action="" method="post">
                 {% csrf_token %}
                 <div class="has-text-centered">
                     <a href="{% url 'frontend:apiary-detail' pk=file.apiary.pk %}" class="button">
-                        Cancel
+                        {% trans 'Cancel' %}
                     </a>
                     <button class="button is-danger">
-                        Delete File
+                        {% trans 'Delete file' %}
                     </button>
                 </div>
             </form>

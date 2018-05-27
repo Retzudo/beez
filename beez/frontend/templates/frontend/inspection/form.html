@@ -1,20 +1,20 @@
 {% extends 'frontend/master.html' %}
 
-{% load widget_tweaks staticfiles markdown_deux_tags %}
+{% load widget_tweaks staticfiles markdown_deux_tags i18n %}
 
 {% block body %}
     <section class="section">
         <div class="container">
             <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
-                    <li><a href="{% url 'frontend:apiary-list' %}">Apiaries</a></li>
+                    <li><a href="{% url 'frontend:apiary-list' %}">{% trans 'Apiaries' %}</a></li>
                     <li><a href="{% url 'frontend:apiary-detail' pk=hive.apiary.pk %}">{{ hive.apiary.name }}</a></li>
                     <li><a href="{% url 'frontend:hive-detail' pk=hive.pk %}">{{ hive.name }}</a></li>
-                    <li class="is-active"><a>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Inspection</a></li>
+                    <li class="is-active"><a>{% if form.instance.pk %}{% trans 'Edit Inspection' %}{% else %}{% trans 'Create Inspection' %}{% endif %}</a></li>
                 </ul>
             </nav>
 
-            <h1 class="title">{% if form.instance.pk %}Edit{% else %}Create{% endif %} Inspection</h1>
+            <h1 class="title">{% if form.instance.pk %}{% trans 'Edit Inspection' %}{% else %}{% trans 'Create Inspection' %}{% endif %}</h1>
             {% if form.non_field_errors %}
                 <div class="message is-danger">
                     <div class="message-header">
@@ -40,7 +40,7 @@
                             <div class="control">
                                 <button class="button is-info" id="button-now">
                                     <span class="icon"><i class="fa fa-clock"></i></span>
-                                    <span>Now</span>
+                                    <span>{% trans 'Now' %}</span>
                                 </button>
                             </div>
                             <div class="control is-expanded">
@@ -145,8 +145,7 @@
                 <div class="field is-horizontal">
                     <div class="field-label is-normal">
                         <label for="{{ form.how_much_food.id_for_label }}" class="label">
-                            {# {{ form.how_much_food.label }} #}
-                            How much?
+                            {{ form.how_much_food.label }}
                         </label>
                     </div>
                     <div class="field-body">
@@ -223,7 +222,7 @@
 
                 {% csrf_token %}
                 <button class="button is-primary">
-                    {% if form.instance.pk %}Save{% else %}Create{% endif %} Inspection
+                    {% if form.instance.pk %}{% trans 'Save Inspection' %}{% else %}{% trans 'Create Inspection' %}{% endif %}
                 </button>
             </form>
         </div>

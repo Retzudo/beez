@@ -1,6 +1,6 @@
 {% extends 'frontend/master.html' %}
 
-{% load static %}
+{% load static i18n %}
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/c3-0.6.1.min.css' %}">
@@ -29,19 +29,19 @@
                     <li>
                         <a href="{% url 'frontend:hive-detail' pk=hive.pk %}">
                             <span class="icon"><i class="fa fa-archive"></i></span>
-                            <span>Hive</span>
+                            <span>{% trans 'Hive' %}</span>
                         </a>
                     </li>
                     <li class="is-active">
                         <a href="{% url 'frontend:statistics-hive' pk=hive.pk %}">
                             <span class="icon"><i class="fa fa-chart-line"></i></span>
-                            <span>Statistics</span>
+                            <span>{% trans 'Statistics' %}</span>
                         </a>
                     </li>
                 </ul>
             </div>
 
-            <h1 class="title">Weight</h1>
+            <h1 class="title">{% trans 'Weight' %}</h1>
 
             <div id="weight-chart"></div>
         </div>
@@ -68,7 +68,7 @@
                         value: ['weight']
                     },
                     names: {
-                        weight: 'Weight'
+                        weight: "{% trans 'Weight' %}"
                     }
                 },
                 axis: {
@@ -102,7 +102,7 @@
                         value: ['weight']
                     },
                     names: {
-                        weight: 'Weight'
+                        weight: '{% trans \'Weight\' %}'
                     }
                 })
             });

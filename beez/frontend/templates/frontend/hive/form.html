@@ -1,19 +1,19 @@
 {% extends 'frontend/master.html' %}
 
-{% load widget_tweaks markdown_deux_tags %}
+{% load widget_tweaks markdown_deux_tags i18n %}
 
 {% block body %}
     <section class="section">
         <div class="container">
             <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
-                    <li><a href="{% url 'frontend:apiary-list' %}">Apiaries</a></li>
+                    <li><a href="{% url 'frontend:apiary-list' %}">{% trans 'Apiaries' %}</a></li>
                     <li><a href="{% url 'frontend:apiary-detail' pk=apiary.pk %}">{{ apiary.name }}</a></li>
-                    <li class="is-active"><a>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Hive</a></li>
+                    <li class="is-active"><a>{% if form.instance.pk %}{% trans 'Edit Hive' %}{% else %}{% trans 'Create Hive' %}{% endif %}</a></li>
                 </ul>
             </nav>
 
-            <h1 class="title">{% if form.instance.pk %}Edit{% else %}Create{% endif %} Hive</h1>
+            <h1 class="title">{% if form.instance.pk %}{% trans 'Edit Hive' %}{% else %}{% trans 'Create Hive' %}{% endif %}</h1>
             {% if form.non_field_errors %}
                 <div class="message is-danger">
                     <div class="message-header">
@@ -66,7 +66,7 @@
 
                 {% csrf_token %}
                 <button class="button is-primary">
-                    {% if form.instance.pk %}Save{% else %}Create{% endif %} Hive
+                    {% if form.instance.pk %}{% trans 'Save Hive' %}{% else %}{% trans 'Create Hive' %}{% endif %}
                 </button>
             </form>
         </div>

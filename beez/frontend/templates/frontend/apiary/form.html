@@ -1,6 +1,6 @@
 {% extends 'frontend/master.html' %}
 
-{% load markdown_deux_tags widget_tweaks staticfiles %}
+{% load markdown_deux_tags widget_tweaks staticfiles i18n %}
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/leaflet.css' %}">
@@ -23,11 +23,11 @@
             <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
                     <li><a href="{% url 'frontend:apiary-list' %}">Apiaries</a></li>
-                    <li class="is-active"><a>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Apiary</a></li>
+                    <li class="is-active"><a>{% if form.instance.pk %}{% trans 'Edit Apiary' %}{% else %}{% trans 'Create Apiary' %}{% endif %}</a></li>
                 </ul>
             </nav>
 
-            <h1 class="title">{% if form.instance.pk %}Edit{% else %}Create{% endif %} Apiary</h1>
+            <h1 class="title">{% if form.instance.pk %}{% trans 'Edit Apiary' %}{% else %}{% trans 'Create Apiary' %}{% endif %}</h1>
             {% if form.non_field_errors %}
                 <div class="message is-danger">
                     <div class="message-header">
@@ -83,11 +83,11 @@
                         <div class="buttons">
                             <button class="button is-info" id="button-detect">
                                 <span class="icon"><i class="fa fa-crosshairs"></i></span>
-                                <span>Detect</span>
+                                <span>{% trans 'Detect' %}</span>
                             </button>
                             <button class="button is-info" id="button-show-map">
                                 <span class="icon"><i class="fa fa-map"></i></span>
-                                <span>Select on map</span>
+                                <span>{% trans 'Select on map' %}</span>
                             </button>
                         </div>
                     </div>
@@ -134,7 +134,7 @@
 
                 {% csrf_token %}
                 <button class="button is-primary">
-                    {% if form.instance.pk %}Save{% else %}Create{% endif %} Apiary
+                    {% if form.instance.pk %}{% trans 'Save Apairy' %}{% else %}{% trans 'Create Apiary' %}{% endif %}
                 </button>
             </form>
         </div>

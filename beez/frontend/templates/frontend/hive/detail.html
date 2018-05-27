@@ -1,6 +1,6 @@
 {% extends 'frontend/master.html' %}
 
-{% load qr_code markdown_deux_tags colors %}
+{% load qr_code markdown_deux_tags colors i18n %}
 
 {% block title %}{{ hive.name }} - {{ block.super }}{% endblock %}
 
@@ -44,7 +44,7 @@
         <div class="container">
             <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
-                    <li><a href="{% url 'frontend:apiary-list' %}">Apiaries</a></li>
+                    <li><a href="{% url 'frontend:apiary-list' %}">{% trans 'Apiaries' %}</a></li>
                     <li><a href="{% url 'frontend:apiary-detail' pk=hive.apiary.pk %}">{{ hive.apiary.name }}</a></li>
                     <li class="is-active"><a href="{% url 'frontend:hive-detail' pk=hive.pk %}">{{ hive.name }}</a></li>
                 </ul>
@@ -62,24 +62,24 @@
                     <li class="is-active">
                         <a href="{% url 'frontend:hive-detail' pk=hive.pk %}">
                             <span class="icon"><i class="fa fa-archive"></i></span>
-                            <span>Hive</span>
+                            <span>{% trans 'Hive' %}</span>
                         </a>
                     </li>
                     <li>
                         <a href="{% url 'frontend:statistics-hive' pk=hive.pk %}">
                             <span class="icon"><i class="fa fa-chart-line"></i></span>
-                            <span>Statistics</span>
+                            <span>{% trans 'Statistics' %}</span>
                         </a>
                     </li>
                 </ul>
             </div>
 
-            <h2 class="title is-4">Inspections</h2>
+            <h2 class="title is-4">{% trans 'Inspections' %}</h2>
             <table class="table is-striped is-fullwidth is-striped is-hoverable">
                 <thead>
                 <tr>
-                    <th>Date</th>
-                    <th><abbr title="Last Recorded Weight">Wgt</abbr></th>
+                    <th>{% trans 'Date' %}</th>
+                    <th><abbr title="{% trans 'Last Recorded Weight' %}">{% trans 'Wgt' %}</abbr></th>
                     <th class="is-hidden-touch"></th>
                 </tr>
                 </thead>
@@ -91,7 +91,7 @@
                             {% if inspection.weight %}
                                 {{ inspection.weight }} {{ user.settings.current_weight_unit }}
                             {% else %}
-                                <em>N/A</em>
+                                <em>{% trans 'N/A' %}</em>
                             {% endif %}
                         </td>
                         <td class="has-text-right is-hidden-touch">
@@ -106,7 +106,7 @@
                 {% empty %}
                     <tr>
                         <td colspan="3">
-                            <em>No inspections</em>
+                            <em>{% trans 'No Inspections' %}</em>
                         </td>
                     </tr>
                 {% endfor %}
@@ -116,39 +116,39 @@
                 <div class="buttons">
                     <a class="button is-success" href="{% url 'frontend:inspection-create' pk=hive.pk %}">
                         <span class="icon"><i class="fa fa-plus"></i></span>
-                        <span>Add Inspection</span>
+                        <span>{% trans 'Add Inspection' %}</span>
                     </a>
                 </div>
             {% else %}
                 <div class="buttons is-centered">
                     <a href="{% url 'frontend:inspection-create' pk=hive.pk %}" class="button is-primary is-big">
                         <span class="icon"><i class="fa fa-plus"></i></span>
-                        <span>Create Your First Inspection</span>
+                        <span>{% trans 'Create Your First Inspection' %}</span>
                     </a>
                 </div>
             {% endif %}
 
             <hr>
 
-            <h2 class="title is-4">Details</h2>
+            <h2 class="title is-4">{% trans 'Details' %}</h2>
             <div class="columns is-multiline">
                 <div class="column is-half">
                     <div class="box">
-                        <h3 class="subtitle">Description</h3>
+                        <h3 class="subtitle">{% trans 'Description' %}</h3>
                         {% if hive.description %}
                             <div class="content">{{ hive.description }}</div>
                         {% else %}
-                            <em>N/A</em>
+                            <em>{% trans 'N/A' %}</em>
                         {% endif %}
                     </div>
                 </div>
                 <div class="column is-half">
                     <div class="box">
-                        <h3 class="subtitle">Notes</h3>
+                        <h3 class="subtitle">{% trans 'Notes' %}</h3>
                         {% if hive.notes %}
                             <div class="content">{{ hive.notes|markdown }}</div>
                         {% else %}
-                            <em>N/A</em>
+                            <em>{% trans 'N/A' %}</em>
                         {% endif %}
                     </div>
                 </div>
@@ -156,7 +156,7 @@
                     <div class="box">
                         <div class="level">
                             <div class="level-left">
-                                <h3 class="subtitle">Queen</h3>
+                                <h3 class="subtitle">{% trans 'Queen' %}</h3>
                             </div>
                             <div class="level-right">
                                 {% if hive.queen %}
@@ -176,17 +176,17 @@
                         {% if hive.queen %}
                             <div class="content">
                                 <dl>
-                                    <dt>Year</dt>
+                                    <dt>{% trans 'Year' %}</dt>
                                     <dd><span class="year-circle {{ hive.queen.year|year_color }}"></span> {{ hive.queen.year }}</dd>
 
                                     {% if hive.queen.number %}
-                                        <dt>Number</dt>
+                                        <dt>{% trans 'Number' %}</dt>
                                         <dd>{{ hive.queen.number }}</dd>
                                     {% endif %}
                                 </dl>
                             </div>
                         {% else %}
-                            <a href="{% url 'frontend:hive-add-queen' pk=hive.pk %}" class="button">Specify queen</a>
+                            <a href="{% url 'frontend:hive-add-queen' pk=hive.pk %}" class="button">{% trans 'Specify queen' %}</a>
                         {% endif %}
                     </div>
                 </div>
@@ -197,9 +197,9 @@
             <h2 class="title is-4">Files</h2>
             <table class="table is-fullwidth is-striped">
                 <tr>
-                    <th>File</th>
-                    <th>Uploaded</th>
-                    <th class="is-hidden-touch">Size</th>
+                    <th>{% trans 'File' %}</th>
+                    <th>{% trans 'Uploaded' %}</th>
+                    <th class="is-hidden-touch">{% trans 'Size' %}</th>
                     <th></th>
                 </tr>
                 {% for file in hive.files.all %}
@@ -226,7 +226,7 @@
                 {% empty %}
                     <tr>
                         <td colspan="4">
-                            <em>No files yet.</em>
+                            <em>{% trans 'No files yet.' %}</em>
                         </td>
                     </tr>
                 {% endfor %}
@@ -235,14 +235,14 @@
                 <div class="buttons">
                     <a class="button is-success" href="{% url 'frontend:hive-add-file' pk=hive.pk %}">
                         <span class="icon"><i class="fa fa-plus"></i></span>
-                        <span>Add File</span>
+                        <span>{% trans 'Add File' %}</span>
                     </a>
                 </div>
             {% else %}
                 <div class="buttons is-centered">
                     <a href="{% url 'frontend:hive-add-file' pk=hive.pk %}" class="button is-primary is-big">
                         <span class="icon"><i class="fa fa-plus"></i></span>
-                        <span>Add Your First File</span>
+                        <span>{% trans 'Add Your First File' %}</span>
                     </a>
                 </div>
             {% endif %}
@@ -252,11 +252,11 @@
             <div class="buttons">
                 <a href="{% url 'frontend:hive-transfer' pk=hive.pk %}" class="button">
                     <span class="icon"><i class="fa fa-exchange-alt"></i></span>
-                    <span>Transfer Hive</span>
+                    <span>{% trans 'Transfer Hive' %}</span>
                 </a>
                 <a href="{% url 'frontend:hive-delete' pk=hive.pk %}" class="button is-danger">
                     <span class="icon"><i class="fa fa-ban"></i></span>
-                    <span>Delete Hive</span>
+                    <span>{% trans 'Delete Hive' %}</span>
                 </a>
             </div>
         </div>

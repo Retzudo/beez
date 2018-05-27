@@ -1,23 +1,23 @@
 {% extends 'frontend/master.html' %}
 
-{% load markdown_deux_tags humanize %}
+{% load markdown_deux_tags humanize i18n %}
 
-{% block title %}Inspection - {{ block.super }}{% endblock %}
+{% block title %}{% trans 'Inspection' %} - {{ block.super }}{% endblock %}
 
 {% block body %}
     <section class="section">
         <div class="container">
             <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
-                    <li><a href="{% url 'frontend:apiary-list' %}">Apiaries</a></li>
+                    <li><a href="{% url 'frontend:apiary-list' %}">{% trans 'Apiaries' %}</a></li>
                     <li><a href="{% url 'frontend:apiary-detail' pk=inspection.hive.apiary.pk %}">{{ inspection.hive.apiary.name }}</a></li>
                     <li><a href="{% url 'frontend:hive-detail' pk=inspection.hive.pk %}">{{ inspection.hive.name }}</a></li>
-                    <li class="is-active"><a href="{% url 'frontend:inspection-detail' pk=inspection.pk %}">Inspection</a></li>
+                    <li class="is-active"><a href="{% url 'frontend:inspection-detail' pk=inspection.pk %}">{% trans 'Inspection' %}</a></li>
                 </ul>
             </nav>
 
             <h1 class="title">
-                <span>Inspection</span>
+                <span>{% trans 'Inspection' %}</span>
                 <a href="{% url 'frontend:inspection-edit' pk=inspection.pk %}">
                     <span class="icon"><i class="fa fa-pencil-alt"></i></span>
                 </a>
@@ -25,36 +25,36 @@
 
             <table class="table is-bordered">
                 <tr>
-                    <th>Date</th>
+                    <th>{% trans 'Date' %}</th>
                     <td>{{ inspection.date }}</td>
                 </tr>
                 {% if inspection.saw_queen != None %}
                     <tr>
-                        <th>Saw Queen</th>
+                        <th>{% trans 'Saw Queen' %}</th>
                         <td>{{ inspection.saw_queen|yesno|capfirst }}</td>
                     </tr>
                 {% endif %}
                 {% if inspection.saw_eggs != None %}
                     <tr>
-                        <th>Saw Queen</th>
+                        <th>{% trans 'Saw Queen' %}</th>
                         <td>{{ inspection.saw_eggs|yesno|capfirst }}</td>
                     </tr>
                 {% endif %}
                 {% if inspection.needs_food != None %}
                     <tr>
-                        <th>Needs food</th>
+                        <th>{% trans 'Needs food' %}</th>
                         <td>{{ inspection.needs_food|yesno|capfirst }}</td>
                     </tr>
                 {% endif %}
                 {% if inspection.weight %}
                     <tr>
-                        <th>Weight</th>
+                        <th>{% trans 'Weight' %}</th>
                         <td>{{ inspection.weight|floatformat }} {{ user.settings.current_weight_unit }}</td>
                     </tr>
                 {% endif %}
                 {% if inspection.gave_food or inspection.how_much_food %}
                     <tr>
-                        <th>Gave food</th>
+                        <th>{% trans 'Gave food' %}</th>
                         <td>
                             {% if inspection.how_much_food %}
                                 {{ inspection.how_much_food|floatformat }} {{ user.settings.current_weight_unit }}
@@ -67,23 +67,23 @@
                 {% endif %}
                 {% if inspection.mites_counted %}
                     <tr>
-                        <th>Mites counted</th>
+                        <th>{% trans 'Mites counted' %}</th>
                         <td>{{ inspection.mites_counted }}</td>
                     </tr>
                     <tr>
-                        <th>Est. mite pop.</th>
+                        <th>{% trans 'Est. mite pop.' %}</th>
                         <td>{{ inspection.estimated_mite_population|intcomma }}</td>
                     </tr>
                 {% endif %}
                 {% if inspection.mite_treatment %}
                     <tr>
-                        <th>Mite treatment</th>
+                        <th>{% trans 'Mite treatment' %}</th>
                         <td>{{ inspection.mite_treatment }}</td>
                     </tr>
                 {% endif %}
                 {% if inspection.notes %}
                     <tr>
-                        <th>Notes</th>
+                        <th>{% trans 'Notes' %}</th>
                         <td>
                             <div class="content">
                                 {{ inspection.notes|markdown }}
@@ -97,7 +97,7 @@
 
             <a href="{% url 'frontend:inspection-delete' pk=inspection.pk %}" class="button is-danger">
                 <span class="icon"><i class="fa fa-trash"></i></span>
-                <span>Delete Inspection</span>
+                <span>{% trans 'Delete Inspection' %}</span>
             </a>
         </div>
     </section>
