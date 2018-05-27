@@ -7,16 +7,15 @@ from django.core import validators
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext as _
 from private_storage.fields import PrivateFileField
-
-from core import utils
 
 UNITS_METRIC = 'metric'
 UNITS_IMPERIAL = 'imperial'
 
 unit_choices = [
-    (UNITS_METRIC, 'Metric'),
-    (UNITS_IMPERIAL, 'Imperial'),
+    (UNITS_METRIC, _('Metric')),
+    (UNITS_IMPERIAL, _('Imperial')),
 ]
 
 unit_map = {
@@ -53,7 +52,7 @@ class Apiary(models.Model):
     notes = models.TextField(blank=True, null=True)
 
     class Meta:
-        verbose_name_plural = 'Apiaries'
+        verbose_name_plural = _('Apiaries')
         ordering = ('date_created',)
 
     def __str__(self):
@@ -119,7 +118,7 @@ class Inspection(models.Model):
         ordering = ('-date',)
 
     def __str__(self):
-        return 'Inspection on {}'.format(self.date)
+        return _('Inspection on {date}').format(date=self.date)
 
     def get_absolute_url(self):
         return reverse('frontend:inspection-detail', args=[self.pk])
@@ -154,12 +153,13 @@ class Settings(models.Model):
     weight_unit = models.CharField(choices=unit_choices, default=UNITS_METRIC, max_length=10)
     temperature_unit = models.CharField(choices=unit_choices, default=UNITS_METRIC, max_length=10)
     timezone = models.CharField(choices=timezone_choices, default='UTC', max_length=40)
+    language = models.CharField(choices=[('de', _('German')), ('en', _('English'))], default='en', max_length=4)
 
     class Meta:
-        verbose_name_plural = 'Settings'
+        verbose_name_plural = _('Settings')
 
     def __str__(self):
-        return 'Settings for {}'.format(self.user)
+        return _('Settings for {user}').format(user=self.user)
 
     @property
     def current_weight_unit(self):
@@ -181,10 +181,10 @@ class File(models.Model):
 
     def __str__(self):
         if self.apiary:
-            return 'Apiary file for {} ({})'.format(self.apiary, self.apiary.pk)
+            return _('Apiary file for {apiary} ({pk})').format(apiary=self.apiary, pk=self.apiary.pk)
 
         if self.hive:
-            return 'Hive file for {} ({})'.format(self.hive, self.hive.pk)
+            return _('Hive file for {hive} ({pk})').format(hive=self.hive, pk=self.hive.pk)
 
 
 class Queen(models.Model):

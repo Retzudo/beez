@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="{% url 'frontend:index' %}">
@@ -31,7 +31,7 @@
                 {% if user.is_superuser %}
                     <a href="/admin" class="navbar-item">
                         <span class="icon"><fa class="fa fa-bug"></fa></span>
-                        <span>Admin</span>
+                        <span>{% trans "Admin" %}</span>
                     </a>
                 {% endif %}
                 <div class="navbar-item has-dropdown is-hoverable">
@@ -42,27 +42,27 @@
                     <div class="navbar-dropdown is-right">
                         <a class="navbar-item" href="{% url 'frontend:apiary-list' %}">
                             <span class="icon"><i class="fa fa-tachometer-alt"></i></span>
-                            <span>Dashboard</span>
+                            <span>{% trans "Dashboard" %}</span>
                         </a>
                         <a class="navbar-item" href="{% url 'frontend:settings' %}">
                             <span class="icon"><i class="fa fa-wrench"></i></span>
-                            <span>Settings</span>
+                            <span>{% trans "Settings" %}</span>
                         </a>
                         <hr class="navbar-divider">
                         <a class="navbar-item" href="{% url 'frontend:logout' %}">
                             <span class="icon"><i class="fa fa-sign-out-alt"></i></span>
-                            <span>Log out</span>
+                            <span>{% trans "Log out" %}</span>
                         </a>
                     </div>
                 </div>
             {% else %}
                 <a href="{% url 'frontend:register' %}" class="navbar-item">
                     <span class="icon"><i class="fa fa-hashtag"></i></span>
-                    <span>Register</span>
+                    <span>{% trans "Register" %}</span>
                 </a>
                 <a href="{% url 'frontend:login' %}" class="navbar-item">
                     <span class="icon"><i class="fa fa-sign-in-alt"></i></span>
-                    <span>Log in</span>
+                    <span>{% trans "Log in" %}</span>
                 </a>
             {% endif %}
         </div>
