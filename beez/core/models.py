@@ -7,7 +7,7 @@ from django.core import validators
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from private_storage.fields import PrivateFileField
 
 UNITS_METRIC = 'metric'
@@ -34,22 +34,22 @@ timezone_choices = sorted(zip(pytz.common_timezones_set, [tz.replace('_', ' ') f
 
 class Apiary(models.Model):
     owner = models.ForeignKey(get_user_model(), related_name='apiaries', on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    latitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True, validators=[
+    name = models.CharField(_('Name'), max_length=255)
+    latitude = models.DecimalField(_('Latitude'), max_digits=9, decimal_places=6, blank=True, null=True, validators=[
         validators.MinValueValidator(-90),
         validators.MaxValueValidator(90),
     ])
-    longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True, validators=[
+    longitude = models.DecimalField(_('Longitude'), max_digits=9, decimal_places=6, blank=True, null=True, validators=[
         validators.MinValueValidator(-180),
         validators.MaxValueValidator(180),
     ])
-    address = models.CharField(max_length=255, blank=True, null=True)
-    radius = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True, default=3.0, validators=[
+    address = models.CharField(_('Address'), max_length=255, blank=True, null=True)
+    radius = models.DecimalField(_('Radius'), max_digits=3, decimal_places=2, blank=True, null=True, default=3.0, validators=[
         validators.MinValueValidator(0),
         validators.MaxValueValidator(10),
     ])
-    date_created = models.DateTimeField(auto_now_add=True)
-    notes = models.TextField(blank=True, null=True)
+    date_created = models.DateTimeField(_('Date created'), auto_now_add=True)
+    notes = models.TextField(_('Notes'), blank=True, null=True)
 
     class Meta:
         verbose_name_plural = _('Apiaries')
@@ -70,11 +70,11 @@ class Apiary(models.Model):
 
 class Hive(models.Model):
     apiary = models.ForeignKey(Apiary, related_name='hives', on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    description = models.CharField(blank=True, null=True, max_length=255)
-    date_created = models.DateTimeField(auto_now_add=True)
-    notes = models.TextField(blank=True, null=True)
-    makes_honey = models.BooleanField(default=False)
+    name = models.CharField(_('Name'), max_length=255)
+    description = models.CharField(_('Description'), blank=True, null=True, max_length=255)
+    date_created = models.DateTimeField(_('Date created'), auto_now_add=True)
+    notes = models.TextField(_('Notes'), blank=True, null=True)
+    makes_honey = models.BooleanField(_('Makes honey'), default=False)
 
     class Meta:
         ordering = ('date_created',)
@@ -102,17 +102,17 @@ class Hive(models.Model):
 
 class Inspection(models.Model):
     hive = models.ForeignKey(Hive, related_name='inspections', on_delete=models.CASCADE)
-    date = models.DateTimeField()
-    weight = models.FloatField(blank=True, null=True, validators=[validators.MinValueValidator(0)])
-    saw_queen = models.NullBooleanField(choices=((True, 'Yes'), (False, 'No')))
-    saw_eggs = models.NullBooleanField(choices=((True, 'Yes'), (False, 'No')))
-    needs_food = models.NullBooleanField(choices=((True, 'Yes'), (False, 'No')))
-    gave_food = models.CharField(blank=True, null=True, max_length=255)
-    how_much_food = models.FloatField(blank=True, null=True, validators=[validators.MinValueValidator(0.1)])
-    mites_counted = models.PositiveSmallIntegerField(blank=True, null=True)
-    mite_treatment = models.CharField(max_length=255, blank=True, null=True)
+    date = models.DateTimeField(_('Date'))
+    weight = models.FloatField(_('Weight'), blank=True, null=True, validators=[validators.MinValueValidator(0)])
+    saw_queen = models.NullBooleanField(_('Saw queen'), choices=((True, 'Yes'), (False, 'No')))
+    saw_eggs = models.NullBooleanField(_('Saw eggs'), choices=((True, 'Yes'), (False, 'No')))
+    needs_food = models.NullBooleanField(_('Needs food'), choices=((True, 'Yes'), (False, 'No')))
+    gave_food = models.CharField(_('Gave food'), blank=True, null=True, max_length=255)
+    how_much_food = models.FloatField(_('How much?'), blank=True, null=True, validators=[validators.MinValueValidator(0.1)])
+    mites_counted = models.PositiveSmallIntegerField(_('Mites counted'), blank=True, null=True)
+    mite_treatment = models.CharField(_('Mite treatment'), max_length=255, blank=True, null=True)
 
-    notes = models.TextField(blank=True, null=True)
+    notes = models.TextField(_('Notes'), blank=True, null=True)
 
     class Meta:
         ordering = ('-date',)
@@ -130,14 +130,14 @@ class Inspection(models.Model):
 
 class Harvest(models.Model):
     hive = models.ForeignKey(Hive, related_name='harvests', on_delete=models.CASCADE)
-    date = models.DateField()
-    weight = models.FloatField(validators=[validators.MinValueValidator(0)])
+    date = models.DateField(_('Date'))
+    weight = models.FloatField(_('Weight'), validators=[validators.MinValueValidator(0)])
 
     class Meta:
         ordering = ('-date',)
 
     def __str__(self):
-        return 'Harvest on {} ({} {})'.format(
+        return _('Harvest on {} ({} {})').format(
             self.date,
             self.weight,
             self.hive.apiary.owner.settings.current_weight_unit
@@ -145,15 +145,11 @@ class Harvest(models.Model):
 
 
 class Settings(models.Model):
-    unit_choices = [
-        ('metric', 'Metric'),
-        ('imperial', 'Imperial'),
-    ]
     user = models.OneToOneField(get_user_model(), related_name='settings', on_delete=models.CASCADE)
-    weight_unit = models.CharField(choices=unit_choices, default=UNITS_METRIC, max_length=10)
-    temperature_unit = models.CharField(choices=unit_choices, default=UNITS_METRIC, max_length=10)
-    timezone = models.CharField(choices=timezone_choices, default='UTC', max_length=40)
-    language = models.CharField(choices=[('de', _('German')), ('en', _('English'))], default='en', max_length=4)
+    weight_unit = models.CharField(_('Weight unit'), choices=unit_choices, default=UNITS_METRIC, max_length=10)
+    temperature_unit = models.CharField(_('Temperature unit'), choices=unit_choices, default=UNITS_METRIC, max_length=10)
+    timezone = models.CharField(_('Timezone'), choices=timezone_choices, default='UTC', max_length=40)
+    language = models.CharField(_('Language'), choices=[('de', _('German')), ('en', _('English'))], default='en', max_length=4)
 
     class Meta:
         verbose_name_plural = _('Settings')
@@ -170,14 +166,14 @@ class Settings(models.Model):
 
 
 class File(models.Model):
-    file = PrivateFileField(content_types='application/pdf', max_file_size=10 * 1024 * 1024)
-    date_created = models.DateTimeField(auto_now_add=True)
+    file = PrivateFileField(_('File'), content_types='application/pdf', max_file_size=10 * 1024 * 1024)
+    date_created = models.DateTimeField(_('Date created'), auto_now_add=True)
     apiary = models.ForeignKey(Apiary, null=True, blank=True, related_name='files', on_delete=models.CASCADE)
     hive = models.ForeignKey(Hive, null=True, blank=True, related_name='files', on_delete=models.CASCADE)
 
     def clean(self):
         if self.apiary and self.hive:
-            raise ValidationError('File cannot have both an apiary and a hive')
+            raise ValidationError(_('File cannot have both an apiary and a hive'))
 
     def __str__(self):
         if self.apiary:
@@ -189,8 +185,8 @@ class File(models.Model):
 
 class Queen(models.Model):
     hive = models.OneToOneField(Hive, related_name='queen', on_delete=models.CASCADE)
-    year = models.PositiveIntegerField(default=datetime.now().year)
-    number = models.CharField(max_length=25)
+    year = models.PositiveIntegerField(_('Year'), default=datetime.now().year)
+    number = models.CharField(_('Number'), max_length=25)
 
     def get_absolute_url(self):
         return reverse('frontend:hive-detail', args=[self.hive.pk])

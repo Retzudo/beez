@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-27 19:39+0000\n"
+"POT-Creation-Date: 2018-05-27 20:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: core/models.py:17
 msgid "Metric"
 msgstr "Metrisch"
@@ -25,38 +26,150 @@ msgstr "Metrisch"
 msgid "Imperial"
 msgstr "Britisch"
 
+#: core/models.py:37 core/models.py:73
+msgid "Name"
+msgstr "Name"
+
+#: core/models.py:38
+msgid "Latitude"
+msgstr "Breitengrad"
+
+#: core/models.py:42
+msgid "Longitude"
+msgstr "Längengrad"
+
+#: core/models.py:46
+msgid "Address"
+msgstr "Adresse"
+
+#: core/models.py:47
+msgid "Radius"
+msgstr "Radius"
+
+#: core/models.py:51 core/models.py:75 core/models.py:170
+msgid "Date created"
+msgstr "Datum erstellt"
+
+#: core/models.py:52 core/models.py:76 core/models.py:115
+msgid "Notes"
+msgstr "Notizen"
+
 #: core/models.py:55
 msgid "Apiaries"
 msgstr "Bienenstände"
+
+#: core/models.py:74
+msgid "Description"
+msgstr "Beschreibung"
+
+#: core/models.py:77
+msgid "Makes honey"
+msgstr "Wirtschaftsvolk"
+
+#: core/models.py:105 core/models.py:133
+msgid "Date"
+msgstr "Datum"
+
+#: core/models.py:106 core/models.py:134
+#, fuzzy
+#| msgid "Weight unit"
+msgid "Weight"
+msgstr "Gewichtseinheit"
+
+#: core/models.py:107
+msgid "Saw queen"
+msgstr "Königin gesichtet"
+
+#: core/models.py:108
+msgid "Saw eggs"
+msgstr "Stifte gesichtet"
+
+#: core/models.py:109
+msgid "Needs food"
+msgstr "Braucht Futter"
+
+#: core/models.py:110
+msgid "Gave food"
+msgstr "Futter gegeben"
+
+#: core/models.py:111
+msgid "How much?"
+msgstr "Wie viel?"
+
+#: core/models.py:112
+msgid "Mites counted"
+msgstr "Milben gezählt"
+
+#: core/models.py:113
+#, fuzzy
+#| msgid "Date created"
+msgid "Mite treatment"
+msgstr "Datum erstellt"
 
 #: core/models.py:121
 #, python-brace-format
 msgid "Inspection on {date}"
 msgstr "Durchsicht am {date}"
 
-#: core/models.py:156
+#: core/models.py:140
+msgid "Harvest on {} ({} {})"
+msgstr "Ernte am {} ({} {})"
+
+#: core/models.py:149
+msgid "Weight unit"
+msgstr "Gewichtseinheit"
+
+#: core/models.py:150
+msgid "Temperature unit"
+msgstr "Temperatureinheit"
+
+#: core/models.py:151
+msgid "Timezone"
+msgstr "Zeitzone"
+
+#: core/models.py:152
+msgid "Language"
+msgstr "Sprache"
+
+#: core/models.py:152
 msgid "German"
 msgstr "Deutsch"
 
-#: core/models.py:156
+#: core/models.py:152
 msgid "English"
 msgstr "Englisch"
 
-#: core/models.py:159
+#: core/models.py:155
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: core/models.py:162
+#: core/models.py:158
 #, python-brace-format
 msgid "Settings for {user}"
 msgstr "Einstellungen für {user}"
 
-#: core/models.py:184
+#: core/models.py:169
+msgid "File"
+msgstr "Datei"
+
+#: core/models.py:176
+msgid "File cannot have both an apiary and a hive"
+msgstr "Datei kann nicht gleichzeitig einem Stand und einem Stock zugewiesen werden"
+
+#: core/models.py:180
 #, python-brace-format
 msgid "Apiary file for {apiary} ({pk})"
 msgstr "Bienenstand-Datei für {apiary} ({pk})"
 
-#: core/models.py:187
+#: core/models.py:183
 #, python-brace-format
 msgid "Hive file for {hive} ({pk})"
 msgstr "Bienenstock-Datei für {hive} ({pk})"
+
+#: core/models.py:188
+msgid "Year"
+msgstr "Jahr"
+
+#: core/models.py:189
+msgid "Number"
+msgstr "Nummer"
