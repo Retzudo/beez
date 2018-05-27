@@ -1,48 +1,59 @@
 {% extends 'frontend/master.html' %}
 
+{% load i18n %}
+
 {% block body %}
     <section class="section">
         <div class="container">
             <h1 class="title">Welcome to Beez!</h1>
 
             <div class="content">
-                <p><strong>Beez</strong> is an open-source software project that aims to help beekeepers with different tasks.</p>
+                <p>{% blocktrans %}<strong>Beez</strong> is an open-source software project that aims to help beekeepers with different tasks.{% endblocktrans %}</p>
 
                 <div class="message is-warning">
                     <div class="message-body">
+                        {% blocktrans %}
                         <strong>Beez</strong> is in its <em>alpha stage</em> which means things constantly change. New
                         features are added while others may disappear. Data loss is also a possibility.
+                        {% endblocktrans %}
                     </div>
                 </div>
 
-                <h2>Features</h2>
-                <p>
-                    <ul>
-                        <li>Manage a number of apiaries and hives.</li>
-                        <li>Weather forecast for an apiary's location.</li>
-                        <li>Show your apiary on a map and track what area your bees can cover.</li>
-                        <li>Create inspections for your hives and collect data.</li>
-                        <li>Print out QR codes and stick them to your hives for quick access on mobile phones.</li>
-                        <li>A browsable, Swagger/OpenAPI documented, RESTful <a href="{% url 'api:schema-json' format='.json' %}" target="_blank">API</a>.</li>
-                    </ul>
-                </p>
+                {% url 'api:schema-json' format='.json' as api_url %}
+                {% blocktrans %}
+                    <h2>Features</h2>
+                    <p>
+                        <ul>
+                            <li>Manage a number of apiaries and hives.</li>
+                            <li>Weather forecast for an apiary's location.</li>
+                            <li>Show your apiary on a map and track what area your bees can cover.</li>
+                            <li>Create inspections for your hives and collect data.</li>
+                            <li>Print out QR codes and stick them to your hives for quick access on mobile phones.</li>
+                            <li>A browsable, Swagger/OpenAPI documented, RESTful <a href="{{ api_url }}" target="_blank">API</a>.</li>
+                        </ul>
+                    </p>
+                {% endblocktrans %}
 
-                <h2>Possible future features</h2>
-                <p>
-                    <ul>
-                        <li>Weather alerts.</li>
-                        <li>Detailed statistics.</li>
-                        <li>Beekeeping related alerts like missed Varroa treatments.</li>
-                        <li>A native phone app.</li>
-                    </ul>
+                {% blocktrans %}
+                    <h2>Possible future features</h2>
+                    <p>
+                        <ul>
+                            <li>Weather alerts.</li>
+                            <li>Detailed statistics.</li>
+                            <li>Beekeeping related alerts like missed Varroa treatments or harvest reminders.</li>
+                            <li>A native phone app.</li>
+                        </ul>
 
-                    If you'd like to see a feature, let us know on the project's <a href="https://github.com/Retzudo/beez/issues" target="_blank">GitHub issues page</a>.
-                </p>
+                        If you'd like to see a feature, let us know on the project's <a href="https://github.com/Retzudo/beez/issues" target="_blank">GitHub issues page</a>.
+                    </p>
+                {% endblocktrans %}
             </div>
 
             <p class="has-text-centered">
                 {% if not user.is_authenticated %}
-                    <a href="{% url 'frontend:register' %}">Create an account</a> or <a href="{% url 'frontend:login' %}">log in.</a>
+                    {% url 'frontend:login' as login_url %}
+                    {% url 'frontend:register' as register_url %}
+                    {% blocktrans %}<a href="{{ register_url }}">Create an account</a> or <a href="{{ login_url }}">log in.</a>{% endblocktrans %}
                 {% endif %}
             </p>
         </div>

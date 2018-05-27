@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-27 20:36+0000\n"
+"POT-Creation-Date: 2018-05-27 21:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -154,7 +154,8 @@ msgstr "Datei"
 
 #: core/models.py:176
 msgid "File cannot have both an apiary and a hive"
-msgstr "Datei kann nicht gleichzeitig einem Stand und einem Stock zugewiesen werden"
+msgstr ""
+"Datei kann nicht gleichzeitig einem Stand und einem Stock zugewiesen werden"
 
 #: core/models.py:180
 #, python-brace-format

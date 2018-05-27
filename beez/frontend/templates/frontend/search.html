@@ -1,23 +1,25 @@
 {% extends 'frontend/master.html' %}
 
+{% load i18n %}
+
 {% block body %}
     <section class="section">
         <div class="container content">
-            <h1 class="title"><em>{{ apiaries.count }}</em> Apiar{% if apiaries.count == 1 %}y{% else %}ies{% endif %} found</h1>
+            <h1 class="title"><em>{{ apiaries.count }}</em> {% blocktrans count count=apiaries.count %}Apiary found{% plural %}Apiaries found{% endblocktrans %}</h1>
             <ul>
                 {% for apiary in apiaries %}
                     <li><a href="{% url 'frontend:apiary-detail' pk=apiary.pk %}">{{ apiary.name }}</a></li>
                 {% endfor %}
             </ul>
 
-            <h1 class="title"><em>{{ hives.count }}</em> Hive{{ hives.count|pluralize }} found</h1>
+            <h1 class="title"><em>{{ hives.count }}</em> {% blocktrans count count=hives.count %}Hive found{% plural %}Hives found{% endblocktrans %}</h1>
             <ul>
                 {% for hive in hives %}
                     <li><a href="{% url 'frontend:hive-detail' pk=hive.pk %}">{{ hive.name }}</a></li>
                 {% endfor %}
             </ul>
 
-            <h1 class="title"><em>{{ queens.count }}</em> Queen{{ hives.count|pluralize }} found</h1>
+            <h1 class="title"><em>{{ queens.count }}</em> {% blocktrans count count=queens.count %}Queen found{% plural %}Queens found{% endblocktrans %}</h1>
             <ul>
                 {% for queen in queens %}
                     <li><a href="{% url 'frontend:hive-detail' pk=queen.hive.pk %}">{{ queen.hive.name }}</a></li>
