@@ -9,7 +9,7 @@ from core.models import Settings
 class SettingsView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Settings
     template_name = 'frontend/settings.html'
-    fields = ['weight_unit', 'temperature_unit', 'timezone']
+    fields = ['weight_unit', 'temperature_unit', 'timezone', 'language']
     success_url = reverse_lazy('frontend:settings')
     success_message = 'Settings saved'
 
