@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-27 21:55+0000\n"
+"POT-Creation-Date: 2018-05-27 21:58+0000\n"
 "PO-Revision-Date: 2018-05-27 23:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -644,3 +644,7 @@ msgstr "Bienenstöcke gesamt"
 #: frontend/templates/frontend/statistics/overview.html:30
 msgid "Total weight"
 msgstr "Gewicht gesamt"
+
+#: frontend/views/settings.py:14
+msgid "Settings saved"
+msgstr "Einstellungen gespeichert"
