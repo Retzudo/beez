@@ -42,8 +42,10 @@
             </div>
 
             <h1 class="title">{% trans 'Weight' %}</h1>
-
             <div id="weight-chart"></div>
+
+            <h1 class="title">Varroa</h1>
+            <div id="varroa-chart"></div>
         </div>
     </section>
 {% endblock %}
@@ -54,7 +56,7 @@
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <script>
         $(function () {
-            var chart = c3.generate({
+            var weightChart = c3.generate({
                 bindto: '#weight-chart',
                 padding: {
                     left: 40,
@@ -93,8 +95,40 @@
                 }
             });
 
+            var varroaChart = c3.generate({
+                bindto: '#varroa-chart',
+                padding: {
+                    left: 40,
+                    right: 40
+                },
+                data: {
+                    json: [],
+                    xFormat: '%Y-%m-%dT%H:%M:%SZ',
+                    keys: {
+                        x: 'date',
+                        value: ['mites_counted']
+                    },
+                    names: {
+                        weight: "{% trans 'Mites' %}"
+                    }
+                },
+                axis: {
+                    x: {
+                        type: 'timeseries',
+                        tick: {
+                            format: '%b %d'
+                        }
+                    },
+                    y: {
+                        label: {
+                            text: '#'
+                        }
+                    }
+                }
+            });
+
             $.get('/api/inspections?hive={{ hive.pk }}&has_weight=1', function (response) {
-                chart.load({
+                weightChart.load({
                     json: response,
                     xFormat: '%Y-%m-%dT%H:%M:%SZ',
                     keys: {
@@ -102,7 +136,21 @@
                         value: ['weight']
                     },
                     names: {
-                        weight: '{% trans \'Weight\' %}'
+                        weight: "{% trans 'Weight' %}"
+                    }
+                })
+            });
+
+            $.get('/api/inspections?hive={{ hive.pk }}&has_mites=1', function (response) {
+                varroaChart.load({
+                    json: response,
+                    xFormat: '%Y-%m-%dT%H:%M:%SZ',
+                    keys: {
+                        x: 'date',
+                        value: ['mites_counted']
+                    },
+                    names: {
+                        weight: "{% trans 'Mites' %}"
                     }
                 })
             });
