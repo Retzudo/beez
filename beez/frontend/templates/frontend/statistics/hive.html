@@ -154,6 +154,18 @@
                     }
                 })
             });
+
+            $.get('/api/inspections?hive={{ hive.pk }}&has_treatment=1', function (response) {
+                var grid = response.map(function (point) {
+                    return {
+                        value: point.date,
+                        text: point.mite_treatment,
+                        position: 'start'
+                    };
+                });
+
+                varroaChart.xgrids(grid);
+            });
         });
     </script>
 {% endblock %}
