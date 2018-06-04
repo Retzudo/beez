@@ -21,6 +21,7 @@ test:
 
 docker:
   stage: docker
+  image: docker
   only:
     - tags
   script:
