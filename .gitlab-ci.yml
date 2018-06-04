@@ -1,0 +1,11 @@
+services:
+  - postgres:latest
+
+test:
+  before_script:
+    - apt-get update -qy
+    - apt-get install -y python3 python3-pip
+    - pip install pipenv
+    - pipenv install --system
+  script:
+    - python3 beez/manage.py test api
