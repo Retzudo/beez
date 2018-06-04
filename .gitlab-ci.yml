@@ -9,4 +9,5 @@ before_script:
 
 test:
   script:
-    - python3 beez/manage.py test api
+    - python beez/manage.py test api
+
