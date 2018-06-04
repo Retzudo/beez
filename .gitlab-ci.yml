@@ -11,6 +11,7 @@ variables:
 before_script:
   - pip install pipenv
   - pipenv install --system
+  - python beez/manage.py collectstatic --no-input
 
 test:
   variables:
