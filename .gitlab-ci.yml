@@ -19,3 +19,12 @@ test:
   script:
     - python beez/manage.py test api
 
+docker:
+  only:
+    - tags
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+    - docker build $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG .
+    - docker tag $CI_REGISTRY_IMAGE latest
+    - docker push $CI_REGISTRY_IMAGE
+
