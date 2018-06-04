@@ -44,7 +44,7 @@
                                 </button>
                             </div>
                             <div class="control is-expanded">
-                                {% render_field form.date|add_error_class:'is-danger' type='datetime-local' class+='input' placeholder='YYYY-MM-DD MM:HH' %}
+                                {% render_field form.date|add_error_class:'is-danger' class+='input' placeholder='YYYY-MM-DD MM:HH' %}
                             </div>
                         </div>
                         {% for error in form.date.errors %}
@@ -235,6 +235,10 @@
         (function () {
             var $timeInput = document.getElementById('{{ form.date.id_for_label }}');
             var $button = document.getElementById('button-now');
+
+            $timeInput.addEventListener('change', function (event) {
+                console.log(event.target.value);
+            });
 
             $button.addEventListener('click', function (event) {
                 event.preventDefault();
