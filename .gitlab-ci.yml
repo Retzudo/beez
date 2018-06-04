@@ -3,11 +3,18 @@ image: python
 services:
   - postgres:latest
 
+variables:
+  POSTGRES_DB: postgres
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+
 before_script:
   - pip install pipenv
   - pipenv install --system
 
 test:
+  variables:
+    DATABASE_URL: 'postgresql://postgres:postgres@postgres:5432/postgres'
   script:
     - python beez/manage.py test api
 
