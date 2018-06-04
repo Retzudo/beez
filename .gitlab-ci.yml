@@ -1,25 +1,26 @@
-image: python
-
-services:
-  - postgres:latest
-
-variables:
-  POSTGRES_DB: postgres
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: postgres
-
-before_script:
-  - pip install pipenv
-  - pipenv install --system
-  - python beez/manage.py collectstatic --no-input
+stages:
+  - test
+  - docker
 
 test:
+  stage: test
+  image: python
+  services:
+    - postgres:latest
   variables:
     DATABASE_URL: 'postgresql://postgres:postgres@postgres:5432/postgres'
+    POSTGRES_DB: postgres
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+  before_script:
+    - pip install pipenv
+    - pipenv install --system
+    - python beez/manage.py collectstatic --no-input
   script:
     - python beez/manage.py test api
 
 docker:
+  stage: docker
   only:
     - tags
   script:
