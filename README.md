@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Retzudo/beez.svg?branch=master)](https://travis-ci.org/Retzudo/beez)
+[![pipeline status](https://gitlab.com/Retzudo/beez/badges/master/pipeline.svg)](https://gitlab.com/Retzudo/beez/commits/master)
 # Beez
 
 Beez is a web based tool for beekeepers. Written in
