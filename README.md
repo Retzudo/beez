@@ -21,7 +21,7 @@ Beez is a web based tool for beekeepers. Written in
 - Beekeeping related alerts like missed Varroa treatments.
 - A native phone app.
 
-If you'd like to see a feature, let us know on the project's [GitHub issues page](https://github.com/Retzudo/beez/issues).
+If you'd like to see a feature, let us know on the project's [GitLab issues page](https://gitlab.com/Retzudo/beez/issues).
 
 
 ## Deployment
