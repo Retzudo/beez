@@ -20,7 +20,7 @@
             <form action="" method="post">
                 <div class="field">
                     <div class="control has-icons-left">
-                        {% render_field form.username|add_error_class:'is-danger' class+="input" placeholder=form.username.label %}
+                        {% render_field form.username|add_error_class:'is-danger' class+="input" placeholder=form.username.label autocorrect="off" autocapitalize="off" %}
                         <span class="icon is-small is-left">
                             <i class="fa fa-user"></i>
                         </span>
